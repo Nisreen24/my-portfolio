@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CRITERRA — UI UX Design Case Study · Nisreen Abdelkader</title>
+  <meta name="description" content="CRITERRA: a role-based clinical trial recruitment platform for admins, CRO sponsors, healthcare organizations and doctors. UI UX design case study by Nisreen Abdelkader." />
+  <meta property="og:title" content="CRITERRA — UI UX Design Case Study" />
+  <meta property="og:description" content="One recruitment journey. Four purpose-built experiences." />
+  <meta property="og:image" content="img/cover.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23E9A9DA'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(-90 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(-18 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(54 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(126 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(198 32 32)'/%3E%3Cpath d='M32 25.5c.8 3.5 3 5.7 6.5 6.5-3.5.8-5.7 3-6.5 6.5-.8-3.5-3-5.7-6.5-6.5 3.5-.8 5.7-3 6.5-6.5z' fill='%23E27ACB'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Naskh+Arabic:wght@500&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { blue: 'var(--blue)', navy: 'var(--navy)', ink: 'var(--ink)', mute: 'var(--mute)', line: 'var(--line)', card: 'var(--card)', ice: 'var(--ice)' },
+      fontFamily: { serif: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'], body: ['Inter', 'system-ui', 'sans-serif'], mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'] },
+    } } };
+  </script>
+
+  <style>
+    :root {
+      --blue: #2C72B7; --blue-deep: #1E4E7C;
+      --navy: #0D0042; --ink: #14243A; --mute: #5B6B80;
+      --bg: #FEFEFE; --card: #F6F6F6; --ice: #EDF3FA; --ice-2: #DCE8F5; --lav: #ECECF7;
+      --line: rgba(15,37,64,.10);
+      --ease: cubic-bezier(.22,1,.36,1);
+      --shadow-soft: 0 1px 2px rgba(15,37,64,.04), 0 10px 30px rgba(15,37,64,.07);
+      --shadow-ui: 0 2px 4px rgba(15,37,64,.05), 0 24px 48px rgba(15,37,64,.12);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* type */
+    .serif { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.03em; line-height: 1.02; text-wrap: balance; font-optical-sizing: auto; }
+    .serif em, .serif i { font-style: normal; color: var(--blue); }
+    .h-hero { font-size: clamp(2.5rem, 4.8vw, 3.75rem); }
+    .h-sec  { font-size: clamp(2rem, 3.2vw, 2.5rem); }
+    .h-card { font-size: 1.75rem; line-height: 1.1; }
+    .eyebrow { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .8125rem; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); font-weight: 500; }
+    .body { font-size: 1.0625rem; line-height: 1.7; color: var(--mute); }
+    .body strong { color: var(--ink); font-weight: 600; background: linear-gradient(transparent 55%, var(--ice-2) 55%); padding: 0 .12em; border-radius: 3px; }
+    :root[data-theme="dark"] .body strong { background: linear-gradient(transparent 55%, rgba(44,114,183,.35) 55%); }
+    .body p + p, .body p + ul, .body ul + p, .body p + ol, .body ol + p { margin-top: 1.1rem; }
+    .body ul { list-style: disc; padding-left: 1.1rem; } .body ol { list-style: decimal; padding-left: 1.3rem; }
+    .body li + li { margin-top: .25rem; }
+    .col { max-width: 700px; margin-inline: auto; }
+    .wide { max-width: 1100px; margin-inline: auto; }
+
+    /* chips */
+    .pill { display: inline-flex; align-items: center; min-height: 38px; padding: 0 1rem; border-radius: 999px; background: var(--card); font-size: .9375rem; font-weight: 500; color: var(--ink); }
+    .tools-row { display: flex; gap: .5rem; align-items: flex-end; }
+    .tool-ic { width: 44px; height: 44px; border-radius: 12px; background: #fff; display: inline-grid; place-items: center; position: relative; cursor: default;
+      box-shadow: 0 1px 2px rgba(15,37,64,.08), 0 6px 16px rgba(15,37,64,.10); border: 1px solid rgba(15,37,64,.06);
+      transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s var(--ease); transform-origin: 50% 100%; }
+    .tool-ic svg { display: block; transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
+    .tool-ic:hover { transform: translateY(-8px) scale(1.18) rotate(-4deg); box-shadow: 0 2px 4px rgba(15,37,64,.08), 0 18px 34px rgba(15,37,64,.22); z-index: 2; }
+    .tool-ic:hover svg { transform: scale(1.08) rotate(6deg); }
+    .tool-ic:active { transform: translateY(-4px) scale(1.05); transition-duration: .15s; }
+    .tools-row:has(.tool-ic:hover) .tool-ic:not(:hover) { transform: translateY(0) scale(.94); opacity: .75; }
+    .tool-ic::after { content: attr(title); position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translate(-50%, 6px) scale(.9); padding: .3rem .6rem; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: .75rem; font-weight: 600; letter-spacing: .01em; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s var(--ease), transform .3s cubic-bezier(.34,1.56,.64,1); }
+    .tool-ic:hover::after { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    @media (prefers-reduced-motion: reduce) { .tool-ic, .tool-ic svg, .tool-ic::after { transition: none; } .tool-ic:hover { transform: none; } .tools-row:has(.tool-ic:hover) .tool-ic:not(:hover) { transform: none; opacity: 1; } }
+    :root[data-theme="dark"] .tool-ic { box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.5); border-color: rgba(255,255,255,.08); }
+    .divider { display: flex; align-items: center; gap: 0; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .divider span { padding: .55rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .9375rem; font-weight: 500; color: var(--ink); background: #fff; }
+
+    /* cards */
+    .card { background: var(--card); border-radius: 24px; }
+    .card-ice { background: linear-gradient(160deg, var(--ice), var(--lav)); border-radius: 24px; }
+    .icon-dot { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--ice-2); color: var(--blue); }
+
+    /* gallery frames */
+    .g { position: relative; overflow: hidden; border-radius: 24px; background: var(--card); }
+    .g img { display: block; }
+    .g-media { position: relative; overflow: hidden; border-radius: 24px; }
+    .g-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease); }
+    .g-media:hover img { transform: scale(1.02); }
+    .ui { border-radius: 14px; overflow: hidden; background: #fff; box-shadow: var(--shadow-ui); border: 1px solid rgba(15,37,64,.06); }
+    .ui img { width: 100%; height: auto; display: block; }
+    .phone { border-radius: 40px; background: #0E1622; padding: 8px; box-shadow: var(--shadow-ui); }
+    .phone .scr { border-radius: 32px; overflow: hidden; aspect-ratio: 390 / 844; background: #F6F8FB; position: relative; }
+    .phone .scr img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .scene { aspect-ratio: 1200 / 810; background: #0B0F16; }
+    .scene video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .scene-fade { position: absolute; inset: auto 0 0 0; height: 32%; background: linear-gradient(to top, #0B0F16 15%, transparent); pointer-events: none; }
+    .scene-tag { position: absolute; left: 1.5rem; bottom: 1.25rem; font-family: "JetBrains Mono", monospace; font-size: .8125rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+    .collage { position: relative; aspect-ratio: 1100 / 640; overflow: hidden; }
+    .collage .ui { position: absolute; width: 46%; transform: rotate(-28deg); }
+    .collage .phone { position: absolute; width: 15%; transform: rotate(-28deg); }
+
+    /* before / after */
+    .ba { border-radius: 24px; padding: 2.25rem 2rem; min-height: 420px; display: flex; flex-direction: column; align-items: center; }
+    .ba-label { font-size: 1rem; letter-spacing: .04em; color: var(--ink); text-transform: uppercase; }
+    .ba-sub { font-size: 1rem; color: var(--mute); margin-top: .35rem; text-align: center; }
+    .tag { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.1rem; border-radius: 999px; background: #fff; box-shadow: var(--shadow-soft); font-size: 1.05rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+    .tag svg { width: 20px; height: 20px; color: var(--blue); }
+    .tag-blue { background: var(--blue); color: #fff; } .tag-blue svg { color: #fff; }
+    .arrow-down { width: 1px; height: 34px; background: var(--blue); opacity: .6; position: relative; }
+    .arrow-down::after { content: ""; position: absolute; bottom: -1px; left: 50%; width: 6px; height: 6px; border-right: 1px solid var(--blue); border-bottom: 1px solid var(--blue); transform: translateX(-50%) rotate(45deg); }
+    .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .75rem; border-radius: 999px; font-size: .8125rem; font-weight: 600; }
+    .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .c-new { background: #EEF1F5; color: #4A5A70; } .c-ready { background: #E4F5EC; color: #1F7A4D; } .c-prog { background: #E2EFFA; color: var(--blue-deep); } .c-pend { background: #FFF4DB; color: #9A6B00; } .c-decl { background: #FDE8E8; color: #B42318; } .c-cons { background: #ECEAF7; color: #4E3F9A; } .c-done { background: #EAF2FB; color: #2A5B8A; }
+
+    /* carousel */
+    .car { position: relative; border-radius: 24px; background: var(--card); padding: 4rem 6rem 3.5rem; }
+    .car-track { position: relative; overflow: hidden; border-radius: 14px; }
+    .car-slides { display: flex; will-change: transform; }
+    .car-slide { flex: 0 0 100%; }
+    .car-slide.is-phone { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; padding: 0 1rem; }
+    .car-slide.is-phone .phone { width: 26%; }
+    .car-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink); cursor: pointer; transition: transform .3s var(--ease), background-color .25s var(--ease); }
+    .car-btn:hover { background: var(--ice); transform: translateY(-50%) scale(1.06); } .car-btn:active { transform: translateY(-50%) scale(.96); }
+    .car-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .car-prev { left: 1.25rem; } .car-next { right: 1.25rem; }
+    .car-dots { display: flex; justify-content: center; gap: .4rem; margin-top: 1.5rem; padding: .5rem .75rem; border-radius: 999px; background: #E5E9EF; width: max-content; margin-inline: auto; }
+    .car-dots button { width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: .55; border: 0; cursor: pointer; transition: opacity .25s, transform .25s; }
+    .car-dots button[aria-current="true"] { opacity: 1; transform: scale(1.15); }
+    .fig { text-align: center; font-size: 1rem; color: var(--ink); margin-top: 1.25rem; } .fig span { color: var(--mute); }
+    @media (max-width: 767px) { .car { padding: 2.5rem 1rem 2rem; } .car-btn { display: none; } .car-slide.is-phone .phone { width: 42%; } .car-slide.is-phone .phone:nth-child(3) { display: none; } .ba { min-height: 0; } }
+
+    /* process wrap */
+    .process-bg { background: var(--card); border-radius: 0 0 48px 48px; }
+
+    /* theme: dark */
+    :root[data-theme="dark"] {
+      --bg: #000000; --card: #101010; --ice: #141414; --ice-2: #1C1C1C; --lav: #121212;
+      --ink: #FFFFFF; --mute: #A4A4A4; --navy: #FFFFFF; --line: rgba(255,255,255,.14);
+      --shadow-soft: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.5);
+      --shadow-ui: 0 2px 4px rgba(0,0,0,.4), 0 24px 48px rgba(0,0,0,.6);
+      color-scheme: dark;
+    }
+    :root[data-theme="dark"] .divider span, :root[data-theme="dark"] .tag, :root[data-theme="dark"] .car-btn { background: var(--card); border-color: var(--line); }
+    :root[data-theme="dark"] .card, :root[data-theme="dark"] .g, :root[data-theme="dark"] .car, :root[data-theme="dark"] .ba.card, :root[data-theme="dark"] .process-bg { border: 1px solid rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .card-ice { background: linear-gradient(160deg, #141414, #0C0C10); border: 1px solid rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .car-dots { background: #1C1C1C; } :root[data-theme="dark"] .car-dots button { background: #A4A4A4; }
+    :root[data-theme="dark"] .ui { background: #0A0A0A; border-color: rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .icon-dot { background: #1C1C1C; }
+    :root[data-theme="dark"] .c-new { background: #1C1C1C; color: #BABABA; }
+    :root[data-theme="dark"] .body strong { background: linear-gradient(transparent 55%, rgba(44,114,183,.35) 55%); }
+    :root[data-theme="dark"] .marq-item .thumb { background: #101010; border: 1px solid rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .scene { border: 1px solid rgba(255,255,255,.08); }
+    html { transition: background-color .3s var(--ease); }
+
+    /* floating glass nav */
+    .gnav { position: fixed; top: 16px; left: 0; right: 0; z-index: 60; display: flex; justify-content: center; align-items: center; gap: .6rem; padding: 0 1rem; pointer-events: none; }
+    .gnav > * { pointer-events: auto; }
+    .glass { background: rgba(255,255,255,.55); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border: 1px solid rgba(255,255,255,.7); box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 10px 30px rgba(15,37,64,.10), 0 1px 2px rgba(15,37,64,.06); }
+    :root[data-theme="dark"] .glass { background: rgba(16,16,16,.6); border-color: rgba(255,255,255,.14); box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 12px 36px rgba(0,0,0,.6); }
+    .gnav .mark { width: 56px; height: 56px; border-radius: 999px; display: grid; place-items: center; text-decoration: none; color: var(--ink); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; transition: transform .3s var(--ease); }
+    .gnav .mark:hover { transform: translateY(-1px); }
+    .gnav .mark small { display: block; font-size: .6rem; letter-spacing: .08em; font-weight: 500; color: var(--mute); text-align: center; margin-top: -2px; }
+    .gnav .links { display: flex; align-items: center; gap: .15rem; height: 56px; padding: 0 .4rem; border-radius: 999px; }
+    .gnav .links a { display: inline-flex; align-items: center; gap: .5rem; height: 42px; padding: 0 .95rem; border-radius: 999px; font-size: 1rem; font-weight: 500; color: var(--ink); text-decoration: none; transition: background-color .25s var(--ease); white-space: nowrap; }
+    .gnav .links a:hover { background: rgba(44,114,183,.10); }
+    .gnav .links a svg { width: 18px; height: 18px; flex: none; }
+    .gnav .sep { width: 1px; height: 22px; background: var(--line); margin: 0 .25rem; }
+    .gnav .ctl, .gnav .theme { height: 42px; border-radius: 999px; border: 0; background: transparent; color: var(--ink); display: inline-flex; align-items: center; gap: .45rem; padding: 0 .8rem; font: inherit; font-size: .9375rem; font-weight: 500; cursor: pointer; transition: background-color .25s var(--ease); }
+    .gnav .theme { width: 42px; padding: 0; justify-content: center; position: relative; }
+    .gnav .ctl:hover, .gnav .theme:hover { background: rgba(44,114,183,.10); }
+    .flag { width: 20px; height: 14px; border-radius: 3px; display: inline-block; position: relative; overflow: hidden; background: #012169; }
+    .flag.eg { background: linear-gradient(to bottom, #CE1126 33%, #fff 33% 66%, #000 66%); }
+    .flag.en::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, #fff 40% 60%, transparent 60%), linear-gradient(to right, transparent 40%, #fff 40% 60%, transparent 60%); }
+    .flag.en::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 44%, #C8102E 44% 56%, transparent 56%), linear-gradient(to right, transparent 44%, #C8102E 44% 56%, transparent 56%); }
+    .lang { position: relative; display: inline-flex; }
+    .lang-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); min-width: 170px; border-radius: 16px; padding: .35rem; display: none; z-index: 70; }
+    .lang-menu[data-open="true"] { display: block; }
+    .lang-menu button { display: flex; align-items: center; gap: .6rem; width: 100%; padding: .65rem .75rem; border-radius: 12px; background: none; border: 0; color: var(--ink); font: inherit; font-size: .9375rem; cursor: pointer; text-align: start; }
+    .lang-menu button:hover, .lang-menu button[aria-checked="true"] { background: rgba(44,114,183,.12); }
+    .theme .sun, .theme .moon { position: absolute; transition: opacity .25s, transform .35s var(--ease); }
+    .theme .moon { opacity: 0; transform: rotate(-40deg) scale(.7); } :root[data-theme="dark"] .theme .moon { opacity: 1; transform: none; } :root[data-theme="dark"] .theme .sun { opacity: 0; transform: rotate(40deg) scale(.7); }
+    .gnav .cta { width: 56px; height: 56px; border-radius: 999px; background: var(--blue); color: #fff; display: grid; place-items: center; text-decoration: none; box-shadow: 0 10px 24px rgba(44,114,183,.35); transition: transform .3s var(--ease), background-color .25s var(--ease); }
+    .gnav .cta:hover { transform: translateY(-2px); background: var(--blue-deep); }
+    .gnav .cta:active { transform: scale(.96); }
+    .gnav .burger { display: none; width: 42px; height: 42px; border-radius: 999px; border: 0; background: transparent; color: var(--ink); place-items: center; cursor: pointer; }
+    .mobile-menu { position: fixed; top: 84px; left: 1rem; right: 1rem; z-index: 59; border-radius: 22px; padding: .5rem; display: none; }
+    .mobile-menu[data-open="true"] { display: grid; gap: .15rem; }
+    .mobile-menu a { display: flex; align-items: center; gap: .7rem; padding: .85rem .9rem; font-size: 1.0625rem; font-weight: 500; color: var(--ink); text-decoration: none; border-radius: 14px; }
+    .mobile-menu a:hover { background: rgba(44,114,183,.10); }
+    @media (max-width: 899px) { .gnav .links a span, .gnav .links .desk { display: none; } .gnav .links a { padding: 0 .7rem; } .gnav .burger { display: grid; } }
+    @media (max-width: 480px) { .gnav .mark small { display: none; } .gnav .ctl span:not(.flag) { display: none; } }
+    .focus-ring:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 999px; }
+    [dir="rtl"] .lang-menu { left: auto; right: 50%; transform: translateX(50%); }
+    body { padding-top: 0; }
+
+    /* next project marquee */
+    .marq { overflow: hidden; white-space: nowrap; }
+    .marq-track { display: inline-flex; align-items: center; gap: 4rem; will-change: transform; padding-right: 4rem; }
+    .marq-item { display: inline-flex; align-items: center; gap: 4rem; }
+    .marq-item .serif { font-size: clamp(2.5rem, 4vw, 3.5rem); }
+    .marq-item .thumb { width: 200px; height: 200px; border-radius: 20px; overflow: hidden; background: var(--ice); display: grid; place-items: center; }
+    .marq-item .thumb img { width: 72%; border-radius: 8px; box-shadow: var(--shadow-soft); }
+
+    /* footer */
+    .foot { background: #000; color: #fff; border-radius: 48px 48px 0 0; }
+    .foot .big { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; font-size: clamp(3rem, 11vw, 11rem); line-height: .9; letter-spacing: -0.04em; background: none; border: 0; padding: 0; color: #fff; text-align: left; }
+    [dir="rtl"] .foot .big { text-align: right; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .foot .ib { width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); background: #101010; display: grid; place-items: center; color: #fff; transition: background-color .25s var(--ease), transform .3s var(--ease); }
+    .foot .ib:hover { background: #1C1C1C; border-color: rgba(255,255,255,.3); transform: translateY(-2px); }
+
+
+    /* eyes that follow the cursor */
+    .eyes { display: inline-flex; gap: 6px; }
+    .eye { width: 44px; height: 68px; border-radius: 999px; background: #fff; position: relative; overflow: hidden; transform-origin: center; }
+    .pupil { position: absolute; left: 50%; top: 50%; width: 26px; height: 40px; margin: -20px 0 0 -13px; border-radius: 999px; background: #000; will-change: transform; }
+    .pupil::after { content: ""; position: absolute; right: 5px; bottom: 7px; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
+    /* copy-email name */
+    .copy-name { cursor: pointer; position: relative; display: inline-block; user-select: none; -webkit-tap-highlight-color: transparent; transition: color .3s var(--ease); }
+    .copy-name:hover { color: var(--blue); }
+    .copy-name:focus-visible { outline: 2px solid var(--blue); outline-offset: 8px; border-radius: 12px; }
+    .cursor-tip { position: fixed; left: 0; top: 0; z-index: 80; pointer-events: none; padding: .6rem .9rem; border-radius: 999px; background: #fff; color: #000; font-size: .875rem; font-weight: 600; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,.35); opacity: 0; transform: translate(-50%, -140%) scale(.9); display: inline-flex; align-items: center; gap: .45rem; }
+    .cursor-tip svg { width: 14px; height: 14px; }
+    .confetti { position: fixed; left: 0; top: 0; z-index: 79; width: 10px; height: 14px; border-radius: 3px; pointer-events: none; will-change: transform, opacity; }
+    @media (prefers-reduced-motion: reduce) { .copy-name { transition: none; } }
+
+    /* ---------- CRITERRA patterns ---------- */
+    .h-md { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+    .sticky-frame { position: sticky; top: 96px; }
+    .stack { position: relative; }
+    .stack img { display: block; width: 100%; height: auto; }
+    .stack img:not(.is-on) { position: absolute; inset: 0; opacity: 0; }
+    .wt-step { min-height: 46vh; display: flex; flex-direction: column; justify-content: center; opacity: .3; }
+    .wt-step.is-active { opacity: 1; }
+    .wt-step .num { font-family: "JetBrains Mono", monospace; font-weight: 500; color: var(--blue); font-size: .875rem; }
+    .wt-rail { position: absolute; left: -1.25rem; top: 0; bottom: 0; width: 1px; background: var(--line); }
+    .wt-rail i { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--blue); }
+    @media (max-width: 1023px) { .sticky-frame { position: relative; top: 0; } .wt-step { min-height: 0; padding: 1rem 0; opacity: 1; } }
+    .role-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem; padding: .3rem; border-radius: 999px; background: var(--bg); border: 1px solid var(--line); width: max-content; max-width: 100%; margin-inline: auto; }
+    @media (max-width: 480px) { .role-tabs { border-radius: 20px; } .role-tabs button { padding: .5rem .8rem; font-size: .875rem; } }
+    .role-tabs button { padding: .6rem 1.1rem; border-radius: 999px; border: 0; background: none; font: inherit; font-size: .9375rem; font-weight: 500; color: var(--mute); cursor: pointer; transition: background-color .25s var(--ease), color .25s var(--ease); }
+    .role-tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+    .role-tabs button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .role-stack { position: relative; }
+    .role-stack img { display: block; width: 100%; height: auto; }
+    .role-stack img:not(.is-on) { position: absolute; inset: 0; opacity: 0; }
+    .role-note { text-align: center; margin-top: 1.25rem; color: var(--mute); font-size: .95rem; }
+    .arrow-right { display: inline-block; width: 28px; height: 1px; background: var(--blue); opacity: .6; position: relative; flex: none; }
+    .arrow-right::after { content: ""; position: absolute; right: -1px; top: 50%; width: 6px; height: 6px; border-right: 1px solid var(--blue); border-top: 1px solid var(--blue); transform: translateY(-50%) rotate(45deg); }
+    .stepper { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .6rem; }
+    .stepper .tag { font-size: .9rem; padding: .55rem .9rem; }
+    .pipe { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .5rem; align-items: center; position: relative; }
+    .pipe .stage { display: flex; flex-direction: column; align-items: center; gap: .5rem; padding: 1rem .5rem; border-radius: 16px; background: var(--bg); border: 1px solid var(--line); text-align: center; font-size: .95rem; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+    .pipe .stage.is-active { box-shadow: var(--shadow-soft); transform: translateY(-4px); }
+    .pipe .pipe-arrow { display: none; }
+    @media (max-width: 639px) { .pipe { grid-template-columns: 1fr; } }
+    .sys { position: relative; }
+    .sys-roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    @media (min-width: 768px) { .sys-roles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .sys-role { display: flex; flex-direction: column; align-items: center; gap: .3rem; padding: 1.1rem .75rem; border-radius: 16px; background: var(--bg); border: 1px solid var(--line); text-align: center; }
+    .sys-role b { font-weight: 600; } .sys-role span:not(.sys-dot) { font-size: .85rem; color: var(--mute); }
+    .sys-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--blue); margin-bottom: .25rem; }
+    .sys-lines { display: none; height: 56px; position: relative; }
+    @media (min-width: 768px) { .sys-lines { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); } .sys-lines i { display: block; justify-self: center; width: 1px; height: 100%; background: linear-gradient(to bottom, var(--blue), transparent); opacity: .6; transform: scaleY(0); transform-origin: top; } }
+    .funnel-row { display: grid; grid-template-columns: auto 9rem 1fr auto; gap: 1rem; align-items: center; padding: .9rem 0; border-top: 1px solid var(--line); }
+    .funnel-row:last-of-type { border-bottom: 1px solid var(--line); }
+    .funnel-row b { font-weight: 500; }
+    .funnel-row i { display: block; height: 10px; border-radius: 999px; background: var(--ice-2); position: relative; overflow: hidden; }
+    .funnel-row i::after { content: ""; position: absolute; inset: 0; width: var(--w); background: var(--blue); transform: scaleX(0); transform-origin: left; border-radius: 999px; }
+    .funnel.in .funnel-row i::after { transform: scaleX(1); transition: transform 1.2s var(--ease); }
+    .funnel-row:nth-child(5) i::after { background: #1F7A4D; }
+    .funnel-row .num-count { font-family: Poppins, sans-serif; font-weight: 600; font-variant-numeric: tabular-nums; min-width: 4ch; text-align: right; }
+    @media (max-width: 639px) { .funnel-row { grid-template-columns: auto 1fr auto; } .funnel-row i { grid-column: 1 / -1; } }
+    .side-item { display: flex; align-items: center; gap: .6rem; padding: .7rem .9rem; border-radius: 10px; font-size: .95rem; color: var(--mute); }
+    .side-item svg { width: 18px; height: 18px; }
+    .side-item.is-on { background: var(--ice); color: var(--blue-deep); font-weight: 500; }
+    .flow-box { flex: 1; padding: 1rem; border-radius: 14px; background: var(--bg); border: 1px solid var(--line); display: flex; flex-direction: column; gap: .25rem; }
+    .flow-box b { font-weight: 600; } .flow-box span { font-size: .85rem; color: var(--mute); }
+    .swatch { border-radius: 18px; border: 1px solid var(--line); padding: 1.125rem; display: flex; flex-direction: column; justify-content: flex-end; min-height: 120px; }
+    .sys-card { background: var(--bg); border: 1px solid var(--line); border-radius: 22px; }
+    .rule { height: 1px; background: var(--line); }
+    .kpi { padding: 1rem; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); display: flex; flex-direction: column; }
+    .kpi b { font-family: Poppins, sans-serif; font-size: 1.75rem; font-weight: 600; line-height: 1; } .kpi span { font-size: .85rem; margin-top: .3rem; } .kpi small { font-size: .75rem; color: var(--blue); margin-top: .2rem; }
+    .row-demo { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .8rem 1rem; border-radius: 12px; background: var(--bg); border: 1px solid var(--line); font-size: .9rem; }
+    .shell { display: grid; grid-template-columns: 72px 1fr; gap: 8px; height: 190px; padding: 8px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+    .shell-side { display: flex; flex-direction: column; gap: 6px; padding: 8px; border-radius: 8px; background: var(--bg); }
+    .shell-side i { display: block; height: 8px; border-radius: 4px; background: var(--ice-2); } .shell-side i:first-child { background: var(--blue); } .shell-side em { display: block; height: 1px; margin: 6px 0; background: var(--line); }
+    .shell-main { display: flex; flex-direction: column; gap: 8px; }
+    .shell-top { height: 22px; border-radius: 8px; background: var(--bg); }
+    .shell-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; } .shell-grid i { display: block; height: 40px; border-radius: 8px; background: var(--bg); }
+    .shell-block { flex: 1; border-radius: 8px; background: var(--bg); }
+    .sp { display: inline-block; height: 28px; border-radius: 4px; background: var(--blue); opacity: .8; }
+    .rd { display: inline-block; width: 56px; height: 56px; background: var(--ice-2); border: 1px solid var(--line); }
+    .roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    @media (min-width: 900px) { .roles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .role { padding: 1.5rem; border-radius: 20px; background: var(--bg); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: flex-start; }
+    .role-list { margin-top: .75rem; display: flex; flex-direction: column; gap: .3rem; font-size: .9rem; color: var(--mute); }
+    .role-list li::before { content: "· "; color: var(--blue); }
+    :root[data-theme="dark"] .sys-card, :root[data-theme="dark"] .role, :root[data-theme="dark"] .sys-role, :root[data-theme="dark"] .pipe .stage, :root[data-theme="dark"] .flow-box, :root[data-theme="dark"] .kpi, :root[data-theme="dark"] .row-demo, :root[data-theme="dark"] .shell-side, :root[data-theme="dark"] .shell-top, :root[data-theme="dark"] .shell-grid i, :root[data-theme="dark"] .shell-block, :root[data-theme="dark"] .role-tabs { background: #101010; }
+    :root[data-theme="dark"] .swatch[style*="F6F6F6"], :root[data-theme="dark"] .swatch[style*="FEFEFE"] { border-color: rgba(255,255,255,.14); }
+    @media (prefers-reduced-motion: reduce) { .pipe .stage, .role-tabs button { transition: none; } .funnel .funnel-row i::after { transform: scaleX(1); transition: none; } .sys-lines i { transform: none; } .wt-step { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .g-media img, .car-btn, .fnav .cta, .foot .ib { transition: none; } }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="font-body" data-i18n-page="criterra" data-i18n-base="../../../">
+  <script src="../../../public/preloader.js"></script>
+
+  <!-- floating glass nav -->
+  <nav class="gnav" id="gnav" aria-label="Site">
+    <a href="../../../" class="mark glass focus-ring" aria-label="Nisreen Abdelkader, home">NA</a>
+
+    <div class="links glass">
+      <a href="../../../#work" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-i18n="nav.work">Work</span></a>
+      <a href="../../../#about" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg><span data-i18n="nav.about">About</span></a>
+      <a href="../../../#about" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg><span data-i18n="nav.exp">Experience</span></a>
+      <a href="../../../public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><span data-i18n="nav.resume">CV</span></a>
+      <span class="sep desk" aria-hidden="true"></span>
+      <div class="lang desk">
+        <button class="ctl focus-ring" id="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+          <span class="flag en" id="lang-flag" aria-hidden="true"></span><span id="lang-label">EN</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu glass" id="lang-menu" role="listbox" data-open="false">
+          <button role="option" data-lang="en" aria-checked="true"><span class="flag en" aria-hidden="true"></span>English</button>
+          <button role="option" data-lang="ar" aria-checked="false"><span class="flag eg" aria-hidden="true"></span>العربية</button>
+        </div>
+      </div>
+      <button class="theme focus-ring" id="theme-btn" aria-label="Toggle dark mode" aria-pressed="false">
+        <svg class="sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="burger focus-ring" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+
+    <a href="mailto:nisreenabdelkader6@gmail.com" class="cta focus-ring" aria-label="Contact" data-i18n-title="nav.contact"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+  </nav>
+  <div class="mobile-menu glass" id="mobile-menu" data-open="false">
+    <a href="../../../#work" data-i18n="nav.work">Work</a>
+    <a href="../../../#about" data-i18n="nav.about">About</a>
+    <a href="../../../#about" data-i18n="nav.exp">Experience</a>
+    <a href="../../../public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" data-i18n="nav.resume">CV</a>
+    <div class="flex items-center gap-2 px-2 pt-2 pb-1">
+      <button class="ctl focus-ring" data-lang-quick="en" style="height:40px;border:1px solid var(--line)"><span class="flag en" aria-hidden="true"></span>EN</button>
+      <button class="ctl focus-ring" data-lang-quick="ar" style="height:40px;border:1px solid var(--line)"><span class="flag eg" aria-hidden="true"></span>AR</button>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <header class="pt-36 sm:pt-44 pb-10 px-5 text-center">
+      <div class="rv mx-auto w-16 h-16 rounded-2xl overflow-hidden grid place-items-center bg-white" style="box-shadow: var(--shadow-ui)">
+        <img src="img/icon.png" width="64" height="64" alt="" class="w-12 h-12" />
+      </div>
+      <h1 class="serif h-hero rv mx-auto mt-14 max-w-[900px]">Making clinical trial recruitment easier to navigate, <em>without compromising patient privacy.</em></h1>
+      <p class="rv body mx-auto mt-6 max-w-[62ch]">CRITERRA is a role-based clinical trial recruitment platform connecting sponsors, healthcare organizations, doctors and eligible patients through one coordinated enrollment journey.</p>
+      <ul class="rv mt-7 flex flex-wrap justify-center gap-x-7 gap-y-2" aria-label="Focus areas">
+        <li class="eyebrow flex items-center gap-2" style="color: var(--ink)"><span class="w-1.5 h-1.5 rounded-full" style="background: var(--blue)"></span>Clinical Trial Recruitment</li>
+        <li class="eyebrow flex items-center gap-2" style="color: var(--ink)"><span class="w-1.5 h-1.5 rounded-full" style="background: var(--blue)"></span>Role-Based SaaS</li>
+        <li class="eyebrow flex items-center gap-2" style="color: var(--ink)"><span class="w-1.5 h-1.5 rounded-full" style="background: var(--blue)"></span>Healthcare Platform</li>
+      </ul>
+    </header>
+    <section class="px-5 pb-20">
+      <div class="wide g g-media rv" style="aspect-ratio: 1540/1022"><img src="img/cover.jpg" alt="CRITERRA admin dashboard on a laptop: clinical trial overview with the five-stage referral pipeline" fetchpriority="high" /></div>
+    </section>
+
+    <!-- ================= INTRO + META ================= -->
+    <section class="px-5 pb-20">
+      <div class="mx-auto max-w-[900px] grid grid-cols-12 gap-y-10 gap-x-0 md:gap-x-10">
+        <div class="col-span-12 md:col-span-7 rv">
+          <p class="eyebrow mb-4">Intro</p>
+          <div class="body">
+            <p>Clinical trial recruitment involves multiple stakeholders working toward the same outcome, <strong>but they should not all see the same information.</strong></p>
+            <p>CRITERRA connects existing patient databases with relevant trials. It is not a manual patient-entry tool: the platform handles <strong>trial creation, eligibility matching, referrals, doctor review, consent and enrollment tracking</strong>, with reporting and role-based access on top.</p>
+          </div>
+        </div>
+        <div class="col-span-12 md:col-span-5 md:pl-6 rv" style="--d:.1s">
+          <p class="eyebrow mb-3">Role</p><div class="flex flex-wrap gap-2"><span class="pill">UI UX Designer</span></div>
+          <p class="eyebrow mb-3 mt-7">Product</p><div class="flex flex-wrap gap-2"><span class="pill">Clinical Trial Recruitment Platform</span></div>
+          <p class="eyebrow mb-3 mt-7">Type</p><div class="flex flex-wrap gap-2"><span class="pill">B2B Healthcare SaaS</span><span class="pill">Web</span><span class="pill">Tablet</span></div>
+          <p class="eyebrow mb-3 mt-7">Scope</p><div class="flex flex-wrap gap-2"><span class="pill">Role-Based Workflows</span><span class="pill">Design System</span><span class="pill">UX/UI</span></div>
+          <p class="eyebrow mb-3 mt-7">Primary users</p><div class="flex flex-wrap gap-2"><span class="pill">Admin</span><span class="pill">CRO / Pharma</span><span class="pill">Organizations</span><span class="pill">Doctors</span></div>
+          <p class="eyebrow mb-3 mt-7">Tools</p>
+          <div class="tools-row">
+            <span class="tool-ic" title="Figma" aria-label="Figma"><svg viewBox="0 0 38 57" width="22" height="33" aria-hidden="true"><path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg></span>
+            <span class="tool-ic" title="FigJam" aria-label="FigJam" style="background:#FFF"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" fill="#A259FF"/><rect x="13" y="3" width="8" height="8" rx="2" fill="#F24E1E"/><rect x="3" y="13" width="8" height="8" rx="2" fill="#0ACF83"/><rect x="13" y="13" width="8" height="8" rx="2" fill="#1ABCFE"/></svg></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PROBLEM / SOLUTION / DIRECTION ================= -->
+    <section class="px-5 pb-24">
+      <div class="wide grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="card p-10 rv">
+          <div class="icon-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="16" r="3"/><path d="M11 8h6a3 3 0 0 1 3 3v0M13 16H7a3 3 0 0 1-3-3"/></svg></div>
+          <h2 class="serif h-card mt-8">Problem</h2>
+          <p class="body mt-4">Recruitment is a shared process, but every participant needs a different view of it. <strong>Sponsors need performance without patient identity.</strong> Organizations need fast referral tools. Doctors need clinical context to decide. Admins need oversight across everything.</p>
+        </article>
+        <article class="card p-10 rv" style="--d:.08s">
+          <div class="icon-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 4v16"/></svg></div>
+          <h2 class="serif h-card mt-8">Solution</h2>
+          <p class="body mt-4">I designed CRITERRA as <strong>one role-based product ecosystem built around a shared recruitment pipeline</strong>, with permissions, navigation, patient visibility and actions adapting to each role instead of four disconnected products.</p>
+        </article>
+        <article class="card p-10 rv" style="--d:.16s">
+          <div class="icon-dot"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18M13 6l6 6-6 6"/></svg></div>
+          <h2 class="serif h-card mt-8">Direction</h2>
+          <p class="body mt-4"><strong>One recruitment journey. Four purpose-built experiences.</strong> Matched → Referred → Doctor Review → Consent → Enrolled became the mental model every role reads, at the level of detail its responsibility requires.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= SCREENSHOT GALLERY ================= -->
+    <div class="divider rv" role="separator"><span data-i18n="div.gallery">Screenshot gallery</span></div>
+    <section class="px-5 pt-24 pb-24">
+      <div class="wide flex flex-col gap-5">
+        <div class="g collage rv" aria-label="Admin, CRO and organization screens">
+          <div class="ui" style="left:-6%; top:-6%"><img src="img/admin-trials.jpg" alt="" loading="lazy" /></div>
+          <div class="ui" style="left:36%; top:-34%"><img src="img/cro-dash.jpg" alt="" loading="lazy" /></div>
+          <div class="ui" style="left:64%; top:26%"><img src="img/pipeline.jpg" alt="" loading="lazy" /></div>
+          <div class="ui" style="left:14%; top:48%"><img src="img/org-eligible.jpg" alt="" loading="lazy" /></div>
+          <div class="ui" style="left:42%; top:40%; width:30%"><img src="img/admin-referrals.jpg" alt="" loading="lazy" /></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div class="card-ice rv p-8 sm:p-12 overflow-hidden" style="min-height:520px"><div class="ui w-[112%] max-w-none"><img src="img/org-dash-refer.jpg" alt="Organization dashboard: eligible patients with Refer All Eligible action" loading="lazy" /></div></div>
+          <div class="g rv p-8 sm:p-12 overflow-hidden" style="min-height:520px; --d:.08s"><div class="ui w-[112%] max-w-none"><img src="img/admin-orgs.jpg" alt="Admin: partner organizations with status and referral counts" loading="lazy" /></div></div>
+        </div>
+
+        <div class="g g-media rv" style="aspect-ratio: 1368/1058"><img src="img/app-icon.jpg" alt="CRITERRA app icon on a phone home screen" loading="lazy" /></div>
+      </div>
+    </section>
+
+    <!-- ================= PROCESS ================= -->
+    <div class="divider rv" role="separator"><span data-i18n="div.process">Process</span></div>
+
+    <section class="process-bg mt-16 px-5 py-20 sm:py-28">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Design challenge</p>
+        <h2 class="serif h-sec">How do you design one recruitment system for four roles that should never have the same level of access?</h2>
+        <div class="body mt-6">
+          <p><strong>The same patient can appear in a shared recruitment journey while being represented completely differently depending on who is viewing the system.</strong> Aggregated for a sponsor. Named for a pharmacy referring them. Clinical for the doctor reviewing them.</p>
+          <p>Every decision on this project balanced operational visibility, patient privacy, clinical access and recruitment efficiency inside one application shell.</p>
+        </div>
+      </div>
+      <!-- system diagram: four roles → one pipeline -->
+      <div class="wide mt-14 rv" aria-label="Four roles connected to one shared pipeline">
+        <div class="sys">
+          <div class="sys-roles">
+            <div class="sys-role"><span class="sys-dot"></span><b>Admin</b><span>Platform oversight</span></div>
+            <div class="sys-role"><span class="sys-dot"></span><b>CRO / Pharma</b><span>Aggregated performance</span></div>
+            <div class="sys-role"><span class="sys-dot"></span><b>Organization</b><span>Patient referral</span></div>
+            <div class="sys-role"><span class="sys-dot"></span><b>Doctor</b><span>Medical review</span></div>
+          </div>
+          <div class="sys-lines" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          <div class="pipe" id="pipe-sys">
+            <div class="stage"><span class="chip c-new">01</span><b>Matched</b></div><span class="pipe-arrow"></span>
+            <div class="stage"><span class="chip c-prog">02</span><b>Referred</b></div><span class="pipe-arrow"></span>
+            <div class="stage"><span class="chip c-pend">03</span><b>Doctor Review</b></div><span class="pipe-arrow"></span>
+            <div class="stage"><span class="chip c-cons">04</span><b>Consent</b></div><span class="pipe-arrow"></span>
+            <div class="stage"><span class="chip c-done">05</span><b>Enrolled</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ISSUE 1: same pipeline, four perspectives -->
+    <section class="px-5 pt-24 pb-10">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Issue #1</p>
+        <h3 class="serif h-sec">The workflow was shared. <em>The responsibilities were not.</em></h3>
+        <div class="body mt-6">
+          <p>All four roles contribute to the same five stages, but they touch them differently. The admin oversees the system. The CRO reads aggregated performance. The organization refers patients. The doctor reviews and decides.</p>
+          <p><strong>Instead of designing separate disconnected products, I used one shared system architecture and adapted navigation, visibility and actions by role.</strong> Same topbar, same sidebar logic, same grid and design system. Different menu, content, tables, permissions and actions.</p>
+        </div>
+      </div>
+      <div class="wide mt-14 rv">
+        <div class="car" style="padding-top: 2rem">
+          <div class="role-tabs" role="tablist" aria-label="Switch role view" id="role-tabs">
+            <button role="tab" aria-selected="true" data-role="0">Admin</button>
+            <button role="tab" aria-selected="false" data-role="1">CRO / Pharma</button>
+            <button role="tab" aria-selected="false" data-role="2">Organization</button>
+          </div>
+          <div class="ui mt-6 role-stack" id="role-stack">
+            <img src="img/admin-dash.jpg" alt="Admin view: platform-wide overview" loading="lazy" class="is-on" />
+            <img src="img/cro-dash.jpg" alt="CRO view: own trials, enrollment progress and organization performance, no patient identity" loading="lazy" />
+            <img src="img/org-dash.jpg" alt="Organization view: eligible patients and referrals" loading="lazy" />
+          </div>
+          <p class="role-note" id="role-note">Same shell. Admin sees platform operations, trials, organizations, referrals, pipeline and reports.</p>
+        </div>
+        <p class="fig">Fig 1. <span>One application shell adapting to the active role. Roles switch from the profile menu.</span></p>
+      </div>
+    <!-- ISSUE 2: privacy -->
+    <section class="px-5 pt-24 pb-10">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Issue #2</p>
+        <h3 class="serif h-sec">Recruitment visibility could not come at the cost of <em>patient privacy</em>.</h3>
+        <div class="body mt-6">
+          <p>CROs need to understand recruitment performance, pipeline progress, enrollment and which participating organizations contribute referrals to their trials. <strong>They must never see personally identifiable patient information.</strong></p>
+          <p><strong>CRO views were built around anonymized and aggregated recruitment information</strong>, scoped to the CRO’s own trials and network, while identifiable patient data remained available only where operational or clinical workflows required it. The CRO also has no organization management: no Organizations page, no Add Organization.</p>
+        </div>
+      </div>
+      <div class="wide mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="ba rv" style="background: var(--ice)">
+          <p class="ba-label">CRO view</p><p class="ba-sub">Aggregated data · no patient identity</p>
+          <div class="ui mt-6 w-full"><img src="img/cro-reports.jpg" alt="CRO reports: counts, rates and partner performance scoped to the CRO’s network" loading="lazy" /></div>
+          <div class="mt-5 flex flex-wrap gap-2 justify-center"><span class="tag" style="font-size:.9rem">Counts &amp; rates</span><span class="tag" style="font-size:.9rem">Own trials only</span><span class="tag" style="font-size:.9rem">Network-scoped partners</span></div>
+        </div>
+        <div class="ba card rv" style="--d:.08s">
+          <p class="ba-label">Organization view</p><p class="ba-sub">Referral-level patient identity</p>
+          <div class="ui mt-6 w-full"><img src="img/org-eligible.jpg" alt="Organization eligible patients: patient names, conditions, matched trials and Refer actions" loading="lazy" /></div>
+          <div class="mt-5 flex flex-wrap gap-2 justify-center"><span class="tag" style="font-size:.9rem">Patient name &amp; ID</span><span class="tag" style="font-size:.9rem">Condition</span><span class="tag tag-blue" style="font-size:.9rem">Refer</span></div>
+        </div>
+      </div>
+      <div class="wide mt-5 rv">
+        <div class="card p-6 sm:p-8 grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div><p class="eyebrow">CRO</p><p class="mt-2 font-medium">Aggregated data</p><p class="body mt-1" style="font-size:.95rem">Metrics, pipeline, enrollment, partner performance within its own trials.</p></div>
+          <div><p class="eyebrow">Organization</p><p class="mt-2 font-medium">Referral-level identity</p><p class="body mt-1" style="font-size:.95rem">Name and ID where needed to identify and refer a matched patient.</p></div>
+          <div><p class="eyebrow">Doctor</p><p class="mt-2 font-medium">Clinical identity</p><p class="body mt-1" style="font-size:.95rem">Full patient context, because medical review requires it.</p></div>
+        </div>
+        <p class="fig">Fig 2. <span>The same recruitment data, exposed at three different levels of identity.</span></p>
+      </div>
+    </section>
+
+    <!-- ISSUE 3: organizations, actions not analytics (sticky walkthrough) -->
+    <section class="px-5 pt-24 pb-10">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Issue #3</p>
+        <h3 class="serif h-sec">Pharmacy teams didn’t need <em>another enterprise dashboard</em>.</h3>
+        <div class="body mt-6">
+          <p>The organization workflow had one primary purpose: <strong>identify eligible patients and move them into the referral journey with as little friction as possible.</strong></p>
+          <p><strong>The organization experience became tablet-first, simplified and action-driven.</strong> Four menu items. Patient identification, eligibility context, referral actions and status tracking, in that order. No system settings, no heavy analytics, no AI-looking eligibility scores.</p>
+        </div>
+      </div>
+      <div class="wide mt-14 grid grid-cols-12 gap-x-4 lg:gap-x-10 gap-y-10">
+        <div class="col-span-12 lg:col-span-7">
+          <div class="sticky-frame"><div class="ui stack" id="org-stack">
+            <img src="img/org-eligible.jpg" alt="Eligible patients matched to active trials, each with a Refer action" loading="lazy" class="is-on" />
+            <img src="img/org-eligible-confirm.jpg" alt="Refer All Eligible asks for confirmation before referring 12 patients" loading="lazy" />
+            <img src="img/org-eligible-done.jpg" alt="All patients referred: buttons become Referred states" loading="lazy" />
+            <img src="img/org-referrals.jpg" alt="Referral history with status per patient" loading="lazy" />
+          </div></div>
+        </div>
+        <div class="col-span-12 lg:col-span-5 relative lg:pl-2" id="org-steps"><span class="wt-rail hidden lg:block" aria-hidden="true"><i id="org-rail"></i></span>
+          <div class="wt-step is-active" data-i="0"><p class="num">01</p><p class="serif h-md mt-3">Eligible Patients</p><p class="body mt-3">Patients already matched to active trials. Name, condition, matched trial, indication, match, and one action.</p></div>
+          <div class="wt-step" data-i="1"><p class="num">02</p><p class="serif h-md mt-3">Refer All Eligible</p><p class="body mt-3">Bulk referral exists because pharmacies work in batches. It always asks for confirmation first.</p></div>
+          <div class="wt-step" data-i="2"><p class="num">03</p><p class="serif h-md mt-3">Confirmation</p><p class="body mt-3">Every row flips to Referred. The list stays in place so the team can see what just happened.</p></div>
+          <div class="wt-step" data-i="3"><p class="num">04</p><p class="serif h-md mt-3">Referral history</p><p class="body mt-3">Status per patient, in plain words: Pending, Doctor Review, Enrolled, Declined.</p></div>
+        </div>
+      </div>
+      <p class="fig wide">Fig 3. <span>The organization flow from eligible list to referral status.</span></p>
+    </section>
+
+    <!-- ISSUE 4: trial creation -->
+    <section class="px-5 pt-24 pb-10">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Issue #4</p>
+        <h3 class="serif h-sec">Complex trial criteria needed to <em>remain understandable</em>.</h3>
+        <div class="body mt-6">
+          <p><strong>Trial creation contains complex eligibility logic, so the workflow was broken into progressive steps rather than exposing the full configuration at once.</strong> Basic information, then criteria, then details, then participating organizations, then review and publish.</p>
+          <p>The criteria builder separates inclusion from exclusion, one criterion per entry. Destructive actions on trials stay with the admin; CRO permissions remain the safer model unless a screen explicitly allows otherwise.</p>
+        </div>
+      </div>
+      <div class="wide mt-12 rv">
+        <div class="stepper" aria-label="Trial creation steps">
+          <span class="tag tag-blue">Create Trial</span><span class="arrow-right"></span><span class="tag">Basic Info</span><span class="arrow-right"></span><span class="tag">Inclusion Criteria</span><span class="arrow-right"></span><span class="tag">Exclusion Criteria</span><span class="arrow-right"></span><span class="tag">Setup</span><span class="arrow-right"></span><span class="tag">Review</span><span class="arrow-right"></span><span class="tag">Publish</span>
+        </div>
+      </div>
+      <div class="wide mt-8 rv">
+        <div class="car" data-carousel>
+          <button class="car-btn car-prev" aria-label="Previous"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>
+          <div class="car-track"><div class="car-slides">
+            <div class="car-slide"><div class="ui"><img src="img/create-trial.jpg" alt="Create New Trial with inclusion and exclusion criteria builder" loading="lazy" /></div></div>
+            <div class="car-slide"><div class="ui"><img src="img/admin-trials.jpg" alt="Trials list with Recruiting, On Hold and Completed statuses" loading="lazy" /></div></div>
+            <div class="car-slide"><div class="ui"><img src="img/cro-enrollment.jpg" alt="Enrollment by trial: target, screened, enrolled, declined, sites" loading="lazy" /></div></div>
+          </div></div>
+          <button class="car-btn car-next" aria-label="Next"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>
+          <div class="car-dots" role="tablist"></div>
+        </div>
+        <p class="fig">Fig 4. <span>Criteria builder, trials list and enrollment status.</span></p>
+      </div>
+    </section>
+
+    <!-- ISSUE 5: pipeline -->
+    <section class="px-5 pt-24 pb-10">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Issue #5</p>
+        <h3 class="serif h-sec">Enrollment progress needed to be <em>readable before it was analyzable</em>.</h3>
+        <div class="body mt-6">
+          <p><strong>The pipeline became the shared mental model of the platform</strong>, letting every role understand where recruitment is progressing or dropping off before opening a report.</p>
+          <p>Five stages, one order, the same semantic colors everywhere: blue for progress, green for enrolled, amber for pending, red for declined, gray for archived.</p>
+        </div>
+      </div>
+      <div class="wide mt-14 rv">
+        <div class="card p-8 sm:p-12 funnel" id="funnel">
+          <div class="funnel-row"><span class="chip c-new">01</span><b>Matched</b><i style="--w:100%"></i><span class="num-count" data-count="1847">0</span></div>
+          <div class="funnel-row"><span class="chip c-prog">02</span><b>Referred</b><i style="--w:35%"></i><span class="num-count" data-count="642">0</span></div>
+          <div class="funnel-row"><span class="chip c-pend">03</span><b>Doctor Review</b><i style="--w:22%"></i><span class="num-count" data-count="412">0</span></div>
+          <div class="funnel-row"><span class="chip c-cons">04</span><b>Consent</b><i style="--w:17%"></i><span class="num-count" data-count="318">0</span></div>
+          <div class="funnel-row"><span class="chip c-done">05</span><b>Enrolled</b><i style="--w:15%"></i><span class="num-count" data-count="281">0</span></div>
+          <p class="mt-6 eyebrow" style="color: var(--mute)">Sample presentation figures, not production analytics</p>
+        </div>
+      </div>
+    <!-- ISSUE 6: doctor -->
+    <section class="px-5 pt-24 pb-24">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Issue #6</p>
+        <h3 class="serif h-sec">The doctor experience needed <em>depth without complexity</em>.</h3>
+        <div class="body mt-6">
+          <p>Doctors can access identifiable patient information because medical review requires it. What they did not need was a system to navigate. <strong>Doctor navigation was intentionally reduced to two items: Dashboard and Patients.</strong></p>
+          <p>Scheduling lives inside Patient Details rather than becoming a separate destination. <strong>The doctor experience was organized around the patient rather than around system modules.</strong></p>
+        </div>
+      </div>
+      <div class="wide mt-14 grid grid-cols-1 md:grid-cols-12 gap-5 rv">
+        <div class="card p-8 md:col-span-4">
+          <p class="eyebrow">Doctor sidebar</p>
+          <div class="mt-5 flex flex-col gap-2">
+            <span class="side-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Dashboard</span>
+            <span class="side-item is-on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>Patients</span>
+          </div>
+          <p class="body mt-6" style="font-size:.95rem">Two destinations. Everything else opens from a patient.</p>
+        </div>
+        <div class="ba card md:col-span-8" style="min-height:0; align-items:stretch">
+          <p class="ba-label self-center">Core doctor journey</p>
+          <div class="mt-6 flex flex-col sm:flex-row items-stretch gap-3">
+            <div class="flow-box"><p class="eyebrow">01</p><b>Patient Details</b><span>Identity, condition, matched trial, referral source</span></div><span class="arrow-right self-center hidden sm:block"></span>
+            <div class="flow-box"><p class="eyebrow">02</p><b>Scheduling</b><span>Inside the patient record, not a menu item</span></div><span class="arrow-right self-center hidden sm:block"></span>
+            <div class="flow-box"><p class="eyebrow">03</p><b>Review</b><span>Clinical context needed to decide</span></div><span class="arrow-right self-center hidden sm:block"></span>
+            <div class="flow-box"><p class="eyebrow">04</p><b>Decision</b><div class="flex flex-wrap gap-1.5 mt-2"><span class="chip c-prog">Schedule</span><span class="chip c-done">Enroll</span><span class="chip c-decl">Decline</span></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="fig wide">Fig 6. <span>Doctor navigation and the patient-centred flow. Doctor screens are not shown here.</span></p>
+    </section>
+
+    <!-- ================= DESIGN SYSTEM ================= -->
+    <div class="divider rv" role="separator"><span>Design language</span></div>
+    <section class="px-5 pt-24 pb-24">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Visual system</p>
+        <h2 class="serif h-sec">Clinical clarity <em>without clinical coldness</em>.</h2>
+        <p class="body mt-6">White and near-white surfaces, dark neutral type, one blue family for progress and action, subtle borders and restrained shadows. Color carries meaning first and decoration never.</p>
+      </div>
+      <div class="wide mt-14 grid grid-cols-12 gap-5">
+        <div class="col-span-12 lg:col-span-5 grid grid-cols-6 gap-3 rv">
+          <div class="swatch col-span-6 min-h-[200px] text-white" style="background:#0D0042; border-color: transparent"><p class="eyebrow" style="color: rgba(255,255,255,.6)">Dark Indigo</p><p class="serif text-2xl mt-1">#0D0042</p></div>
+          <div class="swatch col-span-3 text-white" style="background:#1E4E7C; border-color: transparent"><p class="eyebrow" style="color: rgba(255,255,255,.6)">Deep Blue</p><p class="font-medium mt-1">#1E4E7C</p></div>
+          <div class="swatch col-span-3 text-white" style="background:#2C72B7; border-color: transparent"><p class="eyebrow" style="color: rgba(255,255,255,.7)">Primary</p><p class="font-medium mt-1">#2C72B7</p></div>
+          <div class="swatch col-span-2 text-white" style="background:#5A94C8; border-color: transparent"><p class="eyebrow" style="color: rgba(255,255,255,.75)">Sky</p><p class="font-medium mt-1 text-sm">#5A94C8</p></div>
+          <div class="swatch col-span-2" style="background:#F6F6F6"><p class="eyebrow">Light Grey</p><p class="font-medium mt-1 text-sm" style="color:#14243A">#F6F6F6</p></div>
+          <div class="swatch col-span-2" style="background:#FEFEFE"><p class="eyebrow">Almost White</p><p class="font-medium mt-1 text-sm" style="color:#14243A">#FEFEFE</p></div>
+        </div>
+        <div class="col-span-12 md:col-span-6 lg:col-span-4 sys-card p-7 rv" style="--d:.06s">
+          <p class="eyebrow">Typography</p>
+          <p class="mt-4 leading-none" style="font-family: Poppins, sans-serif; font-weight: 600; font-size: 5rem; color: var(--ink)">Aa</p>
+          <p class="mt-4 text-xl" style="font-family: Poppins, sans-serif; font-weight: 600">Clinical Trial Overview</p>
+          <p class="body mt-1" style="font-size:.95rem">Poppins for headings, labels and data. Geometric, calm, legible in dense tables.</p>
+          <div class="rule mt-6"></div>
+          <p class="text-sm mt-4 flex justify-between"><span style="font-family: Poppins">Poppins · 600</span><span class="body">Headings &amp; KPIs</span></p>
+          <p class="text-sm mt-2 flex justify-between"><span style="font-family: Poppins">Poppins · 400 / 500</span><span class="body">UI &amp; tables</span></p>
+        </div>
+        <div class="col-span-12 md:col-span-6 lg:col-span-3 sys-card p-7 rv" style="--d:.12s">
+          <p class="eyebrow">Status system</p>
+          <div class="mt-4 flex flex-wrap gap-2"><span class="chip c-prog">Recruiting</span><span class="chip c-done">Enrolled</span><span class="chip c-pend">On Hold</span><span class="chip c-decl">Declined</span><span class="chip c-new">Archived</span></div>
+          <p class="body mt-4" style="font-size:.9rem">Blue progress · Green success · Amber pending · Red issue · Gray archived or draft.</p>
+          <p class="eyebrow mt-7">KPI card</p>
+          <div class="kpi mt-3"><b>1,847</b><span>Eligible Patients</span><small>+124 this week</small></div>
+          <p class="eyebrow mt-7">Table row</p>
+          <div class="row-demo mt-3"><span class="font-medium">HORIZON-CARDIO</span><span class="chip c-prog">Recruiting</span><span class="body" style="font-size:.85rem">1,247</span></div>
+        </div>
+        <div class="col-span-12 sys-card p-7 rv" style="--d:.18s">
+          <p class="eyebrow">Application shell</p>
+          <div class="shell mt-5" aria-hidden="true">
+            <div class="shell-side"><i></i><i></i><i></i><i></i><i></i><i></i><em></em><i></i></div>
+            <div class="shell-main"><div class="shell-top"></div><div class="shell-grid"><i></i><i></i><i></i><i></i></div><div class="shell-block"></div></div>
+          </div>
+          <p class="body mt-4" style="font-size:.95rem">240px sidebar, 64px topbar, 12-column grid, 1200–1280px content. Daily navigation on top; Users, Role Permissions, System Preferences, Payment Gateways and Settings sit below a divider so admin setup never mixes with daily work.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= OUTCOMES ================= -->
+    <div class="divider rv" role="separator"><span data-i18n="div.results">Outcomes</span></div>
+    <section class="px-5 pt-24 pb-24">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Product outcomes</p>
+        <h2 class="serif h-sec">Business rules, turned into a product system.</h2>
+        <p class="body mt-6">The result is measured in structure rather than metrics: what each role can see, what each role can do, and how the same journey holds together across all of them.</p>
+      </div>
+      <div class="wide mt-14 grid grid-cols-1 md:grid-cols-2 gap-5">
+        <article class="card p-9 rv"><p class="eyebrow">Clearer role boundaries</p><h3 class="serif h-card mt-6">Each user sees what their responsibility requires</h3><p class="body mt-3">The information and actions for the job, without exposing unnecessary system complexity.</p></article>
+        <article class="card p-9 rv" style="--d:.06s"><p class="eyebrow">Privacy by role</p><h3 class="serif h-card mt-6">Identity only where the workflow needs it</h3><p class="body mt-3">Patient identity is accessible only where referral or clinical workflows require it. Never to sponsors. Organizations refer, they don’t analyze.</p></article>
+        <article class="card p-9 rv" style="--d:.12s"><p class="eyebrow">One shared recruitment model</p><h3 class="serif h-card mt-6">Five stages, one mental model</h3><p class="body mt-3">Matched → Referred → Doctor Review → Consent → Enrolled reads the same in every role.</p></article>
+        <article class="card-ice p-9 rv flex flex-col justify-between" style="--d:.3s"><p class="eyebrow">Closing</p><p class="serif mt-6" style="font-size:1.6rem; line-height:1.15">Clinical trial recruitment is one journey experienced from many perspectives.</p><p class="body mt-4" style="font-size:.95rem">Designed to connect recruitment teams, healthcare organizations and doctors while keeping patient access where it belongs.</p></article>
+      </div>
+    </section>
+
+    <!-- ================= FINAL SHOWCASE ================= -->
+    <section class="px-5 pb-24">
+      <div class="wide g rv py-14 px-6 sm:px-16" style="background: linear-gradient(160deg, #0D0042, #1E4E7C)">
+        <p class="eyebrow text-center" style="color: rgba(255,255,255,.65)">UI UX Design · Role-Based UX · Healthcare SaaS · Design System</p>
+        <h2 class="serif h-hero text-center mt-4" style="color:#fff">CRITERRA</h2>
+        <div class="grid grid-cols-12 gap-4 items-end mt-12">
+          <div class="col-span-12 sm:col-span-4"><div class="ui"><img src="img/org-eligible.jpg" alt="" loading="lazy" /></div></div>
+          <div class="col-span-12 sm:col-span-4"><div class="ui"><img src="img/admin-dash.jpg" alt="CRITERRA admin dashboard" loading="lazy" /></div></div>
+          <div class="col-span-12 sm:col-span-4"><div class="ui"><img src="img/cro-reports.jpg" alt="" loading="lazy" /></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NEXT PROJECT MARQUEE ================= -->
+    <section class="pb-28 pt-6" aria-label="Next project">
+      <a href="../dentlora/" class="marq block focus-ring" id="marq">
+        <div class="marq-track" id="marq-track">
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="img/next-dentlora.jpg" alt="" loading="lazy" /></span></div>
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="img/next-dentlora.jpg" alt="" loading="lazy" /></span></div>
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="img/next-dentlora.jpg" alt="" loading="lazy" /></span></div>
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="img/next-dentlora.jpg" alt="" loading="lazy" /></span></div>
+        </div>
+        <p class="text-center mt-6 font-mono text-sm tracking-[.08em] uppercase" style="color: var(--mute)">./dentlora</p>
+      </a>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <div class="cursor-tip" id="cursor-tip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="cursor-tip-text">Click to copy email</span></div>
+  <footer class="foot px-6 sm:px-16 pt-16 pb-8" id="contact">
+    <div class="eyes" id="eyes" aria-hidden="true"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></div>
+    <div class="mt-16 flex flex-col sm:flex-row sm:items-center justify-between gap-8">
+      <p class="text-[1.0625rem] leading-relaxed" style="color:#BABABA" data-i18n="foot.connect">Let’s connect.<br />I’m always down for a chat.</p>
+      <div class="flex gap-3">
+        <a href="mailto:nisreenabdelkader6@gmail.com" class="ib focus-ring" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+        <a href="../../../public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" class="ib focus-ring" aria-label="CV"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></a>
+        <a href="https://www.linkedin.com/in/nisreen-abdelkader/" target="_blank" rel="noopener" class="ib focus-ring" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.behance.net/nisreenabdelkader" target="_blank" rel="noopener" class="ib focus-ring" aria-label="Behance"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h5a3 3 0 0 1 0 6H3zM3 12h5.5a3 3 0 0 1 0 6H3zM14 9h6M13.5 14.5a3.5 3.5 0 0 1 7 0H13.5zM13.5 14.5a3.5 3.5 0 0 0 6.2 2.3"/></svg></a>
+      </div>
+    </div>
+    <button type="button" class="big copy-name mt-12" id="copy-name" data-email="nisreenabdelkader6@gmail.com" aria-label="Copy email address nisreenabdelkader6@gmail.com">Nisreen Abdelkader</button>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <div class="mt-10 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-[.9375rem]" style="color: #A4A4A4; border-top: 1px solid rgba(255,255,255,.12)">
+      <span>© 2026 Nisreen Abdelkader</span><span>UI UX &amp; Brand Designer</span>
+    </div>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const $ = (q, r = document) => r.querySelector(q), $$ = (q, r = document) => [...r.querySelectorAll(q)];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- Theme (persisted) ----
+    const root = document.documentElement, themeBtn = $('#theme-btn');
+    const applyTheme = t => { root.dataset.theme = t; themeBtn.setAttribute('aria-pressed', String(t === 'dark')); try { localStorage.setItem('theme', t); } catch {} };
+    let savedTheme = null; try { savedTheme = localStorage.getItem('theme'); } catch {}
+    applyTheme(savedTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+    themeBtn.addEventListener('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    // ---- Language (UI strings + direction; body copy stays in the authored language) ----
+    const i18n = {
+      en: { 'nav.work': 'Work', 'nav.about': 'About', 'nav.exp': 'Experience', 'nav.resume': 'CV', 'nav.contact': 'Contact', 'div.gallery': 'Screenshot gallery', 'div.process': 'Process', 'div.results': 'Outcomes', 'ba.before': 'Before', 'ba.after': 'After', 'foot.connect': 'Let’s connect.<br />I’m always down for a chat.', 'next': 'Next Project' },
+      ar: { 'nav.work': 'الأعمال', 'nav.about': 'عني', 'nav.exp': 'الخبرات', 'nav.resume': 'السيرة الذاتية', 'nav.contact': 'تواصل معي', 'div.gallery': 'معرض الشاشات', 'div.process': 'المنهجية', 'div.results': 'النتائج', 'ba.before': 'قبل', 'ba.after': 'بعد', 'foot.connect': 'خلينا نتواصل.<br />دايماً مستعدة لدردشة.', 'next': 'المشروع التالي' },
+    };
+    const langBtn = $('#lang-btn'), langMenu = $('#lang-menu');
+    const applyLang = l => {
+      $$('[data-i18n]').forEach(el => { const v = i18n[l][el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+      $('#lang-label').textContent = l.toUpperCase(); $('#lang-flag').className = 'flag ' + (l === 'ar' ? 'eg' : 'en');
+      $$('#lang-menu [role="option"]').forEach(o => o.setAttribute('aria-checked', String(o.dataset.lang === l)));
+      root.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr'); root.setAttribute('lang', l);
+      try { localStorage.setItem('lang', l); } catch {}
+      window.I18N?.apply(l);
+      ScrollTrigger.refresh();
+    };
+    langBtn.addEventListener('click', () => { const o = langMenu.dataset.open !== 'true'; langMenu.dataset.open = String(o); langBtn.setAttribute('aria-expanded', String(o)); });
+    $$('#lang-menu [role="option"]').forEach(o => o.addEventListener('click', () => { applyLang(o.dataset.lang); langMenu.dataset.open = 'false'; langBtn.setAttribute('aria-expanded', 'false'); }));
+    document.addEventListener('click', e => { if (!e.target.closest('.lang')) { langMenu.dataset.open = 'false'; langBtn.setAttribute('aria-expanded', 'false'); } if (!e.target.closest('#mobile-menu') && !e.target.closest('#burger')) { mm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); } });
+    let savedLang = null; try { savedLang = localStorage.getItem('lang'); } catch {}
+    if (savedLang && savedLang !== 'en') applyLang(savedLang);
+
+    // ---- Mobile menu ----
+    const burger = $('#burger'), mm = $('#mobile-menu');
+    burger.addEventListener('click', () => { const o = mm.dataset.open !== 'true'; mm.dataset.open = String(o); burger.setAttribute('aria-expanded', String(o)); });
+    mm.addEventListener('click', e => { if (e.target.closest('a')) { mm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); } });
+
+    // Glass nav: slides away on fast scroll down, returns on scroll up
+    ScrollTrigger.create({ start: 120, onUpdate: st => { if (reduce) return; const hide = st.direction === 1 && Math.abs(st.getVelocity()) > 400; gsap.to('#gnav', { y: hide ? -90 : 0, autoAlpha: hide ? 0 : 1, duration: .45, ease: 'power3.out', overwrite: true }); }, onLeaveBack: () => gsap.to('#gnav', { y: 0, autoAlpha: 1, duration: .3 }) });
+    $$('[data-lang-quick]').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.langQuick); mm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); }));
+
+    // Reveal
+    if (!reduce) {
+      gsap.set('.rv', { autoAlpha: 0, y: 24 });
+      ScrollTrigger.batch('.rv', { start: 'top 88%', once: true, onEnter: els => gsap.to(els, { autoAlpha: 1, y: 0, duration: .9, ease: 'power3.out', stagger: .08, overwrite: true }) });
+      const pieces = $$('.collage .ui, .collage .phone');
+      gsap.from(pieces, { y: 60, autoAlpha: 0, duration: 1.2, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '.collage', start: 'top 80%', once: true } });
+      gsap.to(pieces, { y: i => -30 - i * 10, ease: 'none', scrollTrigger: { trigger: '.collage', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      $$('.card-ice .phone, .g > .phone, .g .flex .phone').forEach(el => gsap.from(el, { y: 40, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } }));
+      $$('.ba').forEach(b => gsap.from($$('.tag, .arrow-down', b), { autoAlpha: 0, y: 12, duration: .6, ease: 'power3.out', stagger: .06, scrollTrigger: { trigger: b, start: 'top 75%', once: true } }));
+    }
+
+    // Carousels
+    $$('[data-carousel]').forEach(car => {
+      const slides = $('.car-slides', car), items = $$('.car-slide', car), dots = $('.car-dots', car);
+      let i = 0;
+      const go = k => {
+        i = (k + items.length) % items.length;
+        gsap.to(slides, { xPercent: -100 * i, duration: reduce ? 0 : .7, ease: 'power3.inOut' });
+        $$('button', dots).forEach((b, n) => b.setAttribute('aria-current', n === i ? 'true' : 'false'));
+      };
+      items.forEach((_, k) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', `Slide ${k + 1}`); b.addEventListener('click', () => go(k)); dots.appendChild(b); });
+      $('.car-prev', car).addEventListener('click', () => go(i - 1));
+      $('.car-next', car).addEventListener('click', () => go(i + 1));
+      car.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') go(i - 1); if (e.key === 'ArrowRight') go(i + 1); });
+      car.tabIndex = 0;
+      let x0 = null;
+      car.addEventListener('pointerdown', e => x0 = e.clientX, { passive: true });
+      car.addEventListener('pointerup', e => { if (x0 == null) return; const dx = e.clientX - x0; if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1)); x0 = null; });
+      go(0);
+    });
+
+    // Next-project marquee: seamless loop; slows on hover; speeds with scroll velocity
+    (() => {
+      const track = $('#marq-track'); if (!track || reduce) return;
+      const half = track.scrollWidth / 2;
+      const tween = gsap.to(track, { x: -half, duration: 26, ease: 'none', repeat: -1 });
+      $('#marq').addEventListener('mouseenter', () => gsap.to(tween, { timeScale: .15, duration: .6 }));
+      $('#marq').addEventListener('mouseleave', () => gsap.to(tween, { timeScale: 1, duration: .6 }));
+      let vTween;
+      ScrollTrigger.create({ onUpdate: st => { const v = Math.min(3, 1 + Math.abs(st.getVelocity()) / 1500); vTween?.kill(); vTween = gsap.to(tween, { timeScale: v, duration: .5 }); } });
+    })();
+
+
+    // ---- Eyes follow the cursor ----
+    (() => {
+      const eyes = $$('#eyes .eye'); if (!eyes.length) return;
+      const movers = eyes.map(e => { const p = $('.pupil', e); return { e, x: gsap.quickTo(p, 'x', { duration: .35, ease: 'power3.out' }), y: gsap.quickTo(p, 'y', { duration: .35, ease: 'power3.out' }) }; });
+      const MAXX = 9, MAXY = 14;
+      addEventListener('pointermove', ev => {
+        movers.forEach(m => {
+          const r = m.e.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          const dx = ev.clientX - cx, dy = ev.clientY - cy, d = Math.hypot(dx, dy) || 1;
+          const k = Math.min(1, d / 260);
+          m.x(dx / d * MAXX * k); m.y(dy / d * MAXY * k);
+        });
+      }, { passive: true });
+      // blink now and then
+      if (!reduce) { const blink = () => { gsap.to(eyes, { scaleY: .08, duration: .09, yoyo: true, repeat: 1, ease: 'power1.inOut', transformOrigin: '50% 50%' }); gsap.delayedCall(2.5 + Math.random() * 4, blink); }; gsap.delayedCall(2, blink); }
+    })();
+
+    // ---- Click-to-copy name with cursor tooltip + confetti ----
+    (() => {
+      const btn = $('#copy-name'), tip = $('#cursor-tip'), tipText = $('#cursor-tip-text'), status = $('#copy-status'); if (!btn) return;
+      const tx = gsap.quickTo(tip, 'x', { duration: .25, ease: 'power3.out' }), ty = gsap.quickTo(tip, 'y', { duration: .25, ease: 'power3.out' });
+      const fine = matchMedia('(pointer: fine)').matches;
+      const labels = () => ({ idle: root.lang === 'ar' ? 'اضغط لنسخ الإيميل' : 'Click to copy email', done: root.lang === 'ar' ? 'تم النسخ ✓' : 'Copied ✓' });
+      btn.addEventListener('pointerenter', e => { if (!fine) return; tipText.textContent = labels().idle; tx(e.clientX); ty(e.clientY); gsap.to(tip, { autoAlpha: 1, scale: 1, duration: .3, ease: 'back.out(2)' }); });
+      btn.addEventListener('pointermove', e => { if (!fine) return; tx(e.clientX); ty(e.clientY); });
+      btn.addEventListener('pointerleave', () => gsap.to(tip, { autoAlpha: 0, scale: .9, duration: .2 }));
+      const colors = ['#2581C4', '#7A6BA8', '#fff', '#DCEBF8', '#F2B441', '#3FC28A'];
+      function confetti(x, y) {
+        if (reduce) return;
+        const n = 42;
+        for (let i = 0; i < n; i++) {
+          const c = document.createElement('span'); c.className = 'confetti'; c.style.background = colors[i % colors.length];
+          if (i % 3 === 0) c.style.borderRadius = '50%'; document.body.appendChild(c);
+          const a = (Math.PI * 2 * i) / n + (Math.random() - .5) * .6, v = 220 + Math.random() * 260;
+          gsap.set(c, { x, y, scale: .6 + Math.random() * .8, rotation: Math.random() * 360 });
+          gsap.timeline({ onComplete: () => c.remove() })
+            .to(c, { x: x + Math.cos(a) * v, y: y + Math.sin(a) * v - 80, rotation: '+=' + (Math.random() * 720 - 360), duration: .9 + Math.random() * .5, ease: 'power3.out' })
+            .to(c, { y: '+=' + (160 + Math.random() * 120), autoAlpha: 0, duration: .8, ease: 'power2.in' }, '-=.55');
+        }
+      }
+      async function copy(e) {
+        const email = btn.dataset.email;
+        let ok = false;
+        try { await navigator.clipboard.writeText(email); ok = true; } catch {}
+        if (!ok) { try { const r = document.createRange(); const t = document.createElement('span'); t.textContent = email; t.style.position = 'fixed'; document.body.appendChild(t); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); ok = document.execCommand('copy'); sel.removeAllRanges(); t.remove(); } catch {} }
+        const x = e.clientX || innerWidth / 2, y = e.clientY || btn.getBoundingClientRect().top + 60;
+        confetti(x, y);
+        tipText.textContent = ok ? labels().done : email;
+        status.textContent = ok ? `Email copied: ${email}` : email;
+        gsap.fromTo(btn, { scale: .985 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .45)', transformOrigin: 'left center' });
+        if (!fine) { tx(x); ty(y); gsap.to(tip, { autoAlpha: 1, scale: 1, duration: .3 }); gsap.to(tip, { autoAlpha: 0, duration: .3, delay: 1.6 }); }
+        else gsap.delayedCall(1.8, () => { if (tip.style.opacity !== '0') tipText.textContent = labels().idle; });
+      }
+      btn.addEventListener('click', copy);
+    })();
+
+    // ---------- CRITERRA: role tabs ----------
+    (() => {
+      const tabs = $$('#role-tabs button'), imgs = $$('#role-stack img'), note = $('#role-note');
+      const notes = ['Same shell. Admin sees platform operations, trials, organizations, referrals, pipeline and reports.', 'Same shell. CRO sees its own trials, enrollment, pipeline and network partners. No patient identity, no organization management.', 'Same shell. Organization sees eligible patients by name, refers them and tracks referral status. Four menu items.'];
+      if (!tabs.length) return;
+      let cur = 0;
+      const go = i => { if (i === cur) return; tabs.forEach((t, k) => t.setAttribute('aria-selected', String(k === i)));
+        if (reduce) { imgs.forEach((im, k) => im.classList.toggle('is-on', k === i)); }
+        else { gsap.to(imgs[cur], { autoAlpha: 0, duration: .35, onComplete: () => { imgs[cur].classList.remove('is-on'); } }); imgs[i].classList.add('is-on'); gsap.fromTo(imgs[i], { autoAlpha: 0, scale: .99 }, { autoAlpha: 1, scale: 1, duration: .55, ease: 'power2.out', delay: .1 }); }
+        note.textContent = notes[i]; cur = i; };
+      tabs.forEach((t, i) => t.addEventListener('click', () => go(i)));
+    })();
+
+    // ---------- CRITERRA: org sticky walkthrough ----------
+    (() => {
+      const steps = $$('#org-steps .wt-step'), imgs = $$('#org-stack img'), rail = $('#org-rail'); if (!steps.length || !matchMedia('(min-width: 1024px)').matches) return;
+      let cur = 0;
+      const set = i => { if (i === cur && imgs[i].classList.contains('is-on')) return; steps.forEach((s, k) => s.classList.toggle('is-active', k === i));
+        if (reduce) { imgs.forEach((im, k) => im.classList.toggle('is-on', k === i)); cur = i; return; }
+        const from = imgs[cur]; gsap.to(from, { autoAlpha: 0, duration: .4, ease: 'power2.inOut', onComplete: () => from.classList.remove('is-on') });
+        imgs[i].classList.add('is-on'); gsap.fromTo(imgs[i], { autoAlpha: 0, scale: .99 }, { autoAlpha: 1, scale: 1, duration: .55, ease: 'power2.out', delay: .1 });
+        gsap.fromTo(steps[i].children, { autoAlpha: .3, x: -6 }, { autoAlpha: 1, x: 0, duration: .5, stagger: .04, overwrite: true }); cur = i; };
+      steps.forEach((st, i) => ScrollTrigger.create({ trigger: st, start: 'top 55%', end: 'bottom 55%', onEnter: () => set(i), onEnterBack: () => set(i) }));
+      if (rail && !reduce) gsap.fromTo(rail, { height: '0%' }, { height: '100%', ease: 'none', scrollTrigger: { trigger: '#org-steps', start: 'top 55%', end: 'bottom 55%', scrub: .4 } });
+    })();
+
+    // ---------- CRITERRA: pipeline stage activation + funnel + counters + system lines ----------
+    (() => {
+      $$('.pipe').forEach(p => {
+        const stages = $$('.stage', p);
+        ScrollTrigger.create({ trigger: p, start: 'top 75%', once: true, onEnter: () => { if (reduce) { stages.forEach(s => s.classList.add('is-active')); return; } stages.forEach((s, i) => gsap.delayedCall(.18 * i, () => { s.classList.add('is-active'); gsap.delayedCall(.9, () => s.classList.remove('is-active')); })); } });
+      });
+      const f = $('#funnel'); if (f) ScrollTrigger.create({ trigger: f, start: 'top 75%', once: true, onEnter: () => f.classList.add('in') });
+      $$('.num-count').forEach(el => { const end = +el.dataset.count, o = { v: 0 }; gsap.to(o, { v: end, duration: reduce ? 0 : 1.4, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(o.v).toLocaleString('en-US'); }, scrollTrigger: { trigger: el, start: 'top 85%', once: true } }); });
+      const lines = $$('.sys-lines i'); if (lines.length && !reduce) gsap.to(lines, { scaleY: 1, duration: .8, stagger: .1, ease: 'power2.out', scrollTrigger: { trigger: '.sys', start: 'top 70%', once: true } });
+    })();
+
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    addEventListener('load', () => ScrollTrigger.refresh());
+  </script>
+  <script src="../../../public/i18n.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+temporary screenshots/
+Assets/
+nul
+_*.mjs
+_*.py
+_tmp/

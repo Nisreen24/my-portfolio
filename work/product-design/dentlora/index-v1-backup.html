@@ -1,0 +1,767 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dentlora — Product Design Case Study · Nisreen Abdelkader</title>
+  <meta name="description" content="Dentlora: a connected dental management ecosystem for practices, doctors and patients. Product design case study by Nisreen Abdelkader." />
+  <meta property="og:title" content="Dentlora — Product Design Case Study" />
+  <meta property="og:description" content="A connected dental experience for practices, doctors, and patients." />
+  <meta property="og:image" content="img/cover.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232581C4'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%23fff'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: {
+        colors: { blue: 'var(--blue)', navy: 'var(--navy)', ink: 'var(--ink)', mute: 'var(--mute)', line: 'var(--line)', bg: 'var(--bg)', bg2: 'var(--bg-2)' },
+        fontFamily: { display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'], body: ['Inter', 'system-ui', 'sans-serif'], product: ['Lora', 'Georgia', 'serif'] },
+        maxWidth: { site: '1280px' },
+      } },
+    };
+  </script>
+
+  <style>
+    /* =====================================================================
+       DENTLORA CASE STUDY — tokens
+       ===================================================================== */
+    :root {
+      --blue: #2581C4; --blue-deep: #1B6AA6; --blue-soft: rgba(37,129,196,.10);
+      --navy: #0F2540; --ink: #14243A; --mute: #5B6B80;
+      --bg: #F7F9FC; --bg-2: #EEF3F9; --ice: #DCEBF8; --lav: #E9E6F7; --white: #FFFFFF;
+      --line: rgba(15,37,64,.10);
+      --ease: cubic-bezier(.22,1,.36,1);
+      --shadow-soft: 0 1px 2px rgba(15,37,64,.04), 0 12px 32px rgba(15,37,64,.08), 0 40px 80px rgba(37,129,196,.10);
+      --shadow-device: 0 2px 4px rgba(15,37,64,.06), 0 24px 48px rgba(15,37,64,.14), 0 80px 120px rgba(37,129,196,.14);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    .annotation { font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+    .display { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.035em; line-height: .98; text-wrap: balance; }
+    .h-xl { font-size: clamp(2.75rem, 6vw, 5.5rem); }
+    .h-lg { font-size: clamp(2.25rem, 4.2vw, 3.75rem); }
+    .h-md { font-size: clamp(1.75rem, 3vw, 2.5rem); letter-spacing: -0.025em; }
+    .lead { font-size: 1.0625rem; line-height: 1.7; color: var(--mute); max-width: 56ch; }
+    .rule { height: 1px; background: var(--line); }
+
+    /* atmosphere: soft icy / lavender light, no blobs */
+    .atmo { position: relative; isolation: isolate; }
+    .atmo::before {
+      content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(60% 50% at 20% 0%, rgba(233,230,247,.9), transparent 70%),
+        radial-gradient(50% 45% at 85% 10%, rgba(220,235,248,.9), transparent 70%),
+        radial-gradient(40% 35% at 60% 100%, rgba(37,129,196,.10), transparent 70%);
+    }
+
+    /* buttons */
+    .btn { display: inline-flex; align-items: center; gap: .6rem; min-height: 48px; padding: 0 1.375rem; border-radius: 999px; font-weight: 500; font-size: .9375rem;
+      transition: transform .35s var(--ease), background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
+    .btn:hover { transform: translateY(-2px); } .btn:active { transform: translateY(0) scale(.98); }
+    .btn .arrow { transition: transform .35s var(--ease); } .btn:hover .arrow { transform: translateX(4px); }
+    .btn-blue { background: var(--blue); color: #fff; } .btn-blue:hover { background: var(--blue-deep); }
+    .btn-ghost { border: 1px solid var(--line); color: var(--ink); background: rgba(255,255,255,.6); } .btn-ghost:hover { border-color: var(--ink); }
+    .btn-white { background: #fff; color: var(--navy); } .btn-white:hover { background: var(--ice); }
+    .focus-ring:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 999px; }
+
+    /* device frames */
+    .browser { position: relative; border-radius: 16px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-device); }
+    .browser::before { content: ""; display: block; height: 30px; background: #F2F5F9; border-bottom: 1px solid var(--line); }
+    .browser::after { content: ""; position: absolute; top: 11px; left: 14px; width: 40px; height: 8px;
+      background: radial-gradient(circle at 4px 4px, rgba(15,37,64,.22) 3.5px, transparent 4px) 0 0 / 14px 8px repeat-x; }
+    .browser .screen { position: relative; aspect-ratio: 1440 / 1060; overflow: hidden; background: #F6F8FB; }
+    .browser .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .phone { position: relative; border-radius: 44px; background: #0E1622; padding: 9px; box-shadow: var(--shadow-device); }
+    .phone::before { content: ""; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 34%; height: 22px; border-radius: 999px; background: #0E1622; z-index: 2; }
+    .phone .screen { position: relative; border-radius: 36px; overflow: hidden; aspect-ratio: 390 / 844; background: #F6F8FB; }
+    .phone .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .tablet { position: relative; border-radius: 26px; background: #0E1622; padding: 12px; box-shadow: var(--shadow-device); }
+    .tablet .screen { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 4 / 3; background: #F6F8FB; }
+    .tablet .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: left top; display: block; }
+
+    /* screen stacks (GSAP crossfades) */
+    .stack img { opacity: 0; }
+    .stack img.is-on { opacity: 1; }
+
+    /* hero */
+    .hero-visual { will-change: transform; }
+    .hero-glow { position: absolute; inset: 8% 12% -10% 12%; z-index: -1; border-radius: 50%; filter: blur(60px); background: radial-gradient(closest-side, rgba(37,129,196,.22), rgba(233,230,247,.6), transparent); }
+
+    /* ecosystem diagram */
+    .eco-list li { display: flex; align-items: center; gap: .75rem; padding: .7rem 0; border-top: 1px solid var(--line); font-size: .9375rem; }
+    .eco-list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); opacity: .7; }
+    .eco-link { position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); background: linear-gradient(to bottom, transparent, var(--blue) 20%, var(--blue) 80%, transparent); opacity: .5; }
+    .eco-node { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 128px; height: 128px; border-radius: 50%; display: grid; place-items: center; text-align: center;
+      background: rgba(255,255,255,.7); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.9); box-shadow: var(--shadow-soft); font-size: .75rem; line-height: 1.3; font-weight: 500; color: var(--navy); }
+
+    /* fragments → whole */
+    .frag-stage { position: relative; aspect-ratio: 16 / 10; }
+    .frag { position: absolute; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow-soft);
+      transition: transform 1.4s var(--ease), opacity 1.2s var(--ease); }
+    .frag img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+    /* journey */
+    .journey { position: relative; }
+    .journey::before { content: ""; position: absolute; left: 4%; right: 4%; top: 46px; height: 1px; background: linear-gradient(to right, transparent, var(--blue), transparent); opacity: .5; transform: scaleX(0); transform-origin: left; }
+    .journey.drawn::before { transform: none; }
+    .step-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 6px var(--bg); }
+    .thumb { border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: #fff; aspect-ratio: 4 / 3; position: relative; box-shadow: var(--shadow-soft); }
+    .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .thumb.thumb-phone img { object-fit: contain; object-position: center; background: var(--bg-2); padding: 8px 32%; }
+
+    /* sticky walkthrough */
+    .sticky-frame { position: sticky; top: 88px; }
+    .wt-step { min-height: 52vh; display: flex; flex-direction: column; justify-content: center; opacity: .3; }
+    .wt-step.is-active { opacity: 1; }
+    .wt-rail { position: absolute; left: -1.5rem; top: 0; bottom: 0; width: 1px; background: var(--line); }
+    .wt-rail i { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--blue); }
+    .wt-step .num { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 500; color: var(--blue); }
+    @media (max-width: 1023px) { .sticky-frame { position: relative; top: 0; } .wt-step { min-height: 0; padding: 1.25rem 0; opacity: 1; } }
+
+    /* patient annotations */
+    .annot { position: absolute; display: flex; align-items: center; gap: .75rem; font-size: .875rem; font-weight: 500; color: var(--navy); white-space: nowrap; }
+    .annot .ln { width: 36px; height: 1px; background: var(--blue); opacity: .6; }
+    .annot .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+
+    /* design language */
+    .swatch { border-radius: 18px; border: 1px solid var(--line); padding: 1.125rem; display: flex; flex-direction: column; justify-content: flex-end; min-height: 120px; }
+    .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .3rem .7rem; border-radius: 999px; font-size: .75rem; font-weight: 600; }
+    .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .chip-ready { background: #E4F5EC; color: #1F7A4D; } .chip-progress { background: #E2EFFA; color: var(--blue-deep); } .chip-completed { background: #EAF2FB; color: #2A5B8A; } .chip-pending { background: #FFF4DB; color: #9A6B00; }
+    .field { border: 1px solid var(--line); background: #fff; border-radius: 12px; padding: .75rem .9rem; font-size: .875rem; color: var(--mute); display: flex; justify-content: space-between; }
+    .glass { background: rgba(255,255,255,.55); backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,.9); box-shadow: var(--shadow-soft); }
+    .sys-card { background: #fff; border: 1px solid var(--line); border-radius: 22px; }
+
+    /* responsive stage */
+    .stage { position: relative; aspect-ratio: 16 / 9; }
+    .stage .dev { position: absolute; }
+
+    /* final */
+    .final { background: radial-gradient(70% 60% at 50% 0%, #1B4A78, transparent 70%), linear-gradient(180deg, #0F2540, #0B1B31); color: #fff; }
+    .final .display, .final .lead { color: #fff; }
+    .final .lead { color: rgba(255,255,255,.72); }
+    .final .phone, .final .browser { box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+
+    /* ---------- designer chrome ---------- */
+    .progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; background: transparent; pointer-events: none; }
+    .progress i { display: block; height: 100%; width: 100%; background: var(--blue); transform: scaleX(0); transform-origin: left; }
+    .topbar { position: sticky; top: 0; z-index: 50; transition: background-color .3s var(--ease), box-shadow .3s var(--ease); }
+    .topbar.is-scrolled { background: rgba(247,249,252,.78); backdrop-filter: blur(14px); box-shadow: 0 1px 0 var(--line); }
+    .topbar.is-dark { background: rgba(15,37,64,.6); box-shadow: 0 1px 0 rgba(255,255,255,.08); }
+    .topbar.is-dark a, .topbar.is-dark p { color: #fff; }
+    .topbar.is-dark .btn-ghost { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); }
+    .index { position: fixed; right: 1.25rem; top: 50%; transform: translateY(-50%); z-index: 40; display: none; flex-direction: column; gap: .35rem; }
+    @media (min-width: 1280px) { .index { display: flex; } }
+    .index a { display: flex; align-items: center; gap: .5rem; font-size: .625rem; letter-spacing: .12em; color: var(--mute); text-decoration: none; padding: .2rem .35rem; border-radius: 6px; transition: color .25s var(--ease); }
+    .index a i { width: 14px; height: 1px; background: currentColor; transition: width .35s var(--ease); }
+    .index a.is-active { color: var(--blue); } .index a.is-active i { width: 26px; }
+    .index a:hover { color: var(--navy); }
+    .scroll-cue { display: inline-flex; align-items: center; gap: .6rem; font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+    .scroll-cue i { width: 1px; height: 36px; background: var(--line); position: relative; overflow: hidden; }
+    .scroll-cue i::after { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 40%; background: var(--blue); }
+    .split-mask .line, .split-mask .char { overflow: hidden; }
+    .num-count { font-variant-numeric: tabular-nums; }
+    .dev, .hero-visual, .phone, .browser, .tablet { will-change: transform; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .btn .arrow, .topbar { transition: none; }
+      .wt-step { opacity: 1; }
+      .journey::before { transform: none; }
+      .scroll-cue i::after { display: none; }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+</head>
+
+<body class="font-body">
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+
+  <!-- ================= Top bar ================= -->
+  <header class="topbar" id="topbar">
+    <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+      <nav class="flex items-center justify-between h-[76px]" aria-label="Case study">
+        <a href="../../../" class="focus-ring inline-flex items-center gap-2 text-[.9375rem] font-medium text-navy">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M13 8H3.5M7.5 4l-4 4 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Nisreen
+        </a>
+        <p class="annotation hidden sm:block">Dentlora · Product design case study</p>
+        <a href="https://www.dentlora.com/#home" target="_blank" rel="noopener" class="btn btn-ghost focus-ring !min-h-[40px] !px-4 text-sm">Visit dentlora.com ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="index" id="index" aria-label="Sections">
+    <a href="#s01"><i></i>01</a><a href="#s02"><i></i>02</a><a href="#s03"><i></i>03</a><a href="#s04"><i></i>04</a><a href="#s05"><i></i>05</a><a href="#s06"><i></i>06</a>
+    <a href="#s07"><i></i>07</a><a href="#s08"><i></i>08</a><a href="#s09"><i></i>09</a><a href="#s10"><i></i>10</a><a href="#final"><i></i>11</a>
+  </nav>
+  <main>
+
+    <!-- ================= 01 HERO ================= -->
+    <section id="s01" class="atmo relative overflow-hidden" aria-labelledby="hero-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12 pt-10 sm:pt-16 lg:pt-20">
+        <div class="max-w-[62rem]">
+          <p class="annotation rv">Case study · 01</p>
+          <h1 id="hero-title" class="display h-xl mt-6 split-mask" data-split="chars">Dentlora</h1>
+          <p id="hero-sub" class="display h-md mt-5 text-navy split-mask" data-split="lines">A connected dental experience for practices, doctors, and patients.</p>
+          <p class="lead mt-6 rv" style="--d:.2s">A dental management ecosystem designed to simplify appointments, patient records, treatment workflows, and communication across devices.</p>
+          <ul class="mt-8 flex flex-wrap gap-x-8 gap-y-2 rv" style="--d:.28s" aria-label="Focus areas">
+            <li class="annotation !text-navy flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue"></span>Practice Management</li>
+            <li class="annotation !text-navy flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue"></span>Clinical Workflow</li>
+            <li class="annotation !text-navy flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-blue"></span>Patient Experience</li>
+          </ul>
+          <p class="scroll-cue mt-10 rv" style="--d:.34s" aria-hidden="true"><i></i>Scroll</p>
+        </div>
+
+        <div class="relative mt-14 sm:mt-20 lg:mt-24 rv" style="--d:.35s">
+          <div class="hero-glow" aria-hidden="true"></div>
+          <figure class="hero-visual relative rounded-[24px] overflow-hidden" id="hero-visual" style="box-shadow: var(--shadow-device)">
+            <img src="img/cover.jpg" width="1484" height="1060" alt="Dentlora doctor dashboard on a desktop monitor with the patient mobile app shown beside it" fetchpriority="high" class="block w-full h-auto" />
+          </figure>
+        </div>
+
+        <dl class="mt-10 sm:mt-14 grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-line pt-6 rv">
+          <div><dt class="annotation">Role</dt><dd class="mt-1 text-[.9375rem] font-medium">Product Designer</dd></div>
+          <div><dt class="annotation">Scope</dt><dd class="mt-1 text-[.9375rem] font-medium">UX/UI · Design System · UX Writing</dd></div>
+          <div><dt class="annotation">Platforms</dt><dd class="mt-1 text-[.9375rem] font-medium">Web · iOS · Android</dd></div>
+          <div><dt class="annotation">Markets</dt><dd class="mt-1 text-[.9375rem] font-medium">Canada · USA · Egypt</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ================= 02 ECOSYSTEM ================= -->
+    <section id="s02" class="relative py-24 sm:py-32 lg:py-40" aria-labelledby="eco-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="max-w-[46rem]">
+          <p class="annotation rv">02 · Product ecosystem</p>
+          <h2 id="eco-title" class="display h-lg mt-5 split-mask" data-split="lines">One platform. Two experiences. One connected journey.</h2>
+        </div>
+
+        <div class="relative mt-14 lg:mt-20 grid grid-cols-12 gap-y-16 lg:gap-x-10">
+          <!-- Professionals -->
+          <div class="col-span-12 lg:col-span-6 lg:pr-10 rv">
+            <div class="browser -ml-2 sm:ml-0 lg:-ml-8" style="transform: perspective(1600px) rotateY(6deg)">
+              <div class="screen"><img src="img/d-dash.jpg" alt="Doctor dashboard: today’s patient appointments with quick actions" loading="lazy" /></div>
+            </div>
+            <div class="mt-8 grid grid-cols-12 gap-6">
+              <div class="col-span-12 sm:col-span-5">
+                <p class="annotation">Dental professionals</p>
+                <p class="display h-md mt-2">Practice workspace</p>
+              </div>
+              <ul class="eco-list col-span-12 sm:col-span-7 border-b border-line">
+                <li>Dashboard</li><li>Patient Queue</li><li>Treatment Notes</li><li>Clinical Files</li><li>Appointments</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- connector (desktop) -->
+          <div class="hidden lg:block absolute inset-y-0 left-1/2 w-px" aria-hidden="true">
+            <div class="eco-link"></div>
+            <div class="eco-node">One patient<br>record</div>
+          </div>
+
+          <!-- Patients -->
+          <div class="col-span-12 lg:col-span-6 lg:pl-10 rv" style="--d:.1s">
+            <div class="grid grid-cols-12 gap-6 items-end">
+              <div class="col-span-7 sm:col-span-6 lg:col-span-6">
+                <div class="phone max-w-[280px] mx-auto" style="transform: perspective(1600px) rotateY(-8deg)">
+                  <div class="screen"><img src="img/m-portfolio.jpg" alt="Patient app: Medical Portfolio with history, prescriptions, treatment plans and files" loading="lazy" /></div>
+                </div>
+              </div>
+              <div class="col-span-5 sm:col-span-6">
+                <p class="annotation">Patients</p>
+                <p class="display h-md mt-2">Personal dental record</p>
+                <ul class="eco-list mt-6 border-b border-line">
+                  <li>Appointments</li><li>Medical Portfolio</li><li>Prescriptions</li><li>Treatment Plans</li><li>Files</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 03 THE CHALLENGE ================= -->
+    <section id="s03" class="atmo relative py-24 sm:py-32 lg:py-40" aria-labelledby="challenge-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="grid grid-cols-12 gap-x-4 lg:gap-x-10 gap-y-8 items-end">
+          <div class="col-span-12 lg:col-span-7">
+            <p class="annotation rv">03 · The challenge</p>
+            <h2 id="challenge-title" class="display h-lg mt-5 split-mask" data-split="lines">Dental care shouldn’t feel fragmented.</h2>
+          </div>
+          <p class="lead col-span-12 lg:col-span-5 rv" style="--d:.1s">Dentists move between appointments, records, treatment notes and patient files, while patients often struggle to keep their dental history accessible in one place.</p>
+        </div>
+
+        <div class="frag-stage mt-14 lg:mt-20 mx-auto max-w-[1040px]" id="frag-stage" aria-label="Fragmented interface pieces converging into one Dentlora interface">
+          <div class="frag f1" style="left:0; top:0; width:58%; height:58%"><img src="img/d-dash.jpg" alt="" loading="lazy" style="object-position: 0 0" /></div>
+          <div class="frag f2" style="left:61%; top:0; width:39%; height:40%"><img src="img/d-notes.jpg" alt="" loading="lazy" style="object-position: 30% 30%" /></div>
+          <div class="frag f3" style="left:61%; top:43%; width:39%; height:57%"><img src="img/d-files.jpg" alt="" loading="lazy" style="object-position: 22% 45%" /></div>
+          <div class="frag f4" style="left:0; top:61%; width:38%; height:39%"><img src="img/d-patient.jpg" alt="" loading="lazy" style="object-position: 22% 62%" /></div>
+          <div class="frag f5" style="left:40%; top:50%; width:18%; height:50%; border-radius: 22px"><img src="img/m-history.jpg" alt="" loading="lazy" style="object-position: top" /></div>
+        </div>
+        <p class="annotation text-center mt-8 rv">Records · Notes · Files · Patient history → one interface</p>
+      </div>
+    </section>
+
+    <!-- ================= 04 THE CONNECTED JOURNEY ================= -->
+    <section id="s04" class="relative py-24 sm:py-32 lg:py-40" aria-labelledby="journey-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="max-w-[46rem]">
+          <p class="annotation rv">04 · The connected journey</p>
+          <h2 id="journey-title" class="display h-lg mt-5 split-mask" data-split="lines">Designed as a workflow, not a collection of screens.</h2>
+        </div>
+
+        <ol class="journey mt-16 grid grid-cols-2 md:grid-cols-5 gap-x-5 gap-y-12" id="journey">
+          <li class="rv" style="--d:0s">
+            <div class="flex items-center gap-3 h-[92px]"><span class="step-dot"></span><span class="annotation">01</span></div>
+            <div class="thumb thumb-phone"><img src="img/m-booked.jpg" alt="Patient app: appointment booked successfully" loading="lazy" /></div>
+            <p class="mt-4 font-medium">Patient books</p><p class="text-sm text-mute mt-1">Clinic, doctor and time, confirmed in the app.</p>
+          </li>
+          <li class="rv" style="--d:.08s">
+            <div class="flex items-center gap-3 h-[92px]"><span class="step-dot"></span><span class="annotation">02</span></div>
+            <div class="thumb"><img src="img/d-patient.jpg" alt="Doctor dashboard: patient profile overview" loading="lazy" /></div>
+            <p class="mt-4 font-medium">Doctor prepares</p><p class="text-sm text-mute mt-1">Patient pre-brief with history and latest session.</p>
+          </li>
+          <li class="rv" style="--d:.16s">
+            <div class="flex items-center gap-3 h-[92px]"><span class="step-dot"></span><span class="annotation">03</span></div>
+            <div class="thumb"><img src="img/d-notes.jpg" alt="Doctor dashboard: session workspace with clinical notes" loading="lazy" /></div>
+            <p class="mt-4 font-medium">Appointment begins</p><p class="text-sm text-mute mt-1">Session workspace opens with a live timer.</p>
+          </li>
+          <li class="rv" style="--d:.24s">
+            <div class="flex items-center gap-3 h-[92px]"><span class="step-dot"></span><span class="annotation">04</span></div>
+            <div class="thumb"><img src="img/d-files.jpg" alt="Doctor dashboard: X-rays and photos uploaded and auto-tagged" loading="lazy" /></div>
+            <p class="mt-4 font-medium">Treatment documented</p><p class="text-sm text-mute mt-1">Notes autosave, files sync to the dental file.</p>
+          </li>
+          <li class="rv" style="--d:.32s">
+            <div class="flex items-center gap-3 h-[92px]"><span class="step-dot"></span><span class="annotation">05</span></div>
+            <div class="thumb thumb-phone"><img src="img/m-portfolio.jpg" alt="Patient app: updated medical portfolio" loading="lazy" /></div>
+            <p class="mt-4 font-medium">Patient record updated</p><p class="text-sm text-mute mt-1">Everything appears in the patient’s portfolio.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= 05 DOCTOR EXPERIENCE (sticky walkthrough) ================= -->
+    <section id="s05" class="atmo relative py-24 sm:py-32 lg:py-40" aria-labelledby="doctor-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="grid grid-cols-12 gap-x-4 lg:gap-x-10 gap-y-6 items-end">
+          <div class="col-span-12 lg:col-span-7">
+            <p class="annotation rv">05 · Doctor experience</p>
+            <h2 id="doctor-title" class="display h-lg mt-5 split-mask" data-split="lines">Designed around the dentist’s day.</h2>
+          </div>
+          <p class="lead col-span-12 lg:col-span-5 rv" style="--d:.1s">The doctor experience brings appointments, patient context and clinical actions into one focused workspace.</p>
+        </div>
+
+        <div class="mt-14 lg:mt-20 grid grid-cols-12 gap-x-4 lg:gap-x-10 gap-y-10">
+          <div class="col-span-12 lg:col-span-8">
+            <div class="sticky-frame">
+              <div class="browser">
+                <div class="screen stack" id="doctor-stack">
+                  <img src="img/d-dash.jpg" alt="Today’s queue: patient appointments filtered by status" loading="lazy" class="is-on" />
+                  <img src="img/d-patient.jpg" alt="Patient pre-brief: basic information, latest session and active treatment plan" loading="lazy" />
+                  <img src="img/d-notes.jpg" alt="Clinical notes with autosave every 30 seconds" loading="lazy" />
+                  <img src="img/d-files.jpg" alt="Media: X-rays and photos uploaded and auto-tagged" loading="lazy" />
+                  <img src="img/d-appointments.jpg" alt="Appointments list with completed status" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 lg:col-span-4 relative lg:pl-2" id="doctor-steps"><span class="wt-rail hidden lg:block" aria-hidden="true"><i id="doctor-rail"></i></span>
+            <div class="wt-step is-active" data-i="0"><p class="num">01</p><p class="display h-md mt-3">Today’s Queue</p><p class="lead mt-3">Ready, in progress and pending patients at a glance, with quick actions for plans and templates.</p></div>
+            <div class="wt-step" data-i="1"><p class="num">02</p><p class="display h-md mt-3">Patient Pre-Brief</p><p class="lead mt-3">The last session summary, active plan progress and follow-up status, before the patient sits down.</p></div>
+            <div class="wt-step" data-i="2"><p class="num">03</p><p class="display h-md mt-3">Clinical Notes</p><p class="lead mt-3">A focused editor with a session timer. Notes autosave and lock to the appointment.</p></div>
+            <div class="wt-step" data-i="3"><p class="num">04</p><p class="display h-md mt-3">Media</p><p class="lead mt-3">X-rays and photos upload with auto-tags for date, treatment stage and patient.</p></div>
+            <div class="wt-step" data-i="4"><p class="num">05</p><p class="display h-md mt-3">Mark Complete</p><p class="lead mt-3">One action closes the stage and updates the queue, the record and the patient’s app.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 06 PATIENT MOBILE ================= -->
+    <section id="s06" class="relative py-24 sm:py-32 lg:py-40 overflow-hidden" aria-labelledby="patient-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="text-center max-w-[40rem] mx-auto">
+          <p class="annotation rv">06 · Patient mobile experience</p>
+          <h2 id="patient-title" class="display h-lg mt-5 split-mask" data-split="lines">Your dental history, always with you.</h2>
+        </div>
+
+        <div class="relative mt-16 lg:mt-20 mx-auto max-w-[980px] rv" style="--d:.1s">
+          <div class="hero-glow" aria-hidden="true" style="inset: 20% 25% 0 25%"></div>
+          <div class="grid grid-cols-12 items-center gap-x-4">
+            <!-- left labels (desktop) -->
+            <ul class="hidden lg:flex col-span-2 flex-col gap-5 items-end text-right" aria-hidden="true">
+              <li class="annot !static !justify-end"><span>Medical History</span><span class="ln"></span><span class="dot"></span></li>
+              <li class="annot !static !justify-end"><span>Dental History</span><span class="ln"></span><span class="dot"></span></li>
+              <li class="annot !static !justify-end"><span>Appointments</span><span class="ln"></span><span class="dot"></span></li>
+              <li class="annot !static !justify-end"><span>Follow-Ups</span><span class="ln"></span><span class="dot"></span></li>
+            </ul>
+            <div class="hidden md:block col-span-3 lg:col-span-2">
+              <div class="phone opacity-60" data-phone="side" style="transform: perspective(1400px) rotateY(14deg) scale(.88)"><div class="screen"><img src="img/m-history.jpg" alt="" loading="lazy" /></div></div>
+            </div>
+            <div class="col-span-12 md:col-span-6 lg:col-span-4 relative">
+              <div class="phone max-w-[320px] mx-auto" data-phone="main"><div class="screen"><img src="img/m-portfolio.jpg" alt="Patient app: Medical Portfolio home with all record sections" loading="lazy" /></div></div>
+            </div>
+            <div class="hidden md:block col-span-3 lg:col-span-2">
+              <div class="phone opacity-60" data-phone="side" style="transform: perspective(1400px) rotateY(-14deg) scale(.88)"><div class="screen"><img src="img/m-tp.jpg" alt="" loading="lazy" /></div></div>
+            </div>
+            <!-- right labels (desktop) -->
+            <ul class="hidden lg:flex col-span-2 flex-col gap-5 items-start" aria-hidden="true">
+              <li class="annot !static flex-row-reverse !justify-end"><span>Prescriptions</span><span class="ln"></span><span class="dot"></span></li>
+              <li class="annot !static flex-row-reverse !justify-end"><span>Treatment Plans</span><span class="ln"></span><span class="dot"></span></li>
+              <li class="annot !static flex-row-reverse !justify-end"><span>Files</span><span class="ln"></span><span class="dot"></span></li>
+            </ul>
+          </div>
+          <!-- mobile/tablet list -->
+          <ul class="lg:hidden mt-10 flex flex-wrap justify-center gap-x-6 gap-y-3 text-sm font-medium text-navy" aria-label="Portfolio sections">
+            <li>Medical History</li><li>Dental History</li><li>Appointments</li><li>Prescriptions</li><li>Treatment Plans</li><li>Follow-Ups</li><li>Files</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 07 TREATMENT JOURNEY (phone sticky) ================= -->
+    <section id="s07" class="atmo relative py-24 sm:py-32 lg:py-40" aria-labelledby="treat-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="max-w-[46rem]">
+          <p class="annotation rv">07 · Treatment journey</p>
+          <h2 id="treat-title" class="display h-lg mt-5 split-mask" data-split="lines">From appointment to treatment — without losing context.</h2>
+        </div>
+
+        <div class="mt-14 lg:mt-20 grid grid-cols-12 gap-x-4 lg:gap-x-10 gap-y-10">
+          <div class="col-span-12 lg:col-span-6 lg:order-2">
+            <div class="sticky-frame">
+              <div class="phone max-w-[340px] mx-auto">
+                <div class="screen stack" id="treat-stack">
+                  <img src="img/m-upcoming.jpg" alt="Upcoming appointment with status" loading="lazy" class="is-on" />
+                  <img src="img/m-portfolio.jpg" alt="Patient profile in the medical portfolio" loading="lazy" />
+                  <img src="img/m-session.jpg" alt="Session summary with treatment notes" loading="lazy" />
+                  <img src="img/m-tp.jpg" alt="Treatment plan with progress and sessions" loading="lazy" />
+                  <img src="img/m-followup.jpg" alt="Follow-up session request" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 lg:col-span-6 lg:order-1 lg:pr-10 relative lg:pl-2" id="treat-steps"><span class="wt-rail hidden lg:block" aria-hidden="true"><i id="treat-rail"></i></span>
+            <div class="wt-step is-active" data-i="0"><p class="num">01</p><p class="display h-md mt-3">Appointment</p><p class="lead mt-3">The patient sees the booked visit with its status: Ready, In Progress or Completed.</p></div>
+            <div class="wt-step" data-i="1"><p class="num">02</p><p class="display h-md mt-3">Patient Profile</p><p class="lead mt-3">The same record the doctor works from, in the patient’s pocket.</p></div>
+            <div class="wt-step" data-i="2"><p class="num">03</p><p class="display h-md mt-3">Treatment Notes</p><p class="lead mt-3">A readable summary of what was done, written once by the doctor.</p></div>
+            <div class="wt-step" data-i="3"><p class="num">04</p><p class="display h-md mt-3">Treatment Plan</p><p class="lead mt-3">Sessions, progress and cost in one plan the patient can follow and schedule.</p></div>
+            <div class="wt-step" data-i="4"><p class="num">05</p><p class="display h-md mt-3">Follow-Up</p><p class="lead mt-3">Symptoms reported from home reach the doctor’s pre-brief for the next visit.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 08 DESIGN LANGUAGE ================= -->
+    <section id="s08" class="relative py-24 sm:py-32 lg:py-40" aria-labelledby="design-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="grid grid-cols-12 gap-x-4 lg:gap-x-10 gap-y-6 items-end">
+          <div class="col-span-12 lg:col-span-7">
+            <p class="annotation rv">08 · Design language</p>
+            <h2 id="design-title" class="display h-lg mt-5 split-mask" data-split="lines">Calm by design. Clinical by purpose.</h2>
+          </div>
+          <p class="lead col-span-12 lg:col-span-5 rv" style="--d:.1s">A restrained palette, a warm serif for reading, and soft surfaces that keep dense clinical information calm.</p>
+        </div>
+
+        <div class="mt-14 lg:mt-20 grid grid-cols-12 gap-5">
+          <!-- palette -->
+          <div class="col-span-12 lg:col-span-5 grid grid-cols-6 gap-3 rv">
+            <div class="swatch col-span-6 min-h-[200px] text-white" style="background: var(--blue); border-color: transparent"><p class="annotation !text-white/70">Primary</p><p class="font-display font-semibold text-2xl mt-1">#2581C4</p></div>
+            <div class="swatch col-span-3" style="background: var(--navy); color:#fff; border-color: transparent"><p class="annotation !text-white/60">Navy</p><p class="font-medium mt-1">#0F2540</p></div>
+            <div class="swatch col-span-3" style="background: var(--ice)"><p class="annotation">Ice</p><p class="font-medium mt-1">#DCEBF8</p></div>
+            <div class="swatch col-span-2" style="background: var(--lav)"><p class="annotation">Lavender</p><p class="font-medium mt-1 text-sm">#E9E6F7</p></div>
+            <div class="swatch col-span-2" style="background: var(--bg-2)"><p class="annotation">Surface</p><p class="font-medium mt-1 text-sm">#EEF3F9</p></div>
+            <div class="swatch col-span-2" style="background: #fff"><p class="annotation">White</p><p class="font-medium mt-1 text-sm">#FFFFFF</p></div>
+          </div>
+          <!-- typography -->
+          <div class="col-span-12 md:col-span-6 lg:col-span-4 sys-card p-7 rv" style="--d:.06s">
+            <p class="annotation">Typography</p>
+            <p class="font-product font-semibold text-navy mt-4 leading-none" style="font-size: 5rem">Aa</p>
+            <p class="font-product text-navy text-xl mt-4">Today’s Patient Appointments</p>
+            <p class="text-sm text-mute mt-1">Lora for headings and patient names, a humanist sans for controls and data.</p>
+            <div class="rule mt-6"></div>
+            <p class="text-sm mt-4 flex justify-between"><span class="font-product">Lora · 500 / 600</span><span class="text-mute">Display</span></p>
+            <p class="text-sm mt-2 flex justify-between"><span>Inter · 400 / 500</span><span class="text-mute">UI &amp; body</span></p>
+          </div>
+          <!-- components -->
+          <div class="col-span-12 md:col-span-6 lg:col-span-3 sys-card p-7 rv" style="--d:.12s">
+            <p class="annotation">Status chips</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="chip chip-ready">Ready</span><span class="chip chip-progress">In Progress</span><span class="chip chip-completed">Completed</span><span class="chip chip-pending">Pending</span>
+            </div>
+            <p class="annotation mt-7">Form controls</p>
+            <div class="mt-3 flex flex-col gap-2">
+              <div class="field"><span>Session date</span><span class="text-navy font-medium">Mar 19, 2024</span></div>
+              <div class="field"><span>Treatment stage</span><span class="text-navy font-medium">Root Canal</span></div>
+            </div>
+            <p class="annotation mt-7">Actions</p>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <span class="btn btn-blue !min-h-[40px] !px-4 text-sm">Mark Stage Complete</span>
+              <span class="btn btn-ghost !min-h-[40px] !px-4 text-sm">View Details</span>
+            </div>
+          </div>
+          <!-- glass + icons -->
+          <div class="col-span-12 lg:col-span-7 rounded-[22px] p-7 relative overflow-hidden rv" style="--d:.18s; background: linear-gradient(135deg, var(--lav), var(--ice))">
+            <div class="glass rounded-2xl p-6 max-w-[380px]">
+              <p class="annotation">Soft glass · used sparingly</p>
+              <p class="font-product text-navy text-xl mt-2">Today’s Patient Appointments</p>
+              <p class="text-sm text-mute mt-1">Summary cards sit on a light atmospheric surface. Glass never exceeds a small share of any screen.</p>
+              <div class="mt-4 grid grid-cols-3 gap-2">
+                <div class="bg-white/80 rounded-xl p-3"><p class="font-product text-blue text-2xl">8</p><p class="text-xs text-mute">Today</p></div>
+                <div class="bg-white/80 rounded-xl p-3"><p class="font-product text-blue text-2xl">2</p><p class="text-xs text-mute">Ready</p></div>
+                <div class="bg-white/80 rounded-xl p-3"><p class="font-product text-blue text-2xl">1</p><p class="text-xs text-mute">In progress</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 lg:col-span-5 sys-card p-7 rv" style="--d:.24s">
+            <p class="annotation">Iconography · 1.5px line, rounded caps</p>
+            <div class="mt-5 grid grid-cols-6 gap-3 text-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M7 3c-2 0-4 2-4 5 0 4 2 8 3 12 .3 1 1.7 1 2 0l1-4h6l1 4c.3 1 1.7 1 2 0 1-4 3-8 3-12 0-3-2-5-4-5-2 0-3 1-5 1S9 3 7 3z"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M10.5 3.5 3.5 10.5a4.95 4.95 0 0 0 7 7l7-7a4.95 4.95 0 0 0-7-7z"/><path d="M7 7l7 7"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+            </div>
+            <div class="rule mt-6"></div>
+            <p class="annotation mt-5">Cards</p>
+            <p class="text-sm text-mute mt-2">16px radius, 1px hairline, one soft blue-tinted shadow. Elevation is reserved for the active patient and the session workspace.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 09 REAL CLINICAL CONSTRAINTS ================= -->
+    <section id="s09" class="atmo relative py-24 sm:py-32 lg:py-40" aria-labelledby="constraints-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="max-w-[52rem]">
+          <p class="annotation rv">09 · Real clinical constraints</p>
+          <h2 id="constraints-title" class="display h-lg mt-5 split-mask" data-split="lines">Beautiful interfaces are only useful when the workflow works.</h2>
+        </div>
+        <dl class="mt-14 lg:mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 border-t border-l border-line">
+          <div class="p-7 lg:p-9 border-b border-r border-line rv"><dt class="display text-[3.25rem] text-blue leading-none"><span class="num-count" data-count="8">8</span>h</dt><dd class="mt-4 font-medium">Secure sessions</dd><dd class="text-sm text-mute mt-1">A full clinic day without re-login, then a clean expiry.</dd></div>
+          <div class="p-7 lg:p-9 border-b border-r border-line rv" style="--d:.06s"><dt class="display text-[3.25rem] text-blue leading-none"><span class="num-count" data-count="5">5</span></dt><dd class="mt-4 font-medium">Failed attempts → account lock</dd><dd class="text-sm text-mute mt-1">Brute-force protection with a clear recovery path.</dd></div>
+          <div class="p-7 lg:p-9 border-b border-r border-line rv" style="--d:.12s"><dt class="display text-[3.25rem] text-blue leading-none"><span class="num-count" data-count="30">30</span>s</dt><dd class="mt-4 font-medium">Autosave clinical notes</dd><dd class="text-sm text-mute mt-1">Notes lock to the session. Nothing is lost mid-treatment.</dd></div>
+          <div class="p-7 lg:p-9 border-b border-r border-line rv" style="--d:.18s"><dt class="display text-[3.25rem] text-blue leading-none">AR / EN</dt><dd class="mt-4 font-medium">Bilingual, RTL-ready</dd><dd class="text-sm text-mute mt-1">Arabic and English switching for Egypt and the Gulf.</dd></div>
+          <div class="p-7 lg:p-9 border-b border-r border-line rv" style="--d:.24s"><dt class="display text-[2.25rem] text-blue leading-none pt-3">X-ray · Photo · DICOM</dt><dd class="mt-4 font-medium">Patient media uploads</dd><dd class="text-sm text-mute mt-1">Auto-tagged by date, stage and patient, synced to the dental file.</dd></div>
+          <div class="p-7 lg:p-9 border-b border-r border-line rv" style="--d:.3s"><dt class="mt-2 flex flex-wrap gap-2"><span class="chip chip-ready">Ready</span><span class="chip chip-progress">In Progress</span><span class="chip chip-completed">Completed</span></dt><dd class="mt-5 font-medium">Appointment status tracking</dd><dd class="text-sm text-mute mt-1">One status vocabulary shared by doctor and patient.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ================= 10 RESPONSIVE ECOSYSTEM ================= -->
+    <section id="s10" class="relative py-24 sm:py-32 lg:py-40 overflow-hidden" aria-labelledby="resp-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="text-center max-w-[36rem] mx-auto">
+          <p class="annotation rv">10 · Responsive ecosystem</p>
+          <h2 id="resp-title" class="display h-lg mt-5 split-mask" data-split="lines">One system. Every touchpoint.</h2>
+        </div>
+        <div class="stage mt-16 lg:mt-20 hidden md:block rv" style="--d:.1s" aria-label="Dentlora on desktop, tablet and mobile">
+          <div class="hero-glow" aria-hidden="true" style="inset: 10% 15% 0 15%"></div>
+          <div class="dev browser" style="left:0; top:4%; width:64%"><div class="screen"><img src="img/d-dash.jpg" alt="Desktop dashboard" loading="lazy" /></div></div>
+          <div class="dev tablet" style="left:52%; top:22%; width:38%; transform: perspective(1600px) rotateY(-10deg)"><div class="screen"><img src="img/d-patient.jpg" alt="Tablet: patient profile" loading="lazy" /></div></div>
+          <div class="dev phone" style="left:36%; top:34%; width:17%"><div class="screen"><img src="img/m-home.jpg" alt="Mobile: patient home" loading="lazy" /></div></div>
+        </div>
+        <div class="md:hidden mt-12 grid grid-cols-2 gap-4 items-start rv">
+          <div class="browser col-span-2"><div class="screen"><img src="img/d-dash.jpg" alt="Desktop dashboard" loading="lazy" /></div></div>
+          <div class="tablet"><div class="screen"><img src="img/d-patient.jpg" alt="Tablet: patient profile" loading="lazy" /></div></div>
+          <div class="phone max-w-[160px]"><div class="screen"><img src="img/m-home.jpg" alt="Mobile: patient home" loading="lazy" /></div></div>
+        </div>
+        <ul class="mt-10 flex flex-wrap justify-center gap-x-8 gap-y-2 annotation !text-navy">
+          <li>Desktop · Practice</li><li>Tablet · Chairside</li><li>Mobile · Patient</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= 11 FINAL SHOWCASE ================= -->
+    <section id="final" class="final relative overflow-hidden pt-24 sm:pt-32 lg:pt-40" aria-labelledby="final-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12 text-center">
+        <p class="annotation !text-white/60 rv">11 · Dentlora</p>
+        <h2 id="final-title" class="display h-xl mt-6 split-mask" data-split="chars">Dentlora</h2>
+        <p class="lead mx-auto mt-6 rv" style="--d:.12s">Making dental care easier to manage — and easier to experience.</p>
+        <ul class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 annotation !text-white/70 rv" style="--d:.18s" aria-label="Disciplines">
+          <li>Product Design</li><li>UX/UI</li><li>UX Writing</li><li>Design System</li><li>Responsive Design</li>
+        </ul>
+        <div class="mt-10 rv" style="--d:.24s">
+          <a href="https://www.dentlora.com/#home" target="_blank" rel="noopener" class="btn btn-white focus-ring">Visit Dentlora <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+
+        <div class="relative mt-20 lg:mt-28 mx-auto max-w-[1100px] rv" style="--d:.3s">
+          <div class="grid grid-cols-12 items-end gap-4">
+            <div class="col-span-3 hidden sm:block"><div class="phone" style="transform: perspective(1400px) rotateY(12deg)"><div class="screen"><img src="img/m-home.jpg" alt="" loading="lazy" /></div></div></div>
+            <div class="col-span-12 sm:col-span-6"><div class="browser"><div class="screen"><img src="img/d-dash.jpg" alt="Dentlora doctor dashboard" loading="lazy" /></div></div></div>
+            <div class="col-span-3 hidden sm:block"><div class="phone" style="transform: perspective(1400px) rotateY(-12deg)"><div class="screen"><img src="img/m-tp.jpg" alt="" loading="lazy" /></div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12 mt-16 pb-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/60 border-t border-white/10 pt-6">
+        <a href="../../../" class="focus-ring hover:text-white">← Back to portfolio</a>
+        <p>Dentlora · Product Design · Nisreen Abdelkader</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger, SplitText);
+    gsap.defaults({ ease: "power3.out", duration: 1 });
+    const $ = (q, r = document) => r.querySelector(q);
+    const $$ = (q, r = document) => [...r.querySelectorAll(q)];
+
+    // ---------- always-on chrome (no motion preference needed) ----------
+    const topbar = $('#topbar');
+    ScrollTrigger.create({ start: 40, onUpdate: st => topbar.classList.toggle('is-scrolled', st.scroll() > 40), onToggle: st => topbar.classList.toggle('is-scrolled', st.isActive) });
+    gsap.to('#progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: .3 } });
+    // side index: highlight current section
+    ScrollTrigger.create({ trigger: '#final', start: 'top 80px', end: 'bottom top', onToggle: st => topbar.classList.toggle('is-dark', st.isActive) });
+    const links = $$('#index a');
+    links.forEach(a => {
+      const sec = $(a.getAttribute('href'));
+      if (!sec) return;
+      ScrollTrigger.create({ trigger: sec, start: 'top 50%', end: 'bottom 50%', onToggle: st => a.classList.toggle('is-active', st.isActive) });
+    });
+
+    const mm = gsap.matchMedia();
+
+    // ---------- reduced motion: everything visible, screens on first frame ----------
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      $$('.stack').forEach(st => st.querySelectorAll('img').forEach((im, i) => im.classList.toggle('is-on', i === 0)));
+      $('#journey')?.classList.add('drawn');
+      walkthrough('doctor-steps', 'doctor-stack', 'doctor-rail', true);
+      walkthrough('treat-steps', 'treat-stack', 'treat-rail', true);
+    });
+
+    // ---------- full motion ----------
+    mm.add('(prefers-reduced-motion: no-preference)', (ctx) => {
+      const isDesktop = matchMedia('(min-width: 1024px)').matches;
+
+      // 1. HERO — split-text intro, visual rise, slow parallax on scroll
+      const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      const h1 = SplitText.create('#hero-title', { type: 'chars', mask: 'chars', charsClass: 'char' });
+      const sub = SplitText.create('#hero-sub', { type: 'lines', mask: 'lines', linesClass: 'line' });
+      heroTl
+        .from('#s01 .annotation', { autoAlpha: 0, y: 12, duration: .6 })
+        .from(h1.chars, { yPercent: 110, duration: .9, stagger: .035, ease: 'power4.out' }, '-=.3')
+        .from(sub.lines, { yPercent: 110, duration: .8, stagger: .08 }, '-=.55')
+        .from('#s01 .lead', { autoAlpha: 0, y: 16, duration: .7 }, '-=.5')
+        .from('#s01 ul li', { autoAlpha: 0, y: 10, duration: .5, stagger: .07 }, '-=.45')
+        .from('#s01 .scroll-cue', { autoAlpha: 0, duration: .6 }, '-=.2')
+        .from('#hero-visual', { autoAlpha: 0, y: 60, scale: .96, duration: 1.3, ease: 'power3.out' }, '-=.9')
+        .from('#s01 dl > div', { autoAlpha: 0, y: 14, duration: .6, stagger: .06 }, '-=.6');
+      gsap.to('#hero-visual', { yPercent: -8, ease: 'none', scrollTrigger: { trigger: '#hero-visual', start: 'top bottom', end: 'bottom top', scrub: .6 } });
+      gsap.to('#s01 .hero-glow', { yPercent: 12, scale: 1.08, ease: 'none', scrollTrigger: { trigger: '#hero-visual', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+
+      // 2. Generic reveals (.rv) — batched, once
+      gsap.set('.rv', { autoAlpha: 0, y: 22 });
+      ScrollTrigger.batch('.rv', { start: 'top 88%', once: true, onEnter: els => gsap.to(els, { autoAlpha: 1, y: 0, duration: .9, stagger: .08, overwrite: true }) });
+
+      // 3. Section headlines — masked line reveal
+      $$('h2.split-mask').forEach(h => {
+        const sp = SplitText.create(h, { type: 'lines', mask: 'lines', linesClass: 'line', autoSplit: true,
+          onSplit: self => gsap.from(self.lines, { yPercent: 105, duration: .9, stagger: .09, ease: 'power4.out', scrollTrigger: { trigger: h, start: 'top 85%', once: true } }) });
+      });
+
+      // 4. ECOSYSTEM — devices swing in, connector draws, node pops
+      gsap.from('#s02 .browser', { autoAlpha: 0, x: -50, rotationY: 18, transformPerspective: 1600, duration: 1.2, scrollTrigger: { trigger: '#s02 .browser', start: 'top 80%', once: true } });
+      gsap.from('#s02 .phone', { autoAlpha: 0, x: 50, rotationY: -22, transformPerspective: 1600, duration: 1.2, scrollTrigger: { trigger: '#s02 .phone', start: 'top 80%', once: true } });
+      if (isDesktop) {
+        gsap.from('#s02 .eco-link', { scaleY: 0, transformOrigin: 'top', ease: 'none', scrollTrigger: { trigger: '#s02 .grid', start: 'top 75%', end: 'bottom 60%', scrub: .8 } });
+        gsap.from('#s02 .eco-node', { autoAlpha: 0, scale: .6, duration: .8, ease: 'back.out(1.6)', scrollTrigger: { trigger: '#s02 .grid', start: 'top 45%', once: true } });
+      }
+
+      // 5. CHALLENGE — fragments converge with scroll (scrubbed)
+      const frags = $$('#frag-stage .frag');
+      const scatter = [{ x: '-9%', y: '-12%', r: -5 }, { x: '14%', y: '-18%', r: 6 }, { x: '16%', y: '14%', r: -4 }, { x: '-12%', y: '18%', r: 7 }, { x: '6%', y: '26%', r: -9, s: .9 }];
+      gsap.from(frags, { x: i => scatter[i].x, y: i => scatter[i].y, rotation: i => scatter[i].r, scale: i => scatter[i].s || 1, autoAlpha: .5, ease: 'power2.inOut',
+        scrollTrigger: { trigger: '#frag-stage', start: 'top 85%', end: 'center 45%', scrub: 1 } });
+
+      // 6. JOURNEY — line draws, dots pop, thumbs stagger
+      const jl = gsap.timeline({ scrollTrigger: { trigger: '#journey', start: 'top 78%', once: true } });
+      jl.add(() => $('#journey').classList.add('drawn'))
+        .from('#journey .step-dot', { scale: 0, duration: .5, stagger: .12, ease: 'back.out(2)' }, .1)
+        .from('#journey .thumb', { autoAlpha: 0, y: 28, duration: .8, stagger: .12 }, .2)
+        .from('#journey li p', { autoAlpha: 0, y: 10, duration: .6, stagger: .06 }, .5);
+      gsap.set('#journey li', { clearProps: 'opacity,visibility' });
+
+      // 7 + 9. WALKTHROUGHS — crossfade screens inside one frame, rail fills with progress
+      walkthrough('doctor-steps', 'doctor-stack', 'doctor-rail', false);
+      walkthrough('treat-steps', 'treat-stack', 'treat-rail', false);
+      if (isDesktop) {
+        ['#doctor-stack', '#treat-stack'].forEach(sel => {
+          const frame = $(sel).closest('.browser, .phone');
+          gsap.fromTo(frame, { y: 24 }, { y: -24, ease: 'none', scrollTrigger: { trigger: frame.closest('section'), start: 'top bottom', end: 'bottom top', scrub: 1 } });
+        });
+      }
+
+      // 8. PATIENT — center phone rises, side phones drift at different depths, labels draw
+      const s6 = '#s06';
+      gsap.from(`${s6} [data-phone="main"]`, { autoAlpha: 0, y: 70, scale: .94, duration: 1.2, scrollTrigger: { trigger: s6, start: 'top 65%', once: true } });
+      const sides = $$(`${s6} [data-phone="side"]`);
+      gsap.from(sides, { autoAlpha: 0, y: 40, duration: 1.1, stagger: .1, scrollTrigger: { trigger: s6, start: 'top 60%', once: true } });
+      gsap.to(sides[0], { y: -40, ease: 'none', scrollTrigger: { trigger: s6, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
+      gsap.to(sides[1], { y: -70, ease: 'none', scrollTrigger: { trigger: s6, start: 'top bottom', end: 'bottom top', scrub: 1.2 } });
+      gsap.from(`${s6} .annot .ln`, { scaleX: 0, transformOrigin: 'right', duration: .6, stagger: .08, scrollTrigger: { trigger: s6, start: 'top 45%', once: true } });
+      gsap.from(`${s6} .annot span:first-child`, { autoAlpha: 0, x: 8, duration: .6, stagger: .08, scrollTrigger: { trigger: s6, start: 'top 45%', once: true } });
+
+      // 10. DESIGN LANGUAGE — palette tiles cascade, Aa scales, chips pop
+      gsap.from('#s08 .swatch', { autoAlpha: 0, y: 24, scale: .96, duration: .8, stagger: .06, scrollTrigger: { trigger: '#s08 .swatch', start: 'top 85%', once: true } });
+      gsap.from('#s08 .font-product.font-semibold', { scale: .6, autoAlpha: 0, transformOrigin: 'left bottom', duration: 1, ease: 'power4.out', scrollTrigger: { trigger: '#s08 .font-product.font-semibold', start: 'top 85%', once: true } });
+      gsap.from('#s08 .chip', { autoAlpha: 0, scale: .7, duration: .5, stagger: .05, ease: 'back.out(2)', scrollTrigger: { trigger: '#s08 .chip', start: 'top 88%', once: true } });
+
+      // 11. CONSTRAINTS — numbers count up
+      $$('.num-count').forEach(el => {
+        const end = +el.dataset.count; const o = { v: 0 };
+        gsap.to(o, { v: end, duration: 1.4, ease: 'power2.out', onUpdate: () => { el.textContent = Math.round(o.v); }, scrollTrigger: { trigger: el, start: 'top 85%', once: true } });
+      });
+
+      // 12. RESPONSIVE STAGE — three depths of parallax
+      if ($('#s10 .stage')) {
+        const st = { trigger: '#s10 .stage', start: 'top bottom', end: 'bottom top', scrub: 1 };
+        gsap.fromTo('#s10 .stage .browser', { y: 30 }, { y: -30, ease: 'none', scrollTrigger: st });
+        gsap.fromTo('#s10 .stage .tablet', { y: 60 }, { y: -60, ease: 'none', scrollTrigger: st });
+        gsap.fromTo('#s10 .stage .phone', { y: 90 }, { y: -90, ease: 'none', scrollTrigger: st });
+        gsap.from('#s10 .stage .dev', { autoAlpha: 0, y: 50, duration: 1.1, stagger: .12, scrollTrigger: { trigger: '#s10 .stage', start: 'top 70%', once: true } });
+      }
+
+      // 13. FINAL — cinematic close
+      const ft = SplitText.create('#final-title', { type: 'chars', mask: 'chars', charsClass: 'char' });
+      gsap.from(ft.chars, { yPercent: 110, duration: 1, stagger: .04, ease: 'power4.out', scrollTrigger: { trigger: '#final', start: 'top 60%', once: true } });
+      gsap.from('#final .grid > div', { autoAlpha: 0, y: 80, duration: 1.3, stagger: .12, scrollTrigger: { trigger: '#final .grid', start: 'top 85%', once: true } });
+      gsap.to('#final .grid', { y: -40, ease: 'none', scrollTrigger: { trigger: '#final', start: 'top bottom', end: 'bottom bottom', scrub: 1 } });
+
+      // refresh after fonts + images settle (layout-dependent triggers)
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+      addEventListener('load', () => ScrollTrigger.refresh());
+    });
+
+    // Walkthrough: one frame, N steps. Crossfade screens, fill rail with progress.
+    function walkthrough(stepsId, stackId, railId, staticMode) {
+      const steps = $$(`#${stepsId} .wt-step`), imgs = $$(`#${stackId} img`), rail = $(`#${railId}`);
+      if (!steps.length || !imgs.length) return;
+      let current = 0;
+      const set = i => {
+        if (i === current && imgs[i].classList.contains('is-on')) return;
+        steps.forEach((s, k) => s.classList.toggle('is-active', k === i));
+        if (staticMode) { imgs.forEach((im, k) => im.classList.toggle('is-on', k === i)); current = i; return; }
+        gsap.to(imgs[current], { autoAlpha: 0, scale: 1.015, duration: .45, ease: 'power2.inOut', overwrite: true });
+        gsap.fromTo(imgs[i], { autoAlpha: 0, scale: .985 }, { autoAlpha: 1, scale: 1, duration: .6, ease: 'power2.out', overwrite: true });
+        gsap.fromTo(steps[i].children, { autoAlpha: .3, x: -6 }, { autoAlpha: 1, x: 0, duration: .5, stagger: .04, overwrite: true });
+        current = i;
+      };
+      imgs.forEach((im, k) => im.classList.toggle('is-on', k === 0));
+      if (!staticMode) gsap.set(imgs, { autoAlpha: i => i === 0 ? 1 : 0 });
+      steps.forEach((s, i) => ScrollTrigger.create({ trigger: s, start: 'top 55%', end: 'bottom 55%', onEnter: () => set(i), onEnterBack: () => set(i) }));
+      if (rail && !staticMode) {
+        const wrap = $(`#${stepsId}`);
+        gsap.fromTo(rail, { height: '0%' }, { height: '100%', ease: 'none', scrollTrigger: { trigger: wrap, start: 'top 55%', end: 'bottom 55%', scrub: .4 } });
+      }
+    }
+  </script>
+</body>
+</html>

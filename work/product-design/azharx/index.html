@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AzharX — Art Direction & UI Case Study · Nisreen Abdelkader</title>
+  <meta name="description" content="AzharX: an Arabic-first Islamic learning platform for Al-Azhar Al-Sharif, built on a collage-art identity. Art direction and UI design case study by Nisreen Abdelkader, at SwiftX." />
+  <meta property="og:title" content="AzharX — Art Direction & UI Case Study" />
+  <meta property="og:description" content="Bringing Al-Azhar’s scholarship online, with a collage-art identity." />
+  <meta property="og:image" content="img/home-hero.jpg" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23E9A9DA'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(-90 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(-18 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(54 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(126 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(198 32 32)'/%3E%3Cpath d='M32 25.5c.8 3.5 3 5.7 6.5 6.5-3.5.8-5.7 3-6.5 6.5-.8-3.5-3-5.7-6.5-6.5 3.5-.8 5.7-3 6.5-6.5z' fill='%23E27ACB'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&family=Noto+Naskh+Arabic:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: {
+      colors: { blue: 'var(--blue)', navy: 'var(--navy)', ink: 'var(--ink)', mute: 'var(--mute)', line: 'var(--line)', card: 'var(--card)', ice: 'var(--ice)' },
+      fontFamily: { serif: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'], body: ['Inter', 'system-ui', 'sans-serif'], mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'] },
+    } } };
+  </script>
+
+  <style>
+    :root {
+      --blue: #8B6B3E; --blue-deep: #5A4634;
+      --navy: #0D0042; --ink: #14243A; --mute: #5B6B80;
+      --bg: #FEFEFE; --card: #F6F6F6; --ice: #F4F1EA; --ice-2: #E7DBC6; --lav: #EDE5D6;
+      --line: rgba(15,37,64,.10);
+      --ease: cubic-bezier(.22,1,.36,1);
+      --shadow-soft: 0 1px 2px rgba(15,37,64,.04), 0 10px 30px rgba(15,37,64,.07);
+      --shadow-ui: 0 2px 4px rgba(15,37,64,.05), 0 24px 48px rgba(15,37,64,.12);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* type */
+    .serif { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.03em; line-height: 1.02; text-wrap: balance; font-optical-sizing: auto; }
+    .serif em, .serif i { font-style: normal; color: var(--blue); }
+    .h-hero { font-size: clamp(2.5rem, 4.8vw, 3.75rem); }
+    .h-sec  { font-size: clamp(2rem, 3.2vw, 2.5rem); }
+    .h-card { font-size: 1.75rem; line-height: 1.1; }
+    .eyebrow { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: .8125rem; letter-spacing: .06em; text-transform: uppercase; color: var(--blue); font-weight: 500; }
+    .body { font-size: 1.0625rem; line-height: 1.7; color: var(--mute); }
+    .body strong { color: var(--ink); font-weight: 600; background: linear-gradient(transparent 55%, var(--ice-2) 55%); padding: 0 .12em; border-radius: 3px; }
+    :root[data-theme="dark"] .body strong { background: linear-gradient(transparent 55%, rgba(139,107,62,.35) 55%); }
+    .body p + p, .body p + ul, .body ul + p, .body p + ol, .body ol + p { margin-top: 1.1rem; }
+    .body ul { list-style: disc; padding-left: 1.1rem; } .body ol { list-style: decimal; padding-left: 1.3rem; }
+    .body li + li { margin-top: .25rem; }
+    .col { max-width: 700px; margin-inline: auto; }
+    .wide { max-width: 1100px; margin-inline: auto; }
+
+    /* chips */
+    .pill { display: inline-flex; align-items: center; min-height: 38px; padding: 0 1rem; border-radius: 999px; background: var(--card); font-size: .9375rem; font-weight: 500; color: var(--ink); }
+    .tools-row { display: flex; gap: .5rem; align-items: flex-end; }
+    .tool-ic { width: 44px; height: 44px; border-radius: 12px; background: #fff; display: inline-grid; place-items: center; position: relative; cursor: default;
+      box-shadow: 0 1px 2px rgba(15,37,64,.08), 0 6px 16px rgba(15,37,64,.10); border: 1px solid rgba(15,37,64,.06);
+      transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s var(--ease); transform-origin: 50% 100%; }
+    .tool-ic svg { display: block; transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
+    .tool-ic:hover { transform: translateY(-8px) scale(1.18) rotate(-4deg); box-shadow: 0 2px 4px rgba(15,37,64,.08), 0 18px 34px rgba(15,37,64,.22); z-index: 2; }
+    .tool-ic:hover svg { transform: scale(1.08) rotate(6deg); }
+    .tool-ic:active { transform: translateY(-4px) scale(1.05); transition-duration: .15s; }
+    .tools-row:has(.tool-ic:hover) .tool-ic:not(:hover) { transform: translateY(0) scale(.94); opacity: .75; }
+    .tool-ic::after { content: attr(title); position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translate(-50%, 6px) scale(.9); padding: .3rem .6rem; border-radius: 8px; background: var(--ink); color: var(--bg); font-size: .75rem; font-weight: 600; letter-spacing: .01em; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s var(--ease), transform .3s cubic-bezier(.34,1.56,.64,1); }
+    .tool-ic:hover::after { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    @media (prefers-reduced-motion: reduce) { .tool-ic, .tool-ic svg, .tool-ic::after { transition: none; } .tool-ic:hover { transform: none; } .tools-row:has(.tool-ic:hover) .tool-ic:not(:hover) { transform: none; opacity: 1; } }
+    :root[data-theme="dark"] .tool-ic { box-shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.5); border-color: rgba(255,255,255,.08); }
+    .divider { display: flex; align-items: center; gap: 0; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .divider span { padding: .55rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; font-size: .9375rem; font-weight: 500; color: var(--ink); background: #fff; }
+
+    /* cards */
+    .card { background: var(--card); border-radius: 24px; }
+    .card-ice { background: linear-gradient(160deg, var(--ice), var(--lav)); border-radius: 24px; }
+    .icon-dot { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--ice-2); color: var(--blue); }
+
+    /* gallery frames */
+    .g { position: relative; overflow: hidden; border-radius: 24px; background: var(--card); }
+    .g img { display: block; }
+    .g-media { position: relative; overflow: hidden; border-radius: 24px; }
+    .g-media img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1.2s var(--ease); }
+    .g-media:hover img { transform: scale(1.02); }
+    .ui { border-radius: 14px; overflow: hidden; background: #fff; box-shadow: var(--shadow-ui); border: 1px solid rgba(15,37,64,.06); }
+    .ui img { width: 100%; height: auto; display: block; }
+    .phone { border-radius: 40px; background: #0E1622; padding: 8px; box-shadow: var(--shadow-ui); }
+    .phone .scr { border-radius: 32px; overflow: hidden; aspect-ratio: 390 / 844; background: #F6F8FB; position: relative; }
+    .phone .scr img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .scene { aspect-ratio: 1200 / 810; background: #0B0F16; }
+    .scene video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .scene-fade { position: absolute; inset: auto 0 0 0; height: 32%; background: linear-gradient(to top, #0B0F16 15%, transparent); pointer-events: none; }
+    .scene-tag { position: absolute; left: 1.5rem; bottom: 1.25rem; font-family: "JetBrains Mono", monospace; font-size: .8125rem; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.7); }
+    .collage { position: relative; aspect-ratio: 1100 / 640; overflow: hidden; }
+    .collage .ui { position: absolute; width: 46%; transform: rotate(-28deg); }
+    .collage .phone { position: absolute; width: 15%; transform: rotate(-28deg); }
+
+    /* before / after */
+    .ba { border-radius: 24px; padding: 2.25rem 2rem; min-height: 420px; display: flex; flex-direction: column; align-items: center; }
+    .ba-label { font-size: 1rem; letter-spacing: .04em; color: var(--ink); text-transform: uppercase; }
+    .ba-sub { font-size: 1rem; color: var(--mute); margin-top: .35rem; text-align: center; }
+    .tag { display: inline-flex; align-items: center; gap: .5rem; padding: .7rem 1.1rem; border-radius: 999px; background: #fff; box-shadow: var(--shadow-soft); font-size: 1.05rem; font-weight: 500; color: var(--ink); white-space: nowrap; }
+    .tag svg { width: 20px; height: 20px; color: var(--blue); }
+    .tag-blue { background: var(--blue); color: #fff; } .tag-blue svg { color: #fff; }
+    .arrow-down { width: 1px; height: 34px; background: var(--blue); opacity: .6; position: relative; }
+    .arrow-down::after { content: ""; position: absolute; bottom: -1px; left: 50%; width: 6px; height: 6px; border-right: 1px solid var(--blue); border-bottom: 1px solid var(--blue); transform: translateX(-50%) rotate(45deg); }
+    .chip { display: inline-flex; align-items: center; gap: .4rem; padding: .35rem .75rem; border-radius: 999px; font-size: .8125rem; font-weight: 600; }
+    .chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .c-new { background: #EEF1F5; color: #4A5A70; } .c-ready { background: #E4F5EC; color: #1F7A4D; } .c-prog { background: #E2EFFA; color: var(--blue-deep); } .c-pend { background: #FFF4DB; color: #9A6B00; } .c-decl { background: #FDE8E8; color: #B42318; } .c-cons { background: #ECEAF7; color: #4E3F9A; } .c-done { background: #EAF2FB; color: #2A5B8A; }
+
+    /* carousel */
+    .car { position: relative; border-radius: 24px; background: var(--card); padding: 4rem 6rem 3.5rem; }
+    .car-track { position: relative; overflow: hidden; border-radius: 14px; }
+    .car-slides { display: flex; will-change: transform; }
+    .car-slide { flex: 0 0 100%; }
+    .car-slide.is-phone { display: flex; justify-content: center; align-items: flex-start; gap: 2.5rem; padding: 0 1rem; }
+    .car-slide.is-phone .phone { width: 26%; }
+    .car-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: #fff; border: 1px solid var(--line); display: grid; place-items: center; color: var(--ink); cursor: pointer; transition: transform .3s var(--ease), background-color .25s var(--ease); }
+    .car-btn:hover { background: var(--ice); transform: translateY(-50%) scale(1.06); } .car-btn:active { transform: translateY(-50%) scale(.96); }
+    .car-btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+    .car-prev { left: 1.25rem; } .car-next { right: 1.25rem; }
+    .car-dots { display: flex; justify-content: center; gap: .4rem; margin-top: 1.5rem; padding: .5rem .75rem; border-radius: 999px; background: #E5E9EF; width: max-content; margin-inline: auto; }
+    .car-dots button { width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: .55; border: 0; cursor: pointer; transition: opacity .25s, transform .25s; }
+    .car-dots button[aria-current="true"] { opacity: 1; transform: scale(1.15); }
+    .fig { text-align: center; font-size: 1rem; color: var(--ink); margin-top: 1.25rem; } .fig span { color: var(--mute); }
+    @media (max-width: 767px) { .car { padding: 2.5rem 1rem 2rem; } .car-btn { display: none; } .car-slide.is-phone .phone { width: 42%; } .car-slide.is-phone .phone:nth-child(3) { display: none; } .ba { min-height: 0; } }
+
+    /* process wrap */
+    .process-bg { background: var(--card); border-radius: 0 0 48px 48px; }
+
+    /* theme: dark */
+    :root[data-theme="dark"] {
+      --bg: #000000; --card: #101010; --ice: #141414; --ice-2: #1C1C1C; --lav: #121212;
+      --ink: #FFFFFF; --mute: #A4A4A4; --navy: #FFFFFF; --line: rgba(255,255,255,.14);
+      --shadow-soft: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.5);
+      --shadow-ui: 0 2px 4px rgba(0,0,0,.4), 0 24px 48px rgba(0,0,0,.6);
+      color-scheme: dark;
+    }
+    :root[data-theme="dark"] .divider span, :root[data-theme="dark"] .tag, :root[data-theme="dark"] .car-btn { background: var(--card); border-color: var(--line); }
+    :root[data-theme="dark"] .card, :root[data-theme="dark"] .g, :root[data-theme="dark"] .car, :root[data-theme="dark"] .ba.card, :root[data-theme="dark"] .process-bg { border: 1px solid rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .card-ice { background: linear-gradient(160deg, #141414, #0C0C10); border: 1px solid rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .car-dots { background: #1C1C1C; } :root[data-theme="dark"] .car-dots button { background: #A4A4A4; }
+    :root[data-theme="dark"] .ui { background: #0A0A0A; border-color: rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .icon-dot { background: #1C1C1C; }
+    :root[data-theme="dark"] .c-new { background: #1C1C1C; color: #BABABA; }
+    :root[data-theme="dark"] .body strong { background: linear-gradient(transparent 55%, rgba(139,107,62,.35) 55%); }
+    :root[data-theme="dark"] .marq-item .thumb { background: #101010; border: 1px solid rgba(255,255,255,.08); }
+    :root[data-theme="dark"] .scene { border: 1px solid rgba(255,255,255,.08); }
+    html { transition: background-color .3s var(--ease); }
+
+    /* floating glass nav */
+    .gnav { position: fixed; top: 16px; left: 0; right: 0; z-index: 60; display: flex; justify-content: center; align-items: center; gap: .6rem; padding: 0 1rem; pointer-events: none; }
+    .gnav > * { pointer-events: auto; }
+    .glass { background: rgba(255,255,255,.55); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border: 1px solid rgba(255,255,255,.7); box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 10px 30px rgba(15,37,64,.10), 0 1px 2px rgba(15,37,64,.06); }
+    :root[data-theme="dark"] .glass { background: rgba(16,16,16,.6); border-color: rgba(255,255,255,.14); box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 12px 36px rgba(0,0,0,.6); }
+    .gnav .mark { width: 56px; height: 56px; border-radius: 999px; display: grid; place-items: center; text-decoration: none; color: var(--ink); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; transition: transform .3s var(--ease); }
+    .gnav .mark:hover { transform: translateY(-1px); }
+    .gnav .mark small { display: block; font-size: .6rem; letter-spacing: .08em; font-weight: 500; color: var(--mute); text-align: center; margin-top: -2px; }
+    .gnav .links { display: flex; align-items: center; gap: .15rem; height: 56px; padding: 0 .4rem; border-radius: 999px; }
+    .gnav .links a { display: inline-flex; align-items: center; gap: .5rem; height: 42px; padding: 0 .95rem; border-radius: 999px; font-size: 1rem; font-weight: 500; color: var(--ink); text-decoration: none; transition: background-color .25s var(--ease); white-space: nowrap; }
+    .gnav .links a:hover { background: rgba(139,107,62,.10); }
+    .gnav .links a svg { width: 18px; height: 18px; flex: none; }
+    .gnav .sep { width: 1px; height: 22px; background: var(--line); margin: 0 .25rem; }
+    .gnav .ctl, .gnav .theme { height: 42px; border-radius: 999px; border: 0; background: transparent; color: var(--ink); display: inline-flex; align-items: center; gap: .45rem; padding: 0 .8rem; font: inherit; font-size: .9375rem; font-weight: 500; cursor: pointer; transition: background-color .25s var(--ease); }
+    .gnav .theme { width: 42px; padding: 0; justify-content: center; position: relative; }
+    .gnav .ctl:hover, .gnav .theme:hover { background: rgba(139,107,62,.10); }
+    .flag { width: 20px; height: 14px; border-radius: 3px; display: inline-block; position: relative; overflow: hidden; background: #012169; }
+    .flag.eg { background: linear-gradient(to bottom, #CE1126 33%, #fff 33% 66%, #000 66%); }
+    .flag.en::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, #fff 40% 60%, transparent 60%), linear-gradient(to right, transparent 40%, #fff 40% 60%, transparent 60%); }
+    .flag.en::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 44%, #C8102E 44% 56%, transparent 56%), linear-gradient(to right, transparent 44%, #C8102E 44% 56%, transparent 56%); }
+    .lang { position: relative; display: inline-flex; }
+    .lang-menu { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%); min-width: 170px; border-radius: 16px; padding: .35rem; display: none; z-index: 70; }
+    .lang-menu[data-open="true"] { display: block; }
+    .lang-menu button { display: flex; align-items: center; gap: .6rem; width: 100%; padding: .65rem .75rem; border-radius: 12px; background: none; border: 0; color: var(--ink); font: inherit; font-size: .9375rem; cursor: pointer; text-align: start; }
+    .lang-menu button:hover, .lang-menu button[aria-checked="true"] { background: rgba(139,107,62,.12); }
+    .theme .sun, .theme .moon { position: absolute; transition: opacity .25s, transform .35s var(--ease); }
+    .theme .moon { opacity: 0; transform: rotate(-40deg) scale(.7); } :root[data-theme="dark"] .theme .moon { opacity: 1; transform: none; } :root[data-theme="dark"] .theme .sun { opacity: 0; transform: rotate(40deg) scale(.7); }
+    .gnav .cta { width: 56px; height: 56px; border-radius: 999px; background: var(--blue); color: #fff; display: grid; place-items: center; text-decoration: none; box-shadow: 0 10px 24px rgba(139,107,62,.35); transition: transform .3s var(--ease), background-color .25s var(--ease); }
+    .gnav .cta:hover { transform: translateY(-2px); background: var(--blue-deep); }
+    .gnav .cta:active { transform: scale(.96); }
+    .gnav .burger { display: none; width: 42px; height: 42px; border-radius: 999px; border: 0; background: transparent; color: var(--ink); place-items: center; cursor: pointer; }
+    .mobile-menu { position: fixed; top: 84px; left: 1rem; right: 1rem; z-index: 59; border-radius: 22px; padding: .5rem; display: none; }
+    .mobile-menu[data-open="true"] { display: grid; gap: .15rem; }
+    .mobile-menu a { display: flex; align-items: center; gap: .7rem; padding: .85rem .9rem; font-size: 1.0625rem; font-weight: 500; color: var(--ink); text-decoration: none; border-radius: 14px; }
+    .mobile-menu a:hover { background: rgba(139,107,62,.10); }
+    @media (max-width: 899px) { .gnav .links a span, .gnav .links .desk { display: none; } .gnav .links a { padding: 0 .7rem; } .gnav .burger { display: grid; } }
+    @media (max-width: 480px) { .gnav .mark small { display: none; } .gnav .ctl span:not(.flag) { display: none; } }
+    .focus-ring:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 999px; }
+    [dir="rtl"] .lang-menu { left: auto; right: 50%; transform: translateX(50%); }
+    body { padding-top: 0; }
+
+    /* next project marquee */
+    .marq { overflow: hidden; white-space: nowrap; }
+    .marq-track { display: inline-flex; align-items: center; gap: 4rem; will-change: transform; padding-right: 4rem; }
+    .marq-item { display: inline-flex; align-items: center; gap: 4rem; }
+    .marq-item .serif { font-size: clamp(2.5rem, 4vw, 3.5rem); }
+    .marq-item .thumb { width: 200px; height: 200px; border-radius: 20px; overflow: hidden; background: var(--ice); display: grid; place-items: center; }
+    .marq-item .thumb img { width: 72%; border-radius: 8px; box-shadow: var(--shadow-soft); }
+
+    /* footer */
+    .foot { background: #000; color: #fff; border-radius: 48px 48px 0 0; }
+    .foot .big { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; font-size: clamp(3rem, 11vw, 11rem); line-height: .9; letter-spacing: -0.04em; background: none; border: 0; padding: 0; color: #fff; text-align: left; }
+    [dir="rtl"] .foot .big { text-align: right; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    .foot .ib { width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); background: #101010; display: grid; place-items: center; color: #fff; transition: background-color .25s var(--ease), transform .3s var(--ease); }
+    .foot .ib:hover { background: #1C1C1C; border-color: rgba(255,255,255,.3); transform: translateY(-2px); }
+
+
+    /* eyes that follow the cursor */
+    .eyes { display: inline-flex; gap: 6px; }
+    .eye { width: 44px; height: 68px; border-radius: 999px; background: #fff; position: relative; overflow: hidden; transform-origin: center; }
+    .pupil { position: absolute; left: 50%; top: 50%; width: 26px; height: 40px; margin: -20px 0 0 -13px; border-radius: 999px; background: #000; will-change: transform; }
+    .pupil::after { content: ""; position: absolute; right: 5px; bottom: 7px; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
+    /* copy-email name */
+    .copy-name { cursor: pointer; position: relative; display: inline-block; user-select: none; -webkit-tap-highlight-color: transparent; transition: color .3s var(--ease); }
+    .copy-name:hover { color: var(--blue); }
+    .copy-name:focus-visible { outline: 2px solid var(--blue); outline-offset: 8px; border-radius: 12px; }
+    .cursor-tip { position: fixed; left: 0; top: 0; z-index: 80; pointer-events: none; padding: .6rem .9rem; border-radius: 999px; background: #fff; color: #000; font-size: .875rem; font-weight: 600; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,.35); opacity: 0; transform: translate(-50%, -140%) scale(.9); display: inline-flex; align-items: center; gap: .45rem; }
+    .cursor-tip svg { width: 14px; height: 14px; }
+    .confetti { position: fixed; left: 0; top: 0; z-index: 79; width: 10px; height: 14px; border-radius: 3px; pointer-events: none; will-change: transform, opacity; }
+    @media (prefers-reduced-motion: reduce) { .copy-name { transition: none; } }
+
+    /* ---------- AzharX patterns ---------- */
+    .h-md { font-size: clamp(1.5rem, 2.4vw, 2rem); }
+    .ar { font-family: "Noto Naskh Arabic", "Amiri", serif; direction: rtl; }
+    .paper { position: relative; border-radius: 32px; overflow: hidden; isolation: isolate; background: #F4F1EA;
+      background-image: radial-gradient(90% 70% at 85% 10%, rgba(255,255,255,.9), transparent 60%), radial-gradient(70% 60% at 10% 90%, rgba(196,168,120,.18), transparent 60%); }
+    .paper::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .07; pointer-events: none; mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    :root[data-theme="dark"] .paper { background: #171411; background-image: radial-gradient(90% 70% at 85% 10%, rgba(196,168,120,.10), transparent 60%); border: 1px solid rgba(255,255,255,.08); }
+    .paper-dark { background: linear-gradient(160deg, #3B2B1E, #1E1611); }
+    /* hero collage stage */
+    .stage-az { position: relative; min-height: 640px; }
+    .stage-az .piece { position: absolute; will-change: transform; }
+    .stage-az .imam { right: 6%; bottom: 0; width: 44%; z-index: 2; }
+    .stage-az .imam img { display: block; width: 100%; height: auto; }
+    .stage-az .seal { left: 6%; top: 9%; width: 13%; opacity: .9; }
+    .stage-az .seal img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
+    :root[data-theme="dark"] .stage-az .seal img { mix-blend-mode: screen; filter: brightness(1.4); }
+    .stage-az .grid-tape { left: 42%; top: 12%; width: 16%; aspect-ratio: 1; background-image: linear-gradient(rgba(120,95,60,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(120,95,60,.35) 1px, transparent 1px); background-size: 12.5% 12.5%; opacity: .55; transform: rotate(-4deg); }
+    .stage-az .hero-title { left: 7%; bottom: 14%; width: 40%; font-family: "Noto Naskh Arabic", serif; direction: rtl; text-align: right; color: #5A4634; font-size: clamp(1.4rem, 3.4vw, 3rem); line-height: 1.35; font-weight: 500; }
+    .stage-az .hero-title small { display: block; font-family: "JetBrains Mono", monospace; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin-top: .8rem; direction: ltr; text-align: right; }
+    :root[data-theme="dark"] .stage-az .hero-title { color: #E8DCC8; }
+    .stage-az .torn { left: 32%; bottom: 8%; width: 20%; padding: .6rem 1rem; background: #E7DBC6; color: #3E2F22; font-family: "Noto Naskh Arabic", serif; direction: rtl; font-size: 1.1rem; text-align: center; clip-path: polygon(2% 8%, 12% 0, 30% 6%, 55% 0, 75% 5%, 96% 2%, 100% 40%, 97% 70%, 100% 95%, 80% 100%, 60% 92%, 35% 100%, 15% 94%, 0 100%, 3% 60%); box-shadow: 0 10px 24px rgba(58,40,20,.12); transform: rotate(-3deg); }
+    .stage-az .bird { width: 3.5%; color: #8B6B3E; }
+    .stage-az .bird.b1 { left: 58%; top: 10%; } .stage-az .bird.b2 { left: 63%; top: 16%; width: 2.6%; }
+    .stage-az .cloud { left: -5%; right: -5%; bottom: -8%; height: 34%; background: radial-gradient(60% 100% at 30% 100%, rgba(255,255,255,.95), transparent 70%), radial-gradient(50% 100% at 75% 100%, rgba(255,255,255,.9), transparent 70%); z-index: 3; pointer-events: none; }
+    :root[data-theme="dark"] .stage-az .cloud { background: radial-gradient(60% 100% at 30% 100%, rgba(23,20,17,.95), transparent 70%), radial-gradient(50% 100% at 75% 100%, rgba(23,20,17,.9), transparent 70%); }
+    @media (max-width: 767px) { .stage-az { min-height: 0; aspect-ratio: 4/5; } .stage-az .imam { width: 72%; right: 0; } .stage-az .hero-title { left: 5%; top: 7%; bottom: auto; width: 58%; font-size: 1.35rem; } .stage-az .torn { left: 4%; bottom: 10%; width: 44%; font-size: .95rem; } .stage-az .seal { width: 18%; left: auto; right: 4%; top: 3%; } .stage-az .grid-tape { display: none; } }
+    /* snapshot row */
+    .snap { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    @media (min-width: 768px) { .snap { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (min-width: 1024px) { .snap { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+    .snap div { padding: 1.4rem 1rem 1.4rem 0; border-bottom: 1px solid var(--line); }
+    .snap div b { display: block; font-weight: 500; margin-top: .35rem; font-size: 1rem; }
+    @media (min-width: 1024px) { .snap div { border-bottom: 0; } }
+    /* browser frame */
+    .browser { border-radius: 18px; overflow: hidden; background: #fff; border: 1px solid rgba(58,40,20,.1); box-shadow: 0 2px 4px rgba(58,40,20,.06), 0 30px 60px rgba(58,40,20,.18); }
+    .browser-bar { display: flex; align-items: center; gap: .75rem; padding: .7rem .9rem; background: #F6F4EF; border-bottom: 1px solid rgba(58,40,20,.08); }
+    .browser-bar .dots { display: flex; gap: 6px; } .browser-bar .dots i { width: 11px; height: 11px; border-radius: 50%; display: block; }
+    .browser-bar .url { flex: 1; display: flex; align-items: center; gap: .5rem; height: 30px; padding: 0 .8rem; border-radius: 999px; background: #fff; border: 1px solid rgba(58,40,20,.08); font-size: .8125rem; color: #6B5B4A; font-family: "JetBrains Mono", monospace; white-space: nowrap; overflow: hidden; }
+    .browser-bar .url svg { width: 13px; height: 13px; flex: none; }
+    .browser-view { position: relative; height: 620px; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(90,70,52,.4) transparent; -webkit-overflow-scrolling: touch; }
+    .browser-view::-webkit-scrollbar { width: 8px; } .browser-view::-webkit-scrollbar-thumb { background: rgba(90,70,52,.35); border-radius: 999px; border: 2px solid #fff; }
+    .browser-view img { display: block; width: 100%; height: auto; }
+    .browser-view:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+    .browser-hint { position: absolute; left: 50%; bottom: 1.25rem; transform: translateX(-50%); display: inline-flex; align-items: center; gap: .45rem; padding: .5rem .9rem; border-radius: 999px; background: rgba(40,28,18,.85); color: #fff; font-size: .8125rem; font-weight: 500; white-space: nowrap; pointer-events: none; backdrop-filter: blur(8px); transition: opacity .35s var(--ease), transform .35s var(--ease); z-index: 2; }
+    .browser-hint svg { width: 14px; height: 14px; }
+    .browser-wrap { position: relative; }
+    .browser-wrap.scrolled .browser-hint { opacity: 0; transform: translate(-50%, 8px); }
+    @media (max-width: 639px) { .browser-view { height: 460px; } }
+    :root[data-theme="dark"] .browser { background: #0A0A0A; border-color: rgba(255,255,255,.1); box-shadow: 0 2px 4px rgba(0,0,0,.4), 0 30px 60px rgba(0,0,0,.6); }
+    :root[data-theme="dark"] .browser-bar { background: #141414; border-color: rgba(255,255,255,.08); } :root[data-theme="dark"] .browser-bar .url { background: #0A0A0A; border-color: rgba(255,255,255,.1); color: #A4A4A4; }
+    /* screen cards */
+    .shot { border-radius: 18px; overflow: hidden; background: #fff; border: 1px solid rgba(58,40,20,.08); box-shadow: 0 2px 4px rgba(58,40,20,.05), 0 24px 48px rgba(58,40,20,.14); }
+    .shot img { display: block; width: 100%; height: auto; }
+    .shot-tall { height: 560px; overflow: hidden; position: relative; }
+    .shot-tall img { position: absolute; inset: 0; width: 100%; height: auto; will-change: transform; }
+    .shot-tall::after { content: ""; position: absolute; inset: auto 0 0 0; height: 80px; background: linear-gradient(to top, rgba(255,255,255,.9), transparent); pointer-events: none; }
+    :root[data-theme="dark"] .shot { background: #0A0A0A; border-color: rgba(255,255,255,.08); } :root[data-theme="dark"] .shot-tall::after { background: linear-gradient(to top, rgba(10,10,10,.9), transparent); }
+    @media (max-width: 639px) { .shot-tall { height: 380px; } }
+    .moment { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem; align-items: center; }
+    .moment .vis { grid-column: span 12; } .moment .txt { grid-column: span 12; }
+    @media (min-width: 1024px) { .moment .vis { grid-column: span 7; } .moment .txt { grid-column: span 5; } .moment.flip .vis { order: 2; } .moment.flip .txt { order: 1; } }
+    .decision { margin-top: 1.5rem; padding: 1.1rem 1.25rem; border-radius: 16px; background: var(--ice); border-left: 3px solid var(--blue); }
+    .decision b { display: block; font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--blue-deep); font-family: "JetBrains Mono", monospace; font-weight: 500; }
+    .decision p { margin-top: .4rem; color: var(--ink); line-height: 1.6; font-size: 1rem; }
+    /* collage anatomy layers */
+    .anatomy { position: relative; aspect-ratio: 1; max-width: 560px; margin-inline: auto; overflow: hidden; border-radius: 28px; }
+    .anatomy .layer { position: absolute; inset: 0; display: grid; place-items: center; will-change: transform; }
+    .anatomy .layer img { max-width: 100%; max-height: 100%; }
+    .anatomy .l-paper { inset: 8%; border-radius: 24px; background: #E7DBC6; box-shadow: 0 20px 40px rgba(58,40,20,.12); clip-path: polygon(2% 4%, 20% 0, 45% 3%, 70% 0, 98% 3%, 100% 30%, 97% 60%, 100% 96%, 75% 100%, 50% 96%, 25% 100%, 0 97%, 3% 70%, 0 35%); }
+    .anatomy .l-grid { inset: 14% 10% auto auto; width: 34%; aspect-ratio: 1; background-image: linear-gradient(rgba(120,95,60,.4) 1px, transparent 1px), linear-gradient(90deg, rgba(120,95,60,.4) 1px, transparent 1px); background-size: 12.5% 12.5%; }
+    .anatomy .l-photo { inset: 6% 10% 0 22%; } .anatomy .l-photo img { width: 100%; height: 100%; object-fit: contain; object-position: bottom; }
+    .anatomy .l-cloud { inset: auto 0 0 0; height: 42%; background: radial-gradient(60% 100% at 40% 100%, #fff, transparent 70%), radial-gradient(50% 100% at 80% 100%, #fff, transparent 70%); }
+    :root[data-theme="dark"] .anatomy .l-cloud { background: radial-gradient(60% 100% at 40% 100%, #171411, transparent 70%), radial-gradient(50% 100% at 80% 100%, #171411, transparent 70%); }
+    .anatomy .l-note { inset: auto auto 10% 6%; width: 34%; padding: .5rem .8rem; background: #E7DBC6; color: #3E2F22; font-family: "Noto Naskh Arabic", serif; direction: rtl; font-size: 1rem; text-align: center; transform: rotate(-4deg); clip-path: polygon(2% 8%, 30% 0, 60% 5%, 100% 0, 98% 55%, 100% 100%, 65% 94%, 30% 100%, 0 96%); }
+    .anatomy .l-birds { inset: 6% auto auto 30%; width: 14%; color: #8B6B3E; }
+    .layer-list li { display: grid; grid-template-columns: 2.5rem 1fr; gap: .8rem; padding: .9rem 0; border-top: 1px solid var(--line); align-items: baseline; }
+    .layer-list li:last-child { border-bottom: 1px solid var(--line); }
+    .layer-list .n { font-family: "JetBrains Mono", monospace; font-size: .8rem; color: var(--blue); }
+    .layer-list b { display: block; font-weight: 600; } .layer-list span { color: var(--mute); line-height: 1.6; font-size: .95rem; }
+    /* exploration wall */
+    .wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; }
+    .wall figure { position: relative; border-radius: 20px; overflow: hidden; background: var(--card); }
+    .wall figure img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+    .wall figure:hover img { transform: scale(1.03); }
+    .wall figcaption { position: absolute; left: 1rem; bottom: 1rem; padding: .35rem .7rem; border-radius: 999px; background: rgba(255,255,255,.85); backdrop-filter: blur(8px); font-size: .75rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #3E2F22; }
+    .wall .w-a { grid-column: span 12; aspect-ratio: 16/9; } .wall .w-b { grid-column: span 6; aspect-ratio: 1; } .wall .w-c { grid-column: span 6; aspect-ratio: 1; } .wall .w-d { grid-column: span 12; aspect-ratio: 16/10; }
+    @media (min-width: 768px) { .wall .w-a { grid-column: span 7; aspect-ratio: auto; } .wall .w-b { grid-column: span 5; aspect-ratio: auto; } .wall .w-c { grid-column: span 5; aspect-ratio: auto; } .wall .w-d { grid-column: span 7; aspect-ratio: auto; } .wall figure { min-height: 280px; } }
+    .board { position: relative; border-radius: 20px; overflow: hidden; background: #1E1E1E; border: 1px solid rgba(255,255,255,.06); box-shadow: 0 2px 4px rgba(20,14,8,.08), 0 24px 48px rgba(20,14,8,.16); }
+    .board img { display: block; width: 100%; height: auto; }
+    .board-tag { position: absolute; left: 1rem; top: 1rem; padding: .35rem .7rem; border-radius: 999px; background: rgba(255,255,255,.9); color: #3E2F22; font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+    .wall-sm { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+    .wall-sm figure { aspect-ratio: 4/3; min-height: 0; }
+    @media (min-width: 640px) { .wall-sm { grid-template-columns: repeat(4, minmax(0, 1fr)); } .wall-sm figure { aspect-ratio: 3/4; } }
+    /* visual system */
+    .swatch { border-radius: 18px; border: 1px solid var(--line); padding: 1.125rem; display: flex; flex-direction: column; justify-content: flex-end; min-height: 120px; }
+    .sys-card { background: var(--bg); border: 1px solid var(--line); border-radius: 22px; }
+    .rule { height: 1px; background: var(--line); }
+    :root[data-theme="dark"] .sys-card { background: #101010; }
+    .spec-az { font-family: "Noto Naskh Arabic", serif; direction: rtl; color: #3E2F22; }
+    .spec-az .btn-a { display: inline-flex; align-items: center; justify-content: center; height: 46px; padding: 0 1.4rem; border-radius: 10px; background: #5A4634; color: #fff; font-size: 1rem; box-shadow: 0 8px 20px rgba(58,40,20,.22); }
+    .spec-az .btn-b { display: inline-flex; align-items: center; justify-content: center; height: 46px; padding: 0 1.4rem; border-radius: 10px; background: #fff; border: 1px solid #C9BBA6; color: #5A4634; font-size: 1rem; }
+    .spec-az .btn-g { display: inline-flex; align-items: center; justify-content: center; height: 46px; padding: 0 1.4rem; border-radius: 10px; background: #C9A75A; color: #3E2F22; font-size: 1rem; }
+    .spec-az .chip-a { display: inline-flex; align-items: center; height: 34px; padding: 0 .9rem; border-radius: 999px; background: #EFE8DB; color: #5A4634; font-size: .9rem; }
+    .spec-az .chip-a.on { background: #5A4634; color: #fff; }
+    .spec-az .stat { padding: 1rem; border-radius: 16px; background: #EDE5D6; text-align: center; }
+    .spec-az .stat b { display: block; font-size: 1.6rem; color: #3E2F22; font-family: Inter, sans-serif; font-weight: 700; } .spec-az .stat span { font-size: .8rem; color: #6B5B4A; }
+    .spec-az .ai { display: inline-flex; align-items: center; gap: .4rem; height: 36px; padding: 0 .9rem; border-radius: 10px; background: #FBF7FF; border: 1px solid #E5D9F5; color: #6E4CB8; font-size: .9rem; }
+    .team li { display: grid; grid-template-columns: 11rem 1fr; gap: 1rem; padding: .9rem 0; border-top: 1px solid var(--line); }
+    .team li:last-child { border-bottom: 1px solid var(--line); }
+    .team b { font-weight: 600; } .team span { color: var(--mute); }
+    @media (max-width: 639px) { .team li { grid-template-columns: 1fr; gap: .2rem; } }
+    .work-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1.5rem; }
+    @media (min-width: 768px) { .work-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .work-list li { display: flex; gap: .6rem; align-items: baseline; padding: .6rem 0; border-bottom: 1px solid var(--line); font-size: 1rem; }
+    .work-list li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex: none; position: relative; top: -2px; }
+    .status { display: inline-flex; align-items: center; gap: .5rem; padding: .45rem .9rem .45rem .7rem; border-radius: 999px; background: var(--ice); color: var(--blue-deep); font-size: .875rem; font-weight: 600; }
+    .status i { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); box-shadow: 0 0 0 4px rgba(139,107,62,.2); }
+    .tilt { transform: perspective(1200px) rotateX(6deg); transform-origin: 50% 100%; }
+    @media (max-width: 767px) { .tilt { transform: none; } }
+    @media (prefers-reduced-motion: reduce) { .tilt { transform: none; } .browser-hint { transition: none; } .wall figure img { transition: none; } .stage-az .piece, .anatomy .layer, .shot-tall img { will-change: auto; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .g-media img, .foot .ib { transition: none; } }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="font-body" data-i18n-page="azharx" data-i18n-base="../../../">
+  <script src="../../../public/preloader.js"></script>
+  <!-- floating glass nav -->
+  <nav class="gnav" id="gnav" aria-label="Site">
+    <a href="../../../" class="mark glass focus-ring" aria-label="Nisreen Abdelkader, home">NA</a>
+
+    <div class="links glass">
+      <a href="../../../#work" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span data-i18n="nav.work">Work</span></a>
+      <a href="../../../#about" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg><span data-i18n="nav.about">About</span></a>
+      <a href="../../../#about" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg><span data-i18n="nav.exp">Experience</span></a>
+      <a href="../../../public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><span data-i18n="nav.resume">CV</span></a>
+      <span class="sep desk" aria-hidden="true"></span>
+      <div class="lang desk">
+        <button class="ctl focus-ring" id="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="Language">
+          <span class="flag en" id="lang-flag" aria-hidden="true"></span><span id="lang-label">EN</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="lang-menu glass" id="lang-menu" role="listbox" data-open="false">
+          <button role="option" data-lang="en" aria-checked="true"><span class="flag en" aria-hidden="true"></span>English</button>
+          <button role="option" data-lang="ar" aria-checked="false"><span class="flag eg" aria-hidden="true"></span>العربية</button>
+        </div>
+      </div>
+      <button class="theme focus-ring" id="theme-btn" aria-label="Toggle dark mode" aria-pressed="false">
+        <svg class="sun" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+      <button class="burger focus-ring" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+
+    <a href="mailto:nisreenabdelkader6@gmail.com" class="cta focus-ring" aria-label="Contact" data-i18n-title="nav.contact"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+  </nav>
+  <div class="mobile-menu glass" id="mobile-menu" data-open="false">
+    <a href="../../../#work" data-i18n="nav.work">Work</a>
+    <a href="../../../#about" data-i18n="nav.about">About</a>
+    <a href="../../../#about" data-i18n="nav.exp">Experience</a>
+    <a href="../../../public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" data-i18n="nav.resume">CV</a>
+    <div class="flex items-center gap-2 px-2 pt-2 pb-1">
+      <button class="ctl focus-ring" data-lang-quick="en" style="height:40px;border:1px solid var(--line)"><span class="flag en" aria-hidden="true"></span>EN</button>
+      <button class="ctl focus-ring" data-lang-quick="ar" style="height:40px;border:1px solid var(--line)"><span class="flag eg" aria-hidden="true"></span>AR</button>
+    </div>
+  </div>
+
+
+
+  <main>
+
+    <!-- ================= HERO ================= -->
+    <header class="pt-36 sm:pt-44 pb-12 px-5 text-center">
+      <p class="eyebrow rv">EdTech · Art Direction · UI Design · Collage Art</p>
+      <h1 class="serif h-hero rv mx-auto mt-6 max-w-[900px]">AzharX</h1>
+      <p class="rv serif mx-auto mt-4 max-w-[30ch]" style="font-size: clamp(1.35rem, 2.4vw, 1.9rem); font-weight: 500; color: var(--mute); letter-spacing: -0.02em; line-height: 1.2">Bringing Al-Azhar’s scholarship online, <em>with a collage-art identity.</em></p>
+      <div class="rv mt-8 flex flex-wrap justify-center items-center gap-3">
+        <span class="pill">UI Designer · Art Director</span>
+        <span class="status"><i aria-hidden="true"></i>In development</span>
+      </div>
+    </header>
+    <section class="px-5 pb-24">
+      <div class="wide paper rv stage-az" aria-label="AzharX hero collage: the Grand Imam of Al-Azhar, torn paper, a grid, birds and cloud">
+        <div class="piece seal"><img src="img/alazhar-logo.png" width="420" height="533" alt="Al-Azhar Al-Sharif emblem" /></div>
+        <div class="piece grid-tape" aria-hidden="true"></div>
+        <svg class="piece bird b1" viewBox="0 0 64 40" fill="currentColor" aria-hidden="true"><path d="M2 22c10-14 22-16 30-8 6-8 18-10 30-2-10 0-16 4-20 10-6-2-12-2-18 2-6-4-14-4-22-2z"/></svg>
+        <svg class="piece bird b2" viewBox="0 0 64 40" fill="currentColor" aria-hidden="true"><path d="M2 22c10-14 22-16 30-8 6-8 18-10 30-2-10 0-16 4-20 10-6-2-12-2-18 2-6-4-14-4-22-2z"/></svg>
+        <div class="piece imam"><img src="img/collage-imam.png" width="640" height="579" alt="Collage of the Grand Imam of Al-Azhar over a vintage Al-Ahram newspaper, grid paper and gold birds" fetchpriority="high" /></div>
+        <p class="piece hero-title">مِنْ مَنَارَةِ الأَزْهَرِ<br />يَنْطَلِقُ العِلْمُ إِلَى العَالَمِ<small>From the minaret of Al-Azhar, knowledge reaches the world</small></p>
+        <p class="piece torn">لَا أَبْرَحُ حَتَّى أَبْلُغَ</p>
+        <div class="piece cloud" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <!-- ================= SNAPSHOT ================= -->
+    <section class="px-5 pb-24">
+      <div class="wide snap rv" aria-label="Project snapshot">
+        <div><p class="eyebrow">Client</p><b>Al-Azhar Al-Sharif</b></div>
+        <div><p class="eyebrow">Agency</p><b>SwiftX</b></div>
+        <div><p class="eyebrow">Product</p><b>Arabic-first e-learning platform</b></div>
+        <div><p class="eyebrow">Platform</p><b>Web · RTL</b></div>
+        <div><p class="eyebrow">My role</p><b>UI Designer · Art Director</b></div>
+        <div><p class="eyebrow">Lead</p><b>Heba Ehab, Product Manager</b></div>
+      </div>
+    </section>
+
+    <!-- ================= CONTEXT ================= -->
+    <section class="px-5 pb-24">
+      <div class="mx-auto max-w-[900px] grid grid-cols-12 gap-y-8 md:gap-x-10">
+        <div class="col-span-12 md:col-span-4 rv"><p class="eyebrow">Context</p><h2 class="serif h-sec mt-4">A thousand-year institution, going online.</h2></div>
+        <div class="col-span-12 md:col-span-8 body rv" style="--d:.08s">
+          <p>AzharX is a new Arabic-first learning platform inspired by the Al-Azhar tradition. Students around the world enroll in structured Islamic courses taught by trusted scholars, follow guided learning paths and study with AI-assisted tools, all in a calm, modern RTL experience.</p>
+          <p>The product goals were set by the PM: <strong>bring Al-Azhar’s moderate curriculum to a global audience, turn scattered content into structured courses and paths, and support learning with modern AI tools.</strong> My job was to give that product a face. Something that felt like Al-Azhar, not like a course marketplace.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= THE BRIEF / CHALLENGE ================= -->
+    <div class="divider rv" role="separator"><span>Art direction</span></div>
+    <section class="px-5 pt-24 pb-24">
+      <div class="col rv">
+        <p class="eyebrow mb-4">The challenge</p>
+        <h2 class="serif h-sec">How do you make a screen feel <em>reverent</em> without making it feel old?</h2>
+        <div class="body mt-6">
+          <p>Faith-based education lives or dies on trust. Stock illustrations and glossy gradients would have made AzharX look like any other EdTech product. Historical photography alone would have made it look like an archive.</p>
+          <p><strong>The answer was collage art.</strong> Cut-out photography of real scholars and students, torn paper, vintage Al-Ahram newsprint, grid paper, gold birds and Cairo’s minarets, assembled on a warm ivory ground. Heritage and the present, in the same frame.</p>
+        </div>
+      </div>
+      <div class="wide mt-14 grid grid-cols-12 gap-5 items-center">
+        <div class="col-span-12 lg:col-span-6 rv">
+          <div class="anatomy" id="anatomy" aria-label="The collage, layer by layer">
+            <div class="layer l-paper" data-depth="1"></div>
+            <div class="layer l-grid" data-depth="2" aria-hidden="true"></div>
+            <div class="layer l-photo" data-depth="3"><img src="img/collage-student.jpg" width="1000" height="1228" alt="Collage of a young student with a backpack in front of Al-Azhar minarets and old newsprint" loading="lazy" style="object-position: right bottom" /></div>
+            <svg class="layer l-birds" data-depth="4" viewBox="0 0 120 60" fill="currentColor" aria-hidden="true"><path d="M2 30c10-14 22-16 30-8 6-8 18-10 30-2-10 0-16 4-20 10-6-2-12-2-18 2-6-4-14-4-22-2z"/><path d="M60 22c8-10 16-12 22-6 4-6 13-7 22-1-7 0-12 3-15 7-4-1-9-1-13 1-4-3-10-3-16-1z" opacity=".7"/></svg>
+            <div class="layer l-cloud" data-depth="5" aria-hidden="true"></div>
+            <p class="layer l-note" data-depth="6">لَا أَبْرَحُ حَتَّى أَبْلُغَ</p>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-6 rv" style="--d:.08s">
+          <p class="eyebrow">Anatomy of a hero</p>
+          <ol class="layer-list mt-5">
+            <li><span class="n">01</span><div><b>Ivory paper ground</b><span>Textured, warm, slightly torn. It reads as a page, not a screen.</span></div></li>
+            <li><span class="n">02</span><div><b>Grid paper &amp; newsprint</b><span>Vintage Al-Ahram headlines and squared paper place the story in Cairo’s living history.</span></div></li>
+            <li><span class="n">03</span><div><b>Cut-out photography</b><span>A real student or scholar, cut cleanly and placed in front of Al-Azhar’s minarets. People first, always.</span></div></li>
+            <li><span class="n">04</span><div><b>Gold birds</b><span>A quiet symbol of knowledge taking flight. Used sparingly, never as decoration.</span></div></li>
+            <li><span class="n">05</span><div><b>Cloud fade</b><span>Soft white cloud dissolves the collage into the page so the interface can begin.</span></div></li>
+            <li><span class="n">06</span><div><b>The motto</b><span>“I will not stop until I reach.” Handwritten calligraphy on a torn scrap, tying the visual to the mission.</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EXPLORATION ================= -->
+    <section class="px-5 pb-24" id="exploration">
+      <div class="wide">
+        <div class="col rv" style="margin-inline:0">
+          <p class="eyebrow mb-4">Exploration</p>
+          <h2 class="serif h-sec">Finding the direction <em>on the board.</em></h2>
+          <p class="body mt-6">Before a single screen, the direction was built in Figma. A brainstorming board gathered references in four lanes: minarets and mosques, collage composition, infographic art, and Islamic pattern, next to the Al-Azhar emblem and a first colour strip. From there a brand board fixed the palette, the fonts and a library of collage elements: torn paper, stamps, feathers, minarets, birds and calligraphy.</p>
+        </div>
+        <div class="grid grid-cols-12 gap-5 mt-12">
+          <div class="col-span-12 lg:col-span-8 rv">
+            <div class="board"><img src="img/board-mood.jpg" width="1046" height="740" alt="Figma brainstorming board: reference lanes for minarets and mosques, collage composition, infographic art and Islamic pattern, with the Al-Azhar emblem and colours" loading="lazy" /><span class="board-tag">Brainstorming · Figma</span></div>
+          </div>
+          <div class="col-span-12 lg:col-span-4 rv" style="--d:.08s">
+            <div class="board h-full"><img src="img/board-brand.jpg" width="500" height="740" alt="Figma brand board: brand colours, brand fonts and a library of collage elements including torn paper, stamps, feathers, minarets and birds" loading="lazy" style="object-fit: cover; height: 100%" /><span class="board-tag">Brand elements</span></div>
+          </div>
+        </div>
+        <div class="grid grid-cols-12 gap-5 mt-5">
+          <div class="col-span-12 md:col-span-4 rv"><div class="board"><img src="img/board-canvas.jpg" width="780" height="560" alt="Overview of the whole AzharX brainstorming canvas in Figma" loading="lazy" /><span class="board-tag">The whole canvas</span></div></div>
+          <div class="col-span-12 md:col-span-8 rv" style="--d:.06s">
+            <div class="wall wall-sm">
+              <figure><img src="img/explore-student.jpg" width="1200" height="670" alt="Studio collage: a student of Al-Azhar in white holding the Quran, framed by arches, a lamp and a vintage radio" loading="lazy" /><figcaption>Studio collage</figcaption></figure>
+              <figure><img src="img/explore-mosque.jpg" width="1000" height="1339" alt="Paper-cut style illustration of Al-Azhar mosque inside a gold arch" loading="lazy" /><figcaption>Paper-cut mosque</figcaption></figure>
+              <figure><img src="img/explore-stamp.jpg" width="1200" height="800" alt="Sepia postage-stamp collage of a student writing by lamplight" loading="lazy" /><figcaption>Sepia stamp</figcaption></figure>
+              <figure><img src="img/explore-students.jpg" width="1200" height="670" alt="Students of Al-Azhar studying together around a low table by lantern light" loading="lazy" /><figcaption>Study circle</figcaption></figure>
+            </div>
+          </div>
+        </div>
+        <p class="fig">Fig 1. <span>Brainstorming board, brand elements and early collage explorations.</span></p>
+      </div>
+    </section>
+
+    <!-- ================= HOMEPAGE (SCROLLABLE) ================= -->
+    <div class="divider rv" role="separator"><span>The screens</span></div>
+    <section class="px-5 pt-24 pb-24">
+      <div class="wide moment rv">
+        <div class="txt">
+          <p class="eyebrow">01 · Homepage</p>
+          <h3 class="serif h-sec mt-4">One home for <em>every kind of learner.</em></h3>
+          <p class="body mt-5">The homepage serves new visitors, enrolled students and scholars at once. The collage hero sets the tone, then the page gets practical fast: latest courses, learning paths by level, how the journey works, why students choose AzharX and the certificate. Scroll inside the window to browse it.</p>
+          <div class="decision"><b>Design decision</b><p>The collage lives only in the hero and the closing band. Everything in between is quiet ivory cards, so the artwork stays special and the content stays readable.</p></div>
+        </div>
+        <div class="vis">
+          <div class="browser-wrap" id="web-proto">
+            <div class="browser">
+              <div class="browser-bar" aria-hidden="true">
+                <span class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span>
+                <span class="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>azharx.com</span>
+              </div>
+              <div class="browser-view" id="web-view" tabindex="0" role="region" aria-label="AzharX homepage, scrollable preview">
+                <img src="img/home.jpg" width="1000" height="4221" alt="AzharX homepage, full length: collage hero with the Grand Imam, stats, latest courses, learning paths, how your journey starts, an advanced learning experience, why students choose AzharX, and the closing call to action" loading="lazy" decoding="async" />
+              </div>
+            </div>
+            <div class="browser-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg>Hover to browse · scroll inside</div>
+          </div>
+          <p class="fig">Fig 2. <span>Homepage. Hover to browse, or scroll inside.</span></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= LEARNING PATH ================= -->
+    <section class="px-5 pb-24">
+      <div class="wide moment flip rv">
+        <div class="vis"><div class="browser-wrap"><div class="browser"><div class="browser-bar" aria-hidden="true"><span class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>azharx.com/paths/usul-al-fiqh</span></div><div class="browser-view" tabindex="0" role="region" aria-label="AzharX learning path: dark hero with certificate card, progress 25%, module accordion, what you will learn sidebar and related courses, scrollable preview"><img src="img/path.jpg" width="1100" height="2619" alt="AzharX learning path: dark hero with certificate card, progress 25%, module accordion, what you will learn sidebar and related courses" loading="lazy" decoding="async" /></div></div><div class="browser-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg>Hover to browse · scroll inside</div></div><p class="fig">Fig 3. <span>Learning path with progress and certificate.</span></p></div>
+        <div class="txt">
+          <p class="eyebrow">02 · Learning path</p>
+          <h3 class="serif h-sec mt-4">Progress you can <em>see.</em></h3>
+          <p class="body mt-5">A path groups courses into units with clear states: complete, current, locked. Progress sits at the top with the suggested next lesson, and the certificate is shown up front so the goal is visible from day one.</p>
+          <div class="decision"><b>Design decision</b><p>The dark photographic header uses the same collage material as the homepage, so a student never feels they left the world of AzharX when they enter a path.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COURSE PLAYER ================= -->
+    <section class="px-5 pb-24">
+      <div class="wide moment rv">
+        <div class="txt">
+          <p class="eyebrow">03 · Course &amp; AI assistant</p>
+          <h3 class="serif h-sec mt-4">The lesson, the scholar, <em>and a helper on the side.</em></h3>
+          <p class="body mt-5">Video first, lesson list on the side, scholar profile below. The AI assistant lives inside the lesson as a panel with four scoped actions: summarise, explain this point, translate, and quiz me. It never replaces the scholar. It helps the student keep up.</p>
+          <div class="decision"><b>Design decision</b><p>AI elements get their own soft violet, the only cool colour in the system. It is a marker, not a theme, so students always know what came from a scholar and what came from the assistant.</p></div>
+        </div>
+        <div class="vis"><div class="browser-wrap"><div class="browser"><div class="browser-bar" aria-hidden="true"><span class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>azharx.com/course/lesson-3</span></div><div class="browser-view" tabindex="0" role="region" aria-label="AzharX course page: video player, lesson list with progress, scholar card, AI assistant panel with four actions and a quick quiz, scrollable preview"><img src="img/course.jpg" width="1100" height="2172" alt="AzharX course page: video player, lesson list with progress, scholar card, AI assistant panel with four actions and a quick quiz" loading="lazy" decoding="async" /></div></div><div class="browser-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg>Hover to browse · scroll inside</div></div><p class="fig">Fig 4. <span>Course page with the AI assistant panel and quick quiz.</span></p></div>
+      </div>
+    </section>
+
+    <!-- ================= CATALOG ================= -->
+    <section class="px-5 pb-24">
+      <div class="wide moment flip rv">
+        <div class="vis"><div class="browser-wrap"><div class="browser"><div class="browser-bar" aria-hidden="true"><span class="dots"><i style="background:#FF5F57"></i><i style="background:#FEBC2E"></i><i style="background:#28C840"></i></span><span class="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>azharx.com/courses</span></div><div class="browser-view" tabindex="0" role="region" aria-label="AzharX course catalog: search, level and category filters, course cards with scholar and level, pagination and a call to action band, scrollable preview"><img src="img/courses.jpg" width="1100" height="2224" alt="AzharX course catalog: search, level and category filters, course cards with scholar and level, pagination and a call to action band" loading="lazy" decoding="async" /></div></div><div class="browser-hint" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="18" rx="5"/><path d="M12 7v3"/></svg>Hover to browse · scroll inside</div></div><p class="fig">Fig 5. <span>Course catalog with search, filters and pagination.</span></p></div>
+        <div class="txt">
+          <p class="eyebrow">04 · Catalog</p>
+          <h3 class="serif h-sec mt-4">A library, <em>not a marketplace.</em></h3>
+          <p class="body mt-5">Search, level and category filters, then generous cards with the scholar’s name and level on every one. Trust signals stay visible in the list, not hidden on the detail page.</p>
+          <div class="decision"><b>Design decision</b><p>Cards use real photography of manuscripts and mosque interiors instead of icons or illustrations, keeping the catalog inside the same visual world as the hero.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VISUAL SYSTEM ================= -->
+    <div class="divider rv" role="separator"><span>Visual system</span></div>
+    <section class="px-5 pt-24 pb-24">
+      <div class="col rv">
+        <p class="eyebrow mb-4">Visual direction</p>
+        <h2 class="serif h-sec">Warm ivory, deep brown, <em>a touch of gold.</em></h2>
+        <p class="body mt-6">Paper-toned surfaces, one brown family for text and actions, gold for emphasis and the certificate, and refined Arabic serif typography. Corners are soft, cards are generous, and the tone stays reverent and premium.</p>
+      </div>
+      <div class="wide mt-14 grid grid-cols-12 gap-5">
+        <div class="col-span-12 lg:col-span-5 grid grid-cols-6 gap-3 rv">
+          <div class="swatch col-span-6 min-h-[180px] text-white" style="background:#5A4634; border-color: transparent"><p class="eyebrow" style="color: rgba(255,255,255,.7)">Primary brown</p><p class="serif text-2xl mt-1">#5A4634</p></div>
+          <div class="swatch col-span-3 text-white" style="background:#3E2F22; border-color: transparent"><p class="eyebrow" style="color: rgba(255,255,255,.65)">Ink</p><p class="font-medium mt-1">#3E2F22</p></div>
+          <div class="swatch col-span-3" style="background:#C9A75A; color:#3E2F22; border-color: transparent"><p class="eyebrow" style="color:#6B5B4A">Gold</p><p class="font-medium mt-1">#C9A75A</p></div>
+          <div class="swatch col-span-2" style="background:#F4F1EA; color:#3E2F22"><p class="eyebrow" style="color:#6B5B4A">Ivory</p><p class="font-medium mt-1 text-sm">#F4F1EA</p></div>
+          <div class="swatch col-span-2" style="background:#EDE5D6; color:#3E2F22"><p class="eyebrow" style="color:#6B5B4A">Sand</p><p class="font-medium mt-1 text-sm">#EDE5D6</p></div>
+          <div class="swatch col-span-2" style="background:#6E8C7E; color:#fff; border-color: transparent"><p class="eyebrow" style="color: rgba(255,255,255,.75)">Progress</p><p class="font-medium mt-1 text-sm">#6E8C7E</p></div>
+          <div class="swatch col-span-6" style="background:#FBF7FF; color:#3E2F22; border-color:#E5D9F5"><p class="eyebrow" style="color:#6E4CB8">AI assistant only</p><p class="font-medium mt-1">#6E4CB8 · the single cool accent, reserved for AI</p></div>
+        </div>
+        <div class="col-span-12 md:col-span-6 lg:col-span-4 sys-card p-7 rv" style="--d:.06s">
+          <p class="eyebrow">Typography</p>
+          <p class="mt-4 leading-none ar text-right" style="font-size: 4.5rem; color: var(--ink)">أبج</p>
+          <p class="mt-4 text-xl ar text-right" style="color: var(--ink)">المسارات التعليمية المتخصصة</p>
+          <p class="body mt-1" style="font-size:.95rem">Arabic serif for headings, with letter-stretching (kashida) on section titles. A clean Arabic sans for body and UI. Long-form Arabic gets its own line-height.</p>
+          <div class="rule mt-6"></div>
+          <p class="text-sm mt-4 flex justify-between"><span>Arabic serif</span><span class="body">Headings, hero, quotes</span></p>
+          <p class="text-sm mt-2 flex justify-between"><span>Arabic sans</span><span class="body">Body, labels, UI</span></p>
+          <p class="text-sm mt-2 flex justify-between"><span>Calligraphy</span><span class="body">Motto and hero accents</span></p>
+        </div>
+        <div class="col-span-12 md:col-span-6 lg:col-span-3 sys-card p-6 rv spec-az" style="--d:.12s; background:#F4F1EA; border-color:#E4DCCB">
+          <p class="eyebrow" style="direction:ltr; text-align:left; color:#8B6B3E">Components</p>
+          <div class="flex flex-wrap gap-2 mt-4"><span class="btn-a">ابدأ التعلم الآن</span><span class="btn-b">تصفح المسارات</span></div>
+          <div class="flex flex-wrap gap-2 mt-3"><span class="btn-g">سجل مجاناً الآن</span></div>
+          <div class="flex flex-wrap gap-2 mt-3"><span class="chip-a on">الكل</span><span class="chip-a">الفقه</span><span class="chip-a">الحديث</span></div>
+          <div class="grid grid-cols-2 gap-2 mt-3"><div class="stat"><b>+500</b><span>دورة تدريبية</span></div><div class="stat"><b>+120</b><span>عالم ومحاضر</span></div></div>
+          <div class="mt-3"><span class="ai">✦ اشرح هذه النقطة</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= RTL / CRAFT ================= -->
+    <section class="px-5 pb-24">
+      <div class="mx-auto max-w-[900px] grid grid-cols-12 gap-y-8 md:gap-x-10">
+        <div class="col-span-12 md:col-span-4 rv"><p class="eyebrow">Craft</p><h2 class="serif h-sec mt-4">Arabic-first, not translated.</h2></div>
+        <ul class="col-span-12 md:col-span-8 team rv" style="--d:.08s">
+          <li><b>RTL from the grid up</b><span>Layouts, icons, progress bars and pagination were designed right-to-left first, never mirrored afterwards.</span></li>
+          <li><b>Long-form Arabic</b><span>Lesson notes and transcripts use a dedicated reading size and line-height so dense text stays comfortable.</span></li>
+          <li><b>Trust signals in every list</b><span>Scholar name, level and certification badge appear on cards, not only on detail pages.</span></li>
+          <li><b>Collage with restraint</b><span>Artwork frames the page at the top and bottom only. The middle is calm cards and whitespace.</span></li>
+          <li><b>One accent per meaning</b><span>Brown for action, gold for achievement, green for progress, violet for AI. Nothing else.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= TEAM & WORKFLOW ================= -->
+    <div class="divider rv" role="separator"><span>How I worked</span></div>
+    <section class="px-5 pt-24 pb-24">
+      <div class="wide grid grid-cols-12 gap-y-10 md:gap-x-10">
+        <div class="col-span-12 md:col-span-6 rv">
+          <p class="eyebrow mb-4">Team</p>
+          <h2 class="serif h-sec">Under SwiftX, for Al-Azhar.</h2>
+          <p class="body mt-6">The project ran as a live product engagement at SwiftX, led by Heba Ehab as Product Manager. I owned the art direction and UI: concept, collage system, visual language and the final screens, working from her flows, information architecture and requirements.</p>
+          <ul class="team mt-8">
+            <li><b>Client</b><span>Al-Azhar Al-Sharif</span></li>
+            <li><b>Agency</b><span>SwiftX</span></li>
+            <li><b>Product Manager</b><span>Heba Ehab</span></li>
+            <li><b>UI Designer · Art Director</b><span>Nisreen Abdelkader</span></li>
+          </ul>
+        </div>
+        <div class="col-span-12 md:col-span-6 rv" style="--d:.08s">
+          <p class="eyebrow mb-4">What I did</p>
+          <ul class="work-list mt-2" style="grid-template-columns: repeat(2, minmax(0, 1fr))">
+            <li>Concept &amp; art direction</li><li>Collage art system</li>
+            <li>Mood &amp; material exploration</li><li>Visual identity &amp; tokens</li>
+            <li>Homepage, path, course, catalog UI</li><li>RTL layout system</li>
+            <li>Arabic typography</li><li>AI assistant UI</li>
+            <li>Component library</li><li>Developer handoff</li>
+          </ul>
+          <div class="paper mt-8 p-8">
+            <p class="eyebrow" style="color:#8B6B3E">Status</p>
+            <p class="serif mt-3" style="font-size:1.5rem; line-height:1.15">Home, course and learning path are in development. AI assistant, certificates and the mobile app come next.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CLOSING ================= -->
+    <section class="px-5 pb-24">
+      <div class="wide paper rv overflow-hidden" style="padding: 4rem 1.5rem 0">
+        <p class="eyebrow text-center" style="color:#8B6B3E">Closing</p>
+        <p class="serif text-center mx-auto mt-4 max-w-[22ch]" style="font-size: clamp(1.6rem, 3vw, 2.4rem); line-height: 1.15">Heritage you can feel. An interface you can trust.</p>
+        <div class="max-w-[1000px] mx-auto mt-10">
+          <div class="shot tilt" style="border-radius: 18px 18px 0 0"><img src="img/home-hero.jpg" width="1100" height="1103" alt="AzharX homepage hero: collage of the Grand Imam of Al-Azhar in front of the minarets with the headline From the minaret of Al-Azhar knowledge reaches the world" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= NEXT PROJECT MARQUEE ================= -->
+    <section class="pb-28 pt-6" aria-label="Next project">
+      <a href="../agilerx/" class="marq block focus-ring" id="marq">
+        <div class="marq-track" id="marq-track">
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="../../../public/projects/agilerx-cover.jpg" alt="" loading="lazy" /></span></div>
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="../../../public/projects/agilerx-cover.jpg" alt="" loading="lazy" /></span></div>
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="../../../public/projects/agilerx-cover.jpg" alt="" loading="lazy" /></span></div>
+          <div class="marq-item"><span class="serif" data-i18n="next">Next Project</span><span class="thumb"><img src="../../../public/projects/agilerx-cover.jpg" alt="" loading="lazy" /></span></div>
+        </div>
+        <p class="text-center mt-6 font-mono text-sm tracking-[.08em] uppercase" style="color: var(--mute)">./agilerx</p>
+      </a>
+    </section>
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+  <div class="cursor-tip" id="cursor-tip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="cursor-tip-text">Click to copy email</span></div>
+  <footer class="foot px-6 sm:px-16 pt-16 pb-8" id="contact">
+    <div class="eyes" id="eyes" aria-hidden="true"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></div>
+    <div class="mt-16 flex flex-col sm:flex-row sm:items-center justify-between gap-8">
+      <p class="text-[1.0625rem] leading-relaxed" style="color:#BABABA" data-i18n="foot.connect">Let’s connect.<br />I’m always down for a chat.</p>
+      <div class="flex gap-3">
+        <a href="mailto:nisreenabdelkader6@gmail.com" class="ib focus-ring" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+        <a href="../../../public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" class="ib focus-ring" aria-label="CV"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></a>
+        <a href="https://www.linkedin.com/in/nisreen-abdelkader/" target="_blank" rel="noopener" class="ib focus-ring" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.behance.net/nisreenabdelkader" target="_blank" rel="noopener" class="ib focus-ring" aria-label="Behance"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h5a3 3 0 0 1 0 6H3zM3 12h5.5a3 3 0 0 1 0 6H3zM14 9h6M13.5 14.5a3.5 3.5 0 0 1 7 0H13.5zM13.5 14.5a3.5 3.5 0 0 0 6.2 2.3"/></svg></a>
+      </div>
+    </div>
+    <button type="button" class="big copy-name mt-12" id="copy-name" data-email="nisreenabdelkader6@gmail.com" aria-label="Copy email address nisreenabdelkader6@gmail.com">Nisreen Abdelkader</button>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <div class="mt-10 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-[.9375rem]" style="color: #A4A4A4; border-top: 1px solid rgba(255,255,255,.12)">
+      <span>© 2026 Nisreen Abdelkader</span><span>UI UX &amp; Brand Designer</span>
+    </div>
+  </footer>
+
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+    const $ = (q, r = document) => r.querySelector(q), $$ = (q, r = document) => [...r.querySelectorAll(q)];
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- Theme (persisted) ----
+    const root = document.documentElement, themeBtn = $('#theme-btn');
+    const applyTheme = t => { root.dataset.theme = t; themeBtn.setAttribute('aria-pressed', String(t === 'dark')); try { localStorage.setItem('theme', t); } catch {} };
+    let savedTheme = null; try { savedTheme = localStorage.getItem('theme'); } catch {}
+    applyTheme(savedTheme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+    themeBtn.addEventListener('click', () => applyTheme(root.dataset.theme === 'dark' ? 'light' : 'dark'));
+
+    // ---- Language (UI strings + direction; body copy stays in the authored language) ----
+    const i18n = {
+      en: { 'nav.work': 'Work', 'nav.about': 'About', 'nav.exp': 'Experience', 'nav.resume': 'CV', 'nav.contact': 'Contact', 'div.gallery': 'Screenshot gallery', 'div.process': 'Process', 'div.results': 'Outcomes', 'ba.before': 'Before', 'ba.after': 'After', 'foot.connect': 'Let’s connect.<br />I’m always down for a chat.', 'next': 'Next Project' },
+      ar: { 'nav.work': 'الأعمال', 'nav.about': 'عني', 'nav.exp': 'الخبرات', 'nav.resume': 'السيرة الذاتية', 'nav.contact': 'تواصل معي', 'div.gallery': 'معرض الشاشات', 'div.process': 'المنهجية', 'div.results': 'النتائج', 'ba.before': 'قبل', 'ba.after': 'بعد', 'foot.connect': 'خلينا نتواصل.<br />دايماً مستعدة لدردشة.', 'next': 'المشروع التالي' },
+    };
+    const langBtn = $('#lang-btn'), langMenu = $('#lang-menu');
+    const applyLang = l => {
+      $$('[data-i18n]').forEach(el => { const v = i18n[l][el.dataset.i18n]; if (v != null) el.innerHTML = v; });
+      $('#lang-label').textContent = l.toUpperCase(); $('#lang-flag').className = 'flag ' + (l === 'ar' ? 'eg' : 'en');
+      $$('#lang-menu [role="option"]').forEach(o => o.setAttribute('aria-checked', String(o.dataset.lang === l)));
+      root.setAttribute('dir', l === 'ar' ? 'rtl' : 'ltr'); root.setAttribute('lang', l);
+      try { localStorage.setItem('lang', l); } catch {}
+      window.I18N?.apply(l);
+      ScrollTrigger.refresh();
+    };
+    langBtn.addEventListener('click', () => { const o = langMenu.dataset.open !== 'true'; langMenu.dataset.open = String(o); langBtn.setAttribute('aria-expanded', String(o)); });
+    $$('#lang-menu [role="option"]').forEach(o => o.addEventListener('click', () => { applyLang(o.dataset.lang); langMenu.dataset.open = 'false'; langBtn.setAttribute('aria-expanded', 'false'); }));
+    document.addEventListener('click', e => { if (!e.target.closest('.lang')) { langMenu.dataset.open = 'false'; langBtn.setAttribute('aria-expanded', 'false'); } if (!e.target.closest('#mobile-menu') && !e.target.closest('#burger')) { mm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); } });
+    let savedLang = null; try { savedLang = localStorage.getItem('lang'); } catch {}
+    if (savedLang && savedLang !== 'en') applyLang(savedLang);
+
+    // ---- Mobile menu ----
+    const burger = $('#burger'), mm = $('#mobile-menu');
+    burger.addEventListener('click', () => { const o = mm.dataset.open !== 'true'; mm.dataset.open = String(o); burger.setAttribute('aria-expanded', String(o)); });
+    mm.addEventListener('click', e => { if (e.target.closest('a')) { mm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); } });
+
+    // Glass nav: slides away on fast scroll down, returns on scroll up
+    ScrollTrigger.create({ start: 120, onUpdate: st => { if (reduce) return; const hide = st.direction === 1 && Math.abs(st.getVelocity()) > 400; gsap.to('#gnav', { y: hide ? -90 : 0, autoAlpha: hide ? 0 : 1, duration: .45, ease: 'power3.out', overwrite: true }); }, onLeaveBack: () => gsap.to('#gnav', { y: 0, autoAlpha: 1, duration: .3 }) });
+    $$('[data-lang-quick]').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.langQuick); mm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); }));
+
+    // Reveal
+    if (!reduce) {
+      gsap.set('.rv', { autoAlpha: 0, y: 24 });
+      ScrollTrigger.batch('.rv', { start: 'top 88%', once: true, onEnter: els => gsap.to(els, { autoAlpha: 1, y: 0, duration: .9, ease: 'power3.out', stagger: .08, overwrite: true }) });
+      const pieces = $$('.collage .ui, .collage .phone');
+      gsap.from(pieces, { y: 60, autoAlpha: 0, duration: 1.2, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: '.collage', start: 'top 80%', once: true } });
+      gsap.to(pieces, { y: i => -30 - i * 10, ease: 'none', scrollTrigger: { trigger: '.collage', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+      $$('.card-ice .phone, .g > .phone, .g .flex .phone').forEach(el => gsap.from(el, { y: 40, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 85%', once: true } }));
+      $$('.ba').forEach(b => gsap.from($$('.tag, .arrow-down', b), { autoAlpha: 0, y: 12, duration: .6, ease: 'power3.out', stagger: .06, scrollTrigger: { trigger: b, start: 'top 75%', once: true } }));
+    }
+
+    // Carousels
+    $$('[data-carousel]').forEach(car => {
+      const slides = $('.car-slides', car), items = $$('.car-slide', car), dots = $('.car-dots', car);
+      let i = 0;
+      const go = k => {
+        i = (k + items.length) % items.length;
+        gsap.to(slides, { xPercent: -100 * i, duration: reduce ? 0 : .7, ease: 'power3.inOut' });
+        $$('button', dots).forEach((b, n) => b.setAttribute('aria-current', n === i ? 'true' : 'false'));
+      };
+      items.forEach((_, k) => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab'); b.setAttribute('aria-label', `Slide ${k + 1}`); b.addEventListener('click', () => go(k)); dots.appendChild(b); });
+      $('.car-prev', car).addEventListener('click', () => go(i - 1));
+      $('.car-next', car).addEventListener('click', () => go(i + 1));
+      car.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') go(i - 1); if (e.key === 'ArrowRight') go(i + 1); });
+      car.tabIndex = 0;
+      let x0 = null;
+      car.addEventListener('pointerdown', e => x0 = e.clientX, { passive: true });
+      car.addEventListener('pointerup', e => { if (x0 == null) return; const dx = e.clientX - x0; if (Math.abs(dx) > 40) go(i + (dx < 0 ? 1 : -1)); x0 = null; });
+      go(0);
+    });
+
+    // Next-project marquee: seamless loop; slows on hover; speeds with scroll velocity
+    (() => {
+      const track = $('#marq-track'); if (!track || reduce) return;
+      const half = track.scrollWidth / 2;
+      const tween = gsap.to(track, { x: -half, duration: 26, ease: 'none', repeat: -1 });
+      $('#marq').addEventListener('mouseenter', () => gsap.to(tween, { timeScale: .15, duration: .6 }));
+      $('#marq').addEventListener('mouseleave', () => gsap.to(tween, { timeScale: 1, duration: .6 }));
+      let vTween;
+      ScrollTrigger.create({ onUpdate: st => { const v = Math.min(3, 1 + Math.abs(st.getVelocity()) / 1500); vTween?.kill(); vTween = gsap.to(tween, { timeScale: v, duration: .5 }); } });
+    })();
+
+
+    // ---- Eyes follow the cursor ----
+    (() => {
+      const eyes = $$('#eyes .eye'); if (!eyes.length) return;
+      const movers = eyes.map(e => { const p = $('.pupil', e); return { e, x: gsap.quickTo(p, 'x', { duration: .35, ease: 'power3.out' }), y: gsap.quickTo(p, 'y', { duration: .35, ease: 'power3.out' }) }; });
+      const MAXX = 9, MAXY = 14;
+      addEventListener('pointermove', ev => {
+        movers.forEach(m => {
+          const r = m.e.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+          const dx = ev.clientX - cx, dy = ev.clientY - cy, d = Math.hypot(dx, dy) || 1;
+          const k = Math.min(1, d / 260);
+          m.x(dx / d * MAXX * k); m.y(dy / d * MAXY * k);
+        });
+      }, { passive: true });
+      // blink now and then
+      if (!reduce) { const blink = () => { gsap.to(eyes, { scaleY: .08, duration: .09, yoyo: true, repeat: 1, ease: 'power1.inOut', transformOrigin: '50% 50%' }); gsap.delayedCall(2.5 + Math.random() * 4, blink); }; gsap.delayedCall(2, blink); }
+    })();
+
+    // ---- Click-to-copy name with cursor tooltip + confetti ----
+    (() => {
+      const btn = $('#copy-name'), tip = $('#cursor-tip'), tipText = $('#cursor-tip-text'), status = $('#copy-status'); if (!btn) return;
+      const tx = gsap.quickTo(tip, 'x', { duration: .25, ease: 'power3.out' }), ty = gsap.quickTo(tip, 'y', { duration: .25, ease: 'power3.out' });
+      const fine = matchMedia('(pointer: fine)').matches;
+      const labels = () => ({ idle: root.lang === 'ar' ? 'اضغط لنسخ الإيميل' : 'Click to copy email', done: root.lang === 'ar' ? 'تم النسخ ✓' : 'Copied ✓' });
+      btn.addEventListener('pointerenter', e => { if (!fine) return; tipText.textContent = labels().idle; tx(e.clientX); ty(e.clientY); gsap.to(tip, { autoAlpha: 1, scale: 1, duration: .3, ease: 'back.out(2)' }); });
+      btn.addEventListener('pointermove', e => { if (!fine) return; tx(e.clientX); ty(e.clientY); });
+      btn.addEventListener('pointerleave', () => gsap.to(tip, { autoAlpha: 0, scale: .9, duration: .2 }));
+      const colors = ['#2581C4', '#7A6BA8', '#fff', '#DCEBF8', '#F2B441', '#3FC28A'];
+      function confetti(x, y) {
+        if (reduce) return;
+        const n = 42;
+        for (let i = 0; i < n; i++) {
+          const c = document.createElement('span'); c.className = 'confetti'; c.style.background = colors[i % colors.length];
+          if (i % 3 === 0) c.style.borderRadius = '50%'; document.body.appendChild(c);
+          const a = (Math.PI * 2 * i) / n + (Math.random() - .5) * .6, v = 220 + Math.random() * 260;
+          gsap.set(c, { x, y, scale: .6 + Math.random() * .8, rotation: Math.random() * 360 });
+          gsap.timeline({ onComplete: () => c.remove() })
+            .to(c, { x: x + Math.cos(a) * v, y: y + Math.sin(a) * v - 80, rotation: '+=' + (Math.random() * 720 - 360), duration: .9 + Math.random() * .5, ease: 'power3.out' })
+            .to(c, { y: '+=' + (160 + Math.random() * 120), autoAlpha: 0, duration: .8, ease: 'power2.in' }, '-=.55');
+        }
+      }
+      async function copy(e) {
+        const email = btn.dataset.email;
+        let ok = false;
+        try { await navigator.clipboard.writeText(email); ok = true; } catch {}
+        if (!ok) { try { const r = document.createRange(); const t = document.createElement('span'); t.textContent = email; t.style.position = 'fixed'; document.body.appendChild(t); r.selectNodeContents(t); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); ok = document.execCommand('copy'); sel.removeAllRanges(); t.remove(); } catch {} }
+        const x = e.clientX || innerWidth / 2, y = e.clientY || btn.getBoundingClientRect().top + 60;
+        confetti(x, y);
+        tipText.textContent = ok ? labels().done : email;
+        status.textContent = ok ? `Email copied: ${email}` : email;
+        gsap.fromTo(btn, { scale: .985 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .45)', transformOrigin: 'left center' });
+        if (!fine) { tx(x); ty(y); gsap.to(tip, { autoAlpha: 1, scale: 1, duration: .3 }); gsap.to(tip, { autoAlpha: 0, duration: .3, delay: 1.6 }); }
+        else gsap.delayedCall(1.8, () => { if (tip.style.opacity !== '0') tipText.textContent = labels().idle; });
+      }
+      btn.addEventListener('click', copy);
+    })();
+
+    // ---------- AzharX: collage parallax, layer build, scrollable home, panning shots ----------
+    (() => {
+      // Prototype windows stay still until hovered; while a fine pointer rests on one it glides down slowly and stops the moment the pointer leaves or the user scrolls manually.
+      $$('.browser-view').forEach(view => {
+        const wrap = view.closest('.browser-wrap');
+        const seen = () => wrap?.classList.add('scrolled');
+        ['wheel', 'pointerdown', 'keydown', 'touchstart'].forEach(ev => view.addEventListener(ev, seen, { passive: true, once: true }));
+        if (reduce || !matchMedia('(pointer: fine)').matches) return;
+        let raf = 0, last = 0, manual = false;
+        const step = t => { if (last) view.scrollTop += (t - last) * .08; last = t; if (view.scrollTop + view.clientHeight < view.scrollHeight) raf = requestAnimationFrame(step); };
+        const start = () => { if (manual || raf) return; last = 0; raf = requestAnimationFrame(step); seen(); };
+        const stop = () => { cancelAnimationFrame(raf); raf = 0; };
+        view.addEventListener('pointerenter', start); view.addEventListener('pointerleave', () => { stop(); manual = false; });
+        view.addEventListener('wheel', () => { stop(); manual = true; }, { passive: true });
+        view.addEventListener('pointerdown', () => { stop(); manual = true; }, { passive: true });
+      });
+      const mm = gsap.matchMedia();
+      mm.add({ ok: '(prefers-reduced-motion: no-preference)', desk: '(min-width: 768px)', fine: '(pointer: fine)' }, ctx => {
+        const { ok, desk, fine } = ctx.conditions;
+        if (!ok) return;
+        // hero collage: pieces assemble, drift on scroll, follow a fine pointer
+        const stage = $('.stage-az');
+        if (stage) {
+          const pieces = $$('.stage-az .piece:not(.cloud)');
+          gsap.from(pieces, { y: 60, autoAlpha: 0, scale: .96, duration: 1.2, ease: 'power3.out', stagger: .08, delay: .15 });
+          gsap.to($$('.stage-az .imam, .stage-az .torn, .stage-az .bird'), { y: i => -14 - i * 8, ease: 'none', scrollTrigger: { trigger: stage, start: 'top bottom', end: 'bottom top', scrub: 1 } });
+          $$('.stage-az .bird').forEach((b, i) => gsap.to(b, { y: '-=10', x: '+=6', duration: 2.4 + i * .5, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+          if (fine && desk) {
+            const movers = pieces.map((el, i) => ({ x: gsap.quickTo(el, 'x', { duration: .9, ease: 'power3.out' }), y: gsap.quickTo(el, 'y', { duration: .9, ease: 'power3.out' }), k: [10, 18, 26, 30, 14, 6, 22][i % 7] }));
+            stage.addEventListener('pointermove', e => { const r = stage.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - .5, ny = (e.clientY - r.top) / r.height - .5; movers.forEach(m => { m.x(nx * m.k); m.y(ny * m.k * .6); }); }, { passive: true });
+            stage.addEventListener('pointerleave', () => movers.forEach(m => { m.x(0); m.y(0); }));
+          }
+        }
+        // anatomy: layers stack in one by one, then breathe with scroll
+        const layers = $$('#anatomy .layer');
+        if (layers.length) {
+          gsap.from(layers, { y: 80, autoAlpha: 0, rotation: i => (i % 2 ? 3 : -3), duration: 1, ease: 'power3.out', stagger: .16, scrollTrigger: { trigger: '#anatomy', start: 'top 78%', once: true } });
+          gsap.to(layers, { y: (i, el) => -6 * +el.dataset.depth, ease: 'none', scrollTrigger: { trigger: '#anatomy', start: 'top bottom', end: 'bottom top', scrub: 1 } });
+        }
+        // exploration wall: staggered rise
+        $$('.wall figure').forEach((f, i) => gsap.from(f, { y: 50, autoAlpha: 0, duration: 1, delay: (i % 4) * .08, ease: 'power3.out', scrollTrigger: { trigger: f, start: 'top 90%', once: true } }));
+      });
+    })();
+
+    document.fonts?.ready.then(() => ScrollTrigger.refresh());
+    addEventListener('load', () => ScrollTrigger.refresh());
+  </script>
+  <script src="../../../public/i18n.js" defer></script>
+</body>
+</html>

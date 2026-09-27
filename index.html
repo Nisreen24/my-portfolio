@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nisreen Abdelkader</title>
+  <meta name="description" content="Nisreen Abdelkader is a UI UX & Brand Designer who designs digital products and brand systems that turn complex ideas into clear, useful and memorable experiences." />
+  <meta property="og:title" content="Nisreen Abdelkader — UI UX & Brand Designer" />
+  <meta property="og:description" content="Digital experiences and brand systems that turn complex ideas into clear, useful and memorable experiences." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://placehold.co/1200x630/F4F1EB/131313?text=Nisreen+Abdelkader" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23E9A9DA'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(-90 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(-18 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(54 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(126 32 32)'/%3E%3Cellipse cx='32' cy='17' rx='8.5' ry='11.5' fill='%23FFF8EC' transform='rotate(198 32 32)'/%3E%3Cpath d='M32 25.5c.8 3.5 3 5.7 6.5 6.5-3.5.8-5.7 3-6.5 6.5-.8-3.5-3-5.7-6.5-6.5 3.5-.8 5.7-3 6.5-6.5z' fill='%23E27ACB'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Inter:wght@400;500&family=Noto+Naskh+Arabic:wght@500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: 'var(--paper)',
+            ink: 'var(--ink)',
+            mute: 'var(--mute)',
+            line: 'var(--line)',
+            accent: 'var(--accent)',
+          },
+          fontFamily: {
+            display: ['"Bricolage Grotesque"', 'system-ui', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+            arabic: ['"Noto Naskh Arabic"', 'serif'],
+          },
+          maxWidth: { site: '1280px' },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* =====================================================================
+       SITE CONFIG — change copy, portrait, and accent here.
+       Copy lives in the HTML blocks below (each block is labelled).
+       ===================================================================== */
+    :root {
+      --paper: #F4F1EB;          /* warm off-white background */
+      --paper-2: #ECE8E0;        /* slightly deeper paper for surfaces */
+      --ink: #131313;            /* primary text */
+      --mute: #6E6A64;           /* secondary text */
+      --line: rgba(19, 19, 19, 0.12);
+      --accent: #7A6BA8;         /* the ONE accent (muted violet) */
+      --accent-soft: rgba(122, 107, 168, 0.14);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --shadow-card: 0 1px 2px rgba(19,19,19,.05), 0 12px 32px rgba(48,40,70,.10), 0 32px 64px rgba(48,40,70,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Inter, system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* paper texture: very low-opacity noise so the off-white doesn't read flat */
+    .grain::before {
+      content: "";
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      opacity: .045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ---------- Focus ring shared by every interactive element ---------- */
+    .focus-ring:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 6px;
+    }
+
+    /* ---------- Component: Button ---------- */
+    .btn {
+      display: inline-flex; align-items: center; gap: .625rem;
+      min-height: 48px; padding: 0 1.375rem;
+      font-family: Inter, system-ui, sans-serif; font-weight: 500; font-size: .9375rem;
+      border-radius: 8px;
+      transition: transform .35s var(--ease), background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+      will-change: transform;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0) scale(.98); }
+    .btn .arrow { transition: transform .35s var(--ease); }
+    .btn:hover .arrow { transform: translateX(4px); }
+    .btn-primary { background: var(--ink); color: var(--paper); }
+    .btn-primary:hover { background: #000; }
+    .btn-secondary { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+    .btn-secondary:hover { border-color: var(--ink); }
+
+    /* ---------- Component: Nav link ---------- */
+    .nav-link {
+      position: relative; padding: .5rem 0; font-size: .9375rem; color: var(--ink);
+      transition: opacity .25s var(--ease);
+    }
+    .nav-link::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: .125rem; height: 1.5px;
+      background: currentColor; transform: scaleX(0); transform-origin: left;
+      transition: transform .35s var(--ease);
+    }
+    .nav-link:hover::after, .nav-link[aria-current="page"]::after { transform: scaleX(1); }
+    .nav-link:active { opacity: .6; }
+
+    /* ---------- Component: ExpertiseTag ---------- */
+    .tag {
+      display: inline-flex; align-items: center; min-height: 34px; padding: 0 .875rem;
+      font-size: .8125rem; font-weight: 500; color: var(--mute);
+      border: 1px solid var(--line); border-radius: 999px;
+      transition: color .25s var(--ease), border-color .25s var(--ease), transform .35s var(--ease);
+    }
+    .tag:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-1px); }
+
+    /* ---------- Component: AvailabilityBadge ---------- */
+    .badge {
+      display: inline-flex; align-items: center; gap: .625rem;
+      font-size: .8125rem; font-weight: 500; color: var(--mute); letter-spacing: .01em;
+    }
+    .badge .dot { position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+    .badge .dot::after {
+      content: ""; position: absolute; inset: -4px; border-radius: 50%;
+      border: 1.5px solid var(--accent); opacity: 0;
+      animation: pulse 2.4s var(--ease) infinite;
+    }
+    @keyframes pulse { 0% { transform: scale(.6); opacity: .7 } 100% { transform: scale(1.4); opacity: 0 } }
+
+    /* ---------- Display type ---------- */
+    .display-name {
+      font-family: "Bricolage Grotesque", system-ui, sans-serif;
+      font-weight: 600; font-optical-sizing: auto;
+      font-size: clamp(3.25rem, 9.5vw, 7.75rem);
+      line-height: .92; letter-spacing: -0.035em;
+    }
+    .display-name .line-2 { margin-left: clamp(0px, 8vw, 7rem); }   /* editorial offset */
+
+    /* ---------- HeroVisual ---------- */
+    .portrait-card {
+      position: relative; border-radius: 16px; overflow: hidden;
+      background: var(--paper-2);
+      box-shadow: var(--shadow-card);
+      aspect-ratio: 4 / 5;
+      transform: translate3d(var(--px, 0), var(--py, 0), 0);
+      transition: transform .6s var(--ease);
+    }
+    .portrait-card img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 35%; display: block; }
+    .portrait-card .tint { position: absolute; inset: 0; background: var(--accent); mix-blend-mode: multiply; opacity: .12; }
+    .portrait-card .fade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.45), rgba(0,0,0,.05) 45%, transparent); }
+
+    .orbit { position: absolute; border-radius: 50%; border: 1px solid var(--line); pointer-events: none; }
+    .grid-dots {
+      position: absolute; pointer-events: none; opacity: .5;
+      background-image: radial-gradient(var(--mute) 1px, transparent 1px);
+      background-size: 14px 14px;
+      -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent);
+      mask-image: radial-gradient(closest-side, #000 40%, transparent);
+    }
+    .annotation { font-size: .6875rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+    .annotation-vertical { writing-mode: vertical-rl; transform: rotate(180deg); }
+
+    /* ---------- Load-in sequence (CSS only, no GSAP) ---------- */
+    .reveal { opacity: 0; transform: translateY(18px); animation: rise .9s var(--ease) forwards; animation-delay: var(--d, 0s); }
+    .reveal-visual { opacity: 0; transform: translateY(24px) scale(.97); animation: rise-visual 1.1s var(--ease) forwards; animation-delay: var(--d, 0s); }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    @keyframes rise-visual { to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal, .reveal-visual { animation: none; opacity: 1; transform: none; }
+      .badge .dot::after { animation: none; }
+      .btn, .tag, .nav-link, .nav-link::after, .portrait-card { transition: none; }
+      .portrait-card { transform: none !important; }
+    }
+
+    /* ---------- Mobile menu ---------- */
+
+    /* ---------- Component: ClientMarquee ---------- */
+    .marquee {
+      --marquee-gap: clamp(3rem, 7vw, 6.5rem);
+      --logo-h: clamp(44px, 4.5vw, 68px);
+      position: relative; overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+      mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    }
+    .marquee-track {
+      display: flex; width: max-content; align-items: center;
+      gap: var(--marquee-gap); padding-inline-end: var(--marquee-gap);
+      animation: marquee 36s linear infinite;
+      will-change: transform;
+    }
+    .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+    .marquee-list { display: flex; align-items: center; gap: var(--marquee-gap); margin: 0; padding: 0; list-style: none; flex: none; }
+    .marquee-item { display: flex; align-items: center; height: var(--logo-h); flex: none; }
+    .marquee-item img {
+      height: 100%; width: auto; max-width: 220px; object-fit: contain; display: block;
+      filter: grayscale(1) contrast(1.05);
+      mix-blend-mode: multiply;       /* drops light logo backgrounds onto the paper */
+      opacity: .6;
+      transform: scale(var(--logo-scale, 1));
+      transition: opacity .35s var(--ease), transform .35s var(--ease);
+    }
+    .marquee-item img[data-invert="true"] { filter: invert(1) grayscale(1) contrast(1.05); } /* dark-background logos */
+    .marquee-item:hover img { opacity: 1; }
+    @keyframes marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-50%,0,0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .marquee { -webkit-mask-image: none; mask-image: none; overflow-x: auto; scrollbar-width: thin; }
+      .marquee-track { animation: none; width: auto; padding-inline: 0; }
+      .marquee-list[aria-hidden="true"] { display: none; }
+      .marquee-item img { transition: none; }
+    }
+    @media (max-width: 767px) { .marquee { --marquee-gap: 2.25rem; --logo-h: 40px; } .marquee-item img { max-width: 140px; } }
+
+    /* ---------- Section: About ---------- */
+    .about-lead { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; font-size: clamp(2rem, 4.2vw, 3.5rem); text-wrap: balance; }
+    .about-copy p { font-size: 1.0625rem; line-height: 1.75; color: var(--mute); }
+    .about-copy p + p { margin-top: 1.25rem; }
+    .about-copy strong { color: var(--ink); font-weight: 600; }
+    .about-portrait { position: relative; border-radius: 18px; overflow: hidden; background: var(--paper-2); aspect-ratio: 4 / 5; box-shadow: var(--shadow-card); }
+    .about-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+    .about-portrait .tint { position: absolute; inset: 0; background: var(--accent); mix-blend-mode: multiply; opacity: .10; }
+    .about-portrait .fade { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.42), rgba(0,0,0,.04) 40%, transparent); }
+    .social-row { position: absolute; right: 1rem; bottom: 1rem; display: flex; gap: .5rem; flex-wrap: wrap; justify-content: flex-end; }
+    .social-pill {
+      display: inline-flex; align-items: center; gap: .4rem; min-height: 38px; padding: 0 .875rem;
+      border-radius: 999px; background: rgba(244,241,235,.92); color: var(--ink); font-size: .8125rem; font-weight: 500;
+      backdrop-filter: blur(6px); transition: transform .35s var(--ease), background-color .25s var(--ease);
+    }
+    .social-pill:hover { transform: translateY(-2px); background: var(--paper); }
+    .social-pill:active { transform: translateY(0) scale(.98); }
+    .identity-name { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.02em; font-size: 1.375rem; line-height: 1.1; white-space: nowrap; }
+
+    /* tools marquee reuses .marquee; items are icon + name, no cards */
+    .marquee-track { animation-duration: var(--marquee-duration, 36s); }
+    /* tools row: brand marks, lift + tooltip on hover (same as case studies) */
+    .tools-row { display: flex; gap: .875rem; align-items: flex-end; padding: 52px 0 6px; }
+    .tools-marquee { --marquee-gap: .875rem; -webkit-mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent) !important; mask-image: linear-gradient(to right, transparent, #000 14%, #000 86%, transparent) !important; }
+    .tools-marquee .marquee-track { gap: .875rem !important; padding-inline-end: .875rem !important; }
+    .tools-marquee:hover .marquee-track { animation-play-state: paused; }
+    .tool-ic { width: 48px; height: 48px; border-radius: 13px; background: #fff; display: inline-grid; place-items: center; position: relative; cursor: default; box-shadow: 0 1px 2px rgba(19,19,19,.08), 0 6px 16px rgba(19,19,19,.10); border: 1px solid rgba(19,19,19,.06); transition: transform .45s cubic-bezier(.34,1.56,.64,1), box-shadow .35s var(--ease); transform-origin: 50% 100%; }
+    .tool-ic svg { display: block; transition: transform .45s cubic-bezier(.34,1.56,.64,1); }
+    .tool-ic:hover, .tool-ic:focus-visible { transform: translateY(-8px) scale(1.18) rotate(-4deg); box-shadow: 0 2px 4px rgba(19,19,19,.08), 0 18px 34px rgba(19,19,19,.22); z-index: 2; outline: none; }
+    .tool-ic:hover svg, .tool-ic:focus-visible svg { transform: scale(1.08) rotate(6deg); }
+    .tool-ic:active { transform: translateY(-4px) scale(1.05); transition-duration: .15s; }
+    .tools-row:has(.tool-ic:hover) .tool-ic:not(:hover) { transform: translateY(0) scale(.94); opacity: .75; }
+    .tool-ic::after { content: attr(title); position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translate(-50%, 6px) scale(.9); padding: .3rem .6rem; border-radius: 8px; background: var(--ink); color: var(--paper); font-size: .75rem; font-weight: 600; letter-spacing: .01em; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s var(--ease), transform .3s cubic-bezier(.34,1.56,.64,1); }
+    .tool-ic:hover::after, .tool-ic:focus-visible::after { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    @media (prefers-reduced-motion: reduce) { .tool-ic, .tool-ic svg, .tool-ic::after { transition: none; } .tool-ic:hover { transform: none; } .tools-row:has(.tool-ic:hover) .tool-ic:not(:hover) { transform: none; opacity: 1; } }
+    .tools .marquee { --marquee-gap: clamp(2.25rem, 4.5vw, 4rem); }
+    .tool { display: inline-flex; align-items: center; gap: .75rem; color: var(--mute); font-size: .9375rem; font-weight: 500; white-space: nowrap; transition: color .3s var(--ease); }
+    .tool:hover { color: var(--ink); }
+    .tool-icon { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; background: var(--paper-2); border: 1px solid var(--line); color: var(--ink); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; font-size: .75rem; letter-spacing: -0.02em; flex: none; }
+    .tool-icon img, .tool-icon svg { width: 18px; height: 18px; display: block; filter: grayscale(1); opacity: .8; }
+    @media (prefers-reduced-motion: reduce) { .social-pill { transition: none; } }
+
+    /* ---------- Component: AboutTabs ---------- */
+    .tabs { display: flex; gap: 2rem; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      position: relative; flex: none; padding: .875rem 0 1rem; background: none; border: 0; cursor: pointer;
+      font: inherit; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--mute);
+      transition: color .25s var(--ease);
+    }
+    .tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1.5px; background: var(--ink); transform: scaleX(0); transform-origin: left; transition: transform .35s var(--ease); }
+    .tab:hover { color: var(--ink); }
+    .tab[aria-selected="true"] { color: var(--ink); }
+    .tab[aria-selected="true"]::after { transform: scaleX(1); }
+    .tab:active { opacity: .7; }
+    .tab-panels { position: relative; }
+    .tab-panel { transition: opacity .28s var(--ease), transform .28s var(--ease); }
+    .tab-panel[data-state="enter"] { opacity: 0; transform: translateY(8px); }
+    .tab-panel[data-state="in"] { opacity: 1; transform: none; }
+
+    /* ---------- Component: CareerTimeline ---------- */
+    .timeline { display: flex; flex-direction: column; }
+    .timeline-row { display: grid; gap: .5rem 1.5rem; grid-template-columns: 1fr; padding: 1.25rem 0; border-top: 1px solid var(--line); }
+    .timeline-row:last-of-type { border-bottom: 1px solid var(--line); }
+    @media (min-width: 640px) { .timeline-row { grid-template-columns: 9.5rem minmax(0, 1fr) auto; align-items: baseline; } }
+    .timeline-dates { font-size: .8125rem; letter-spacing: .04em; color: var(--mute); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .timeline-role { font-weight: 500; font-size: 1.0625rem; letter-spacing: -0.005em; }
+    .timeline-company { color: var(--mute); font-size: .9375rem; margin-top: .125rem; }
+    .timeline-focus { margin-top: .75rem; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: var(--mute); line-height: 1.7; }
+    .timeline-desc { margin-top: .375rem; font-size: .9rem; color: var(--mute); line-height: 1.65; max-width: 48ch; }
+    .timeline-meta { font-size: .8125rem; color: var(--mute); text-align: left; line-height: 1.6; }
+    @media (min-width: 640px) { .timeline-meta { text-align: right; } }
+    .timeline-extra { margin-top: 1.5rem; }
+    .timeline-extra p:not(.annotation) { font-size: .9375rem; color: var(--mute); line-height: 1.7; }
+
+    /* ---------- Component: CapabilitiesList ---------- */
+    .caps { display: grid; grid-template-columns: 1fr; gap: 0 2.5rem; }
+    @media (min-width: 640px) { .caps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .cap { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); gap: .25rem .5rem; padding: 1.125rem 0; border-top: 1px solid var(--line); }
+    .cap-num { font-size: .75rem; letter-spacing: .08em; color: var(--mute); padding-top: .2rem; font-variant-numeric: tabular-nums; }
+    .cap-title { font-weight: 500; font-size: 1rem; letter-spacing: -0.005em; }
+    .cap-desc { grid-column: 2; font-size: .9rem; color: var(--mute); line-height: 1.6; }
+    @media (prefers-reduced-motion: reduce) { .tab, .tab::after, .tab-panel { transition: none; } .tab-panel[data-state="enter"] { opacity: 1; transform: none; } }
+
+    /* ---------- Component: WorkCategorySection ---------- */
+    .work-block {
+      display: grid; gap: 2rem;
+      grid-template-areas: "head" "previews" "count";
+      border: 1px solid var(--line); border-radius: 22px;
+      padding: 1.5rem;
+      background: var(--paper);
+    }
+    .work-block--brand { background: var(--paper-2); }
+    @media (min-width: 640px) { .work-block { padding: 2rem; } }
+    @media (min-width: 1024px) {
+      .work-block {
+        grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 2.5rem; row-gap: 0;
+        padding: 1.75rem;
+        grid-template-areas: "head head head head previews previews previews previews previews previews previews previews"
+                             "count count count count previews previews previews previews previews previews previews previews";
+      }
+      .work-head { padding: 2.5rem 0 0 1.75rem; }
+      .work-count { padding: 0 0 2.5rem 1.75rem; }
+    }
+    .work-head { grid-area: head; }
+    .work-previews { grid-area: previews; }
+    .work-count { grid-area: count; align-self: end; }
+
+    .work-num { display: flex; align-items: center; gap: 1rem; font-size: .875rem; letter-spacing: .06em; color: var(--mute); }
+    .work-num::after { content: ""; width: 3.5rem; height: 1px; background: var(--line); }
+    .work-title { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; letter-spacing: -0.03em; line-height: 1.0; font-size: clamp(2rem, 3.4vw, 2.9rem); }
+    .btn-pill { border-radius: 999px; padding: 0 1.5rem; min-height: 50px; }
+
+    /* count row: avatar stack + label + rule */
+    .work-count { display: flex; align-items: center; gap: .875rem; font-size: .875rem; color: var(--ink); }
+    .work-count .rule { flex: 1; max-width: 5rem; height: 1px; background: var(--line); }
+    .avatars { display: flex; }
+    .avatars img, .avatars span { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--paper); object-fit: cover; margin-left: -12px; background: var(--paper-2); display: block; }
+    .avatars img:first-child, .avatars span:first-child { margin-left: 0; }
+    .work-block--brand .avatars img, .work-block--brand .avatars span { border-color: var(--paper-2); }
+
+    /* Composition: dominant landscape left (5/8), two stacked supports right (3/8), equal outer height */
+    .composition {
+      display: grid; gap: 1.25rem;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 3fr);
+      grid-template-rows: auto auto;
+    }
+    .composition .is-dominant { grid-column: 1; grid-row: 1 / span 2; display: flex; flex-direction: column; }
+    .composition .is-dominant .project-frame { flex: 1; min-height: 0; aspect-ratio: auto; }
+    .composition .is-support { grid-column: 2; }
+    .composition .is-support .project-frame { aspect-ratio: 2 / 1; }
+    @media (max-width: 767px) {
+      .composition { grid-template-columns: 1fr; grid-template-rows: none; }
+      .composition .is-dominant, .composition .is-support { grid-column: 1; grid-row: auto; }
+      .composition .is-dominant .project-frame { aspect-ratio: 4 / 3; flex: none; }
+      .composition .is-support .project-frame { aspect-ratio: 16 / 10; }
+    }
+
+    /* ---------- Component: ProjectPreview ---------- */
+    .project { display: block; color: inherit; }
+    .project-frame {
+      position: relative; overflow: hidden; border-radius: 16px;
+      border: 1px solid var(--line); background: var(--paper-2);
+    }
+    .project-frame > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform .7s var(--ease); transform: scale(1); }
+    .project:hover .project-frame > img, .project:focus-visible .project-frame > img { transform: scale(1.025); }
+    .project:active .project-frame > img { transform: scale(1.01); }
+    .project:focus-visible { outline: none; }
+    .project:focus-visible .project-frame { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    /* aspect helpers */
+    .ratio-16-10 { aspect-ratio: 16 / 10; }
+    .ratio-4-3   { aspect-ratio: 4 / 3; }
+    .ratio-4-5   { aspect-ratio: 4 / 5; }
+    .ratio-1-1   { aspect-ratio: 1 / 1; }
+    .ratio-3-2   { aspect-ratio: 3 / 2; }
+
+    /* Device frames (product block only) */
+    .frame-browser::before {
+      content: ""; position: absolute; top: 0; left: 0; right: 0; height: 28px; z-index: 1;
+      background: #E6E1D8; border-bottom: 1px solid var(--line);
+    }
+    .frame-browser::after {
+      content: ""; position: absolute; top: 10px; left: 12px; width: 34px; height: 8px; z-index: 2;
+      background: radial-gradient(circle at 4px 4px, rgba(19,19,19,.22) 3.5px, transparent 4px) 0 0 / 13px 8px repeat-x;
+    }
+    .frame-browser > img { top: 28px; height: calc(100% - 28px); }
+    .frame-phone { display: grid; place-items: end center; background: linear-gradient(160deg, #E6E1D8, #D9D3C7); }
+    .frame-phone .phone {
+      position: relative; width: 44%; height: 88%; border-radius: 26px 26px 0 0;
+      background: #131313; padding: 8px 8px 0; box-shadow: 0 24px 48px rgba(48,40,70,.18);
+      transition: transform .7s var(--ease);
+    }
+    .frame-phone .phone .screen { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 18px 18px 0 0; background: var(--paper); }
+    .frame-phone .phone .screen img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+    .project:hover .frame-phone .phone { transform: translateY(-6px); }
+
+    /* ---------- Component: ProjectMeta ---------- */
+    .project-meta { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-top: .875rem; }
+    .project-title { font-weight: 500; font-size: .9375rem; letter-spacing: -0.005em; }
+    .project-cat { font-size: .8125rem; color: var(--mute); margin-top: .125rem; }
+    .project-arrow { flex: none; display: inline-flex; align-items: center; gap: .375rem; font-size: .8125rem; color: var(--mute); margin-top: .1rem; transition: color .3s var(--ease); }
+    .project-arrow svg { transition: transform .35s var(--ease); }
+    .project:hover .project-arrow, .project:focus-visible .project-arrow { color: var(--ink); }
+    .project:hover .project-arrow svg, .project:focus-visible .project-arrow svg { transform: translate(3px, -3px); }
+    .is-dominant .project-title { font-size: 1.0625rem; }
+
+    /* ---------- Scroll reveal (IntersectionObserver adds .in-view) ---------- */
+    .js .reveal-up { opacity: 0; transform: translateY(18px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
+    .js .reveal-up.in-view { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .js .reveal-up { opacity: 1; transform: none; transition: none; }
+      .project-frame > img, .frame-phone .phone, .project-arrow svg { transition: none; }
+      .project:hover .project-frame > img { transform: none; }
+    }
+
+    /* ---------- Selected Work section chrome ---------- */
+
+    /* ---------- Footer (shared) ---------- */
+    .foot { background: #000; color: #fff; border-radius: 48px 48px 0 0; position: relative; z-index: 10; }
+    .foot .big { font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 600; font-size: clamp(3rem, 11vw, 11rem); line-height: .9; letter-spacing: -0.04em; background: none; border: 0; padding: 0; color: #fff; text-align: left; }
+    .foot .ib { width: 56px; height: 56px; border-radius: 50%; border: 1px solid rgba(255,255,255,.15); background: #101010; display: grid; place-items: center; color: #fff; transition: background-color .25s var(--ease), transform .3s var(--ease); }
+    .foot .ib:hover { background: #1C1C1C; border-color: rgba(255,255,255,.3); transform: translateY(-2px); }
+    .foot .ib:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+    .eyes { display: inline-flex; gap: 6px; }
+    .eye { width: 44px; height: 68px; border-radius: 999px; background: #fff; position: relative; overflow: hidden; transform-origin: center; }
+    .pupil { position: absolute; left: 50%; top: 50%; width: 26px; height: 40px; margin: -20px 0 0 -13px; border-radius: 999px; background: #000; will-change: transform; }
+    .pupil::after { content: ""; position: absolute; right: 5px; bottom: 7px; width: 7px; height: 7px; border-radius: 50%; background: #fff; }
+    .copy-name { cursor: pointer; position: relative; display: inline-block; user-select: none; -webkit-tap-highlight-color: transparent; transition: color .3s var(--ease); }
+    .copy-name:hover { color: var(--accent); }
+    .copy-name:focus-visible { outline: 2px solid #fff; outline-offset: 8px; border-radius: 12px; }
+    .cursor-tip { position: fixed; left: 0; top: 0; z-index: 80; pointer-events: none; padding: .6rem .9rem; border-radius: 999px; background: #fff; color: #000; font-size: .875rem; font-weight: 600; white-space: nowrap; box-shadow: 0 10px 30px rgba(0,0,0,.35); opacity: 0; transform: translate(-50%, -140%) scale(.9); display: inline-flex; align-items: center; gap: .45rem; }
+    .cursor-tip svg { width: 14px; height: 14px; }
+    .confetti { position: fixed; left: 0; top: 0; z-index: 79; width: 10px; height: 14px; border-radius: 3px; pointer-events: none; will-change: transform, opacity; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    @media (prefers-reduced-motion: reduce) { .copy-name, .foot .ib { transition: none; } }
+
+    /* floating glass nav (shared with case studies) */
+    .gnav { position: fixed; top: 16px; left: 0; right: 0; z-index: 60; display: flex; justify-content: center; align-items: center; gap: .6rem; padding: 0 1rem; pointer-events: none; }
+    .gnav > * { pointer-events: auto; }
+    .glass { background: rgba(255,255,255,.55); backdrop-filter: blur(18px) saturate(1.6); -webkit-backdrop-filter: blur(18px) saturate(1.6); border: 1px solid rgba(255,255,255,.7); box-shadow: 0 1px 0 rgba(255,255,255,.6) inset, 0 10px 30px rgba(48,40,70,.10), 0 1px 2px rgba(48,40,70,.06); }
+    .gnav .mark { width: 56px; height: 56px; border-radius: 999px; display: grid; place-items: center; text-decoration: none; color: var(--ink); font-family: "Bricolage Grotesque", system-ui, sans-serif; font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em; transition: transform .3s var(--ease); }
+    .gnav .mark:hover { transform: translateY(-1px); } .gnav .mark:active { transform: scale(.96); }
+    .gnav .links { display: flex; align-items: center; gap: .15rem; height: 56px; padding: 0 .4rem; border-radius: 999px; }
+    .gnav .links a { display: inline-flex; align-items: center; gap: .5rem; height: 42px; padding: 0 .95rem; border-radius: 999px; font-size: 1rem; font-weight: 500; color: var(--ink); text-decoration: none; transition: background-color .25s var(--ease); white-space: nowrap; }
+    .gnav .links a:hover, .gnav .links a[aria-current="page"] { background: rgba(122,107,168,.12); } .gnav .links a:active { background: rgba(122,107,168,.2); }
+    .gnav .links a svg { width: 18px; height: 18px; flex: none; }
+    .gnav .cta { height: 56px; padding: 0 1.35rem; border-radius: 999px; background: var(--ink); color: var(--paper); display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; font-weight: 600; font-size: .9375rem; white-space: nowrap; box-shadow: 0 10px 24px rgba(19,19,19,.22); transition: transform .3s var(--ease), background-color .25s var(--ease); }
+    .gnav .cta:hover { transform: translateY(-2px); background: var(--accent); } .gnav .cta:active { transform: scale(.96); }
+    .gnav .cta svg { width: 16px; height: 16px; }
+    .gnav .burger { display: none; width: 42px; height: 42px; border-radius: 999px; border: 0; background: transparent; color: var(--ink); place-items: center; cursor: pointer; }
+    .gnav .burger:hover { background: rgba(122,107,168,.12); }
+    .gmenu { position: fixed; top: 84px; left: 1rem; right: 1rem; z-index: 59; border-radius: 22px; padding: .5rem; display: none; }
+    .gmenu[data-open="true"] { display: grid; gap: .15rem; }
+    .gmenu a { display: flex; align-items: center; gap: .7rem; padding: .85rem .9rem; font-size: 1.0625rem; font-weight: 500; color: var(--ink); text-decoration: none; border-radius: 14px; }
+    .gmenu a:hover { background: rgba(122,107,168,.12); }
+    .gmenu a svg { width: 18px; height: 18px; }
+    .gmenu .cta { margin-top: .35rem; justify-content: center; background: var(--ink); color: var(--paper); font-weight: 600; }
+    .gnav .cta.desk-only { display: inline-flex; }
+    @media (max-width: 1023px) { .gnav .links a span { display: none; } .gnav .links a { padding: 0 .7rem; } .gnav .cta.desk-only span { display: none; } .gnav .cta.desk-only { width: 56px; padding: 0; justify-content: center; } }
+    @media (max-width: 767px) { .gnav .links a:not(.keep) { display: none; } .gnav .burger { display: grid; } }
+    .gnav .focus-ring:focus-visible, .gmenu a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) { .gnav .mark, .gnav .cta, .gnav .links a { transition: none; } }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+</head>
+
+<body class="grain font-body" data-i18n-page="home" data-i18n-base="">
+  <script src="public/preloader.js"></script>
+
+  <!-- =========================================================
+       Component: Header
+       ========================================================= -->
+  <!-- floating glass nav -->
+  <nav class="gnav" id="gnav" aria-label="Site">
+    <a href="#top" class="mark glass focus-ring" aria-label="Nisreen Abdelkader, home">NA</a>
+    <div class="links glass">
+      <a href="#work" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Work</span></a>
+      <a href="#about" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg><span>About</span></a>
+      <a href="#experience" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg><span>Experience</span></a>
+      <a href="public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><span>Resume</span></a>
+      <a href="mailto:nisreenabdelkader6@gmail.com" class="focus-ring"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>Contact</span></a>
+      <button class="burger focus-ring" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="gmenu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+    <a href="mailto:nisreenabdelkader6@gmail.com" class="cta desk-only focus-ring" aria-label="Let’s work together"><span>Let’s work together</span><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </nav>
+  <div class="gmenu glass" id="gmenu" data-open="false">
+    <a href="#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Work</a>
+    <a href="#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>About</a>
+    <a href="#experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="3"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg>Experience</a>
+    <a href="public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>Resume</a>
+    <a href="mailto:nisreenabdelkader6@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>Contact</a>
+    <a href="mailto:nisreenabdelkader6@gmail.com" class="cta">Let’s work together</a>
+  </div>
+  <div aria-hidden="true" style="height: 88px"></div>
+
+  <main id="top" class="relative z-10">
+
+    <!-- =========================================================
+         Component: Hero
+         ========================================================= -->
+    <section class="relative" aria-labelledby="hero-name">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="grid grid-cols-12 gap-x-6 lg:gap-x-10 pt-6 sm:pt-10 lg:pt-2 pb-14 lg:pb-12 lg:min-h-[calc(100svh-88px-21vh)]">
+
+          <!-- Content column -->
+          <div class="col-span-12 lg:col-span-7 flex flex-col lg:justify-center lg:pt-6">
+
+            <!-- Component: AvailabilityBadge -->
+            <p class="badge reveal" style="--d:.05s">
+              <span class="dot" aria-hidden="true"></span>
+              Available for selected opportunities
+            </p>
+
+            <!-- Name -->
+            <h1 id="hero-name" class="display-name mt-7 sm:mt-9">
+              <span class="block reveal" style="--d:.15s">Nisreen</span>
+              <span class="block line-2 reveal" style="--d:.25s">Abdelkader</span>
+            </h1>
+
+            <!-- Positioning -->
+            <p class="reveal mt-6 sm:mt-8 font-display font-medium text-[1.25rem] sm:text-[1.5rem] tracking-[-0.015em] leading-tight" style="--d:.38s">
+              UI UX &amp; Brand Designer
+            </p>
+
+            <!-- Supporting text -->
+            <p class="reveal mt-4 sm:mt-5 max-w-[44ch] text-[1rem] sm:text-[1.0625rem] leading-[1.7] text-mute" style="--d:.48s">
+              I design digital experiences and brand systems that turn complex ideas into clear, useful and memorable experiences.
+            </p>
+
+            <!-- CTAs -->
+            <div class="reveal mt-8 sm:mt-10 flex flex-wrap gap-3" style="--d:.58s">
+              <a href="#work" class="btn btn-primary focus-ring">
+                View Selected Work
+                <svg class="arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9.5M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a href="public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" class="btn btn-secondary focus-ring">View Resume</a>
+            </div>
+
+            <!-- Component: ExpertiseTag list (desktop position; moves below portrait on mobile) -->
+            <ul class="reveal hidden lg:flex flex-wrap gap-2 mt-12" style="--d:.7s" aria-label="Areas of expertise">
+              <li><span class="tag">UI UX Design</span></li>
+              <li><span class="tag">UI/UX</span></li>
+              <li><span class="tag">Brand Identity</span></li>
+              <li><span class="tag">Web Design</span></li>
+              <li><span class="tag">Design Systems</span></li>
+            </ul>
+          </div>
+
+          <!-- =========================================================
+               Component: HeroVisual
+               ========================================================= -->
+          <div class="col-span-12 lg:col-span-5 mt-14 lg:mt-0 relative lg:-mr-4 xl:-mr-8 lg:-mt-4 lg:self-center">
+            <div class="reveal-visual relative mx-auto max-w-[440px] lg:max-w-[430px] lg:ml-auto lg:mr-0" style="--d:.35s">
+
+              <!-- subtle orbital line, behind the card -->
+              <span class="orbit hidden sm:block -top-10 -right-10 w-[62%] aspect-square" aria-hidden="true"></span>
+              <!-- editorial grid dots, bottom-left -->
+              <span class="grid-dots hidden sm:block -right-12 -bottom-12 w-40 h-40" aria-hidden="true"></span>
+
+              <!-- portrait card positioning box -->
+              <div class="relative">
+              <figure class="portrait-card" id="portrait">
+                <img src="public/portrait.jpg" width="880" height="1100"
+                     alt="Portrait of Nisreen Abdelkader, Product and Brand Designer" fetchpriority="high" />
+                <span class="tint" aria-hidden="true"></span>
+                <span class="fade" aria-hidden="true"></span>
+              </figure>
+
+              </div>
+
+              <!-- vertical type annotation along the edge -->
+              <p class="annotation annotation-vertical hidden lg:block absolute -left-8 top-6 whitespace-nowrap" aria-hidden="true">
+                Products · Brands · Experiences
+              </p>
+              <!-- mobile/tablet annotation -->
+              <p class="annotation lg:hidden mt-12 text-center" aria-hidden="true">Products · Brands · Experiences</p>
+            </div>
+          </div>
+
+          <!-- ExpertiseTag list (mobile/tablet position, after portrait) -->
+          <ul class="reveal col-span-12 lg:hidden flex flex-wrap justify-center gap-2 mt-10" style="--d:.7s" aria-label="Areas of expertise">
+            <li><span class="tag">UI UX Design</span></li>
+            <li><span class="tag">UI/UX</span></li>
+            <li><span class="tag">Brand Identity</span></li>
+            <li><span class="tag">Web Design</span></li>
+            <li><span class="tag">Design Systems</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         Component: ClientMarquee
+         Logo data lives in the `clients` array in the script below.
+         ========================================================= -->
+    <!-- ClientMarquee section temporarily removed (2026-09-27). The `clients` data, CSS and renderer are kept; restore the markup here to bring it back. -->
+
+    <!-- =========================================================
+         Section: Selected Work
+         Project data lives in `productProjects` / `brandingProjects` below.
+         Blocks are rendered by renderWorkSection().
+         ========================================================= -->
+    <section id="work" class="relative" aria-labelledby="work-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+
+        <!-- Section header -->
+        <div class="border-t border-line pt-6">
+          <div class="grid grid-cols-12 gap-x-6 lg:gap-x-10 gap-y-8 pt-14 sm:pt-20 lg:pt-24">
+            <div class="col-span-12 lg:col-span-7 reveal-up">
+              <p class="annotation">Selected Work</p>
+              <h2 id="work-title" class="mt-5 font-display font-semibold tracking-[-0.03em] leading-[1.0] text-[clamp(2.5rem,5.2vw,4.5rem)]">
+                Work across<br />products &amp; brands.
+              </h2>
+            </div>
+            <p class="col-span-12 lg:col-span-4 lg:col-start-9 lg:self-end max-w-[42ch] text-[1rem] sm:text-[1.0625rem] leading-[1.7] text-mute reveal-up" style="--d:.1s">
+              A selection of digital experiences and visual identities I’ve designed, turning complex ideas into clear, meaningful and memorable solutions.
+            </p>
+          </div>
+        </div>
+
+        <!-- Blocks (rendered from data) -->
+        <div id="work-blocks" class="mt-12 sm:mt-16 lg:mt-20 flex flex-col gap-5 pb-24 lg:pb-32"></div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         Section: About
+         Copy lives here; tools live in the `tools` array in the script.
+         ========================================================= -->
+    <section id="about" class="relative" aria-labelledby="about-title">
+      <div class="mx-auto max-w-site px-5 sm:px-8 lg:px-12">
+        <div class="border-t border-line pt-14 sm:pt-20 lg:pt-24 pb-16 sm:pb-20 lg:pb-24">
+
+          <!-- Component: AboutTabs (rendered from `aboutTabs`) -->
+          <span id="experience" aria-hidden="true"></span>
+          <div class="tabs reveal-up" role="tablist" aria-label="About section" id="about-tabs"></div>
+
+          <div class="grid grid-cols-12 gap-x-6 lg:gap-x-12 gap-y-12 mt-10 sm:mt-14">
+
+            <!-- Text column: three tab panels -->
+            <div class="col-span-12 lg:col-span-7 tab-panels" id="about-panels">
+
+              <!-- Panel: About Me (Component: AboutProfile) -->
+              <div class="tab-panel" id="panel-about" role="tabpanel" aria-labelledby="tab-about" tabindex="0" data-state="in">
+                <p class="annotation reveal-up">About me</p>
+                <h2 id="about-title" class="about-lead mt-5 reveal-up" style="--d:.05s">I turn complex ideas into clear, thoughtful digital experiences.</h2>
+                <div class="about-copy mt-8 sm:mt-10 max-w-[60ch] reveal-up" style="--d:.12s">
+                  <p>I’m Nisreen, a UI UX &amp; Brand Designer working across digital experiences, interfaces and visual identity. I enjoy taking complex ideas and turning them into experiences that feel clear, useful and intentional.</p>
+                  <p><strong>I design for real problems, not just beautiful screens.</strong> From understanding requirements and shaping user flows to building interfaces and scalable design systems, I focus on making every decision serve a purpose.</p>
+                  <p><strong>I care about the details that make the difference.</strong> Typography, hierarchy, interaction and visual consistency all come together to create products and brands that feel considered, cohesive and memorable.</p>
+                </div>
+          <!-- Tools: brand marks with the case-study hover interaction -->
+                <div class="tools mt-10 border-t border-line pt-7 reveal-up" style="--d:.18s">
+            <p class="annotation mb-6">Tools I work with</p>
+            <div class="marquee tools-marquee" id="tools-marquee" aria-label="Tools">
+              <div class="marquee-track" style="--marquee-duration: 40s">
+                <div class="marquee-list tools-row"><span class="tool-ic" title="Figma" tabindex="0" aria-label="Figma"><svg viewBox="0 0 38 57" width="20" height="30" aria-hidden="true"><path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg></span>
+              <span class="tool-ic" title="FigJam" tabindex="0" aria-label="FigJam"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" fill="#A259FF"/><rect x="13" y="3" width="8" height="8" rx="2" fill="#F24E1E"/><rect x="3" y="13" width="8" height="8" rx="2" fill="#0ACF83"/><rect x="13" y="13" width="8" height="8" rx="2" fill="#1ABCFE"/></svg></span>
+              <span class="tool-ic" title="Figma Make" tabindex="0" aria-label="Figma Make"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 18l-2.2-5.8L4 10l5.8-2.2z" fill="#A259FF"/><circle cx="18.5" cy="18.5" r="2.5" fill="#0ACF83"/></svg></span>
+              <span class="tool-ic" title="Miro" tabindex="0" aria-label="Miro"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#050038" d="M17.392 0H13.9L17 4.808 10.444 0H6.949l3.102 6.3L3.494 0H0l3.05 8.131L0 24h3.494L10.05 6.985 6.949 24h3.494L17 5.494 13.899 24h3.493L24 3.672 17.392 0z"/></svg></span>
+              <span class="tool-ic" title="Claude Code" tabindex="0" aria-label="Claude Code"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#D97757" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg></span>
+              <span class="tool-ic" title="Cursor" tabindex="0" aria-label="Cursor"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#111111" d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></svg></span>
+              <span class="tool-ic" title="UX Pilot" tabindex="0" aria-label="UX Pilot"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5B4BC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z" fill="#5B4BC4"/></svg></span>
+              <span class="tool-ic" title="Adobe Photoshop" tabindex="0" aria-label="Adobe Photoshop"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#31A8FF" d="M9.85 8.42c-.37-.15-.77-.21-1.18-.2-.26 0-.49 0-.68.01-.2-.01-.34 0-.41.01v3.36c.14.01.27.02.39.02h.53c.39 0 .78-.06 1.15-.18.32-.09.6-.28.82-.53.21-.25.31-.59.31-1.03.01-.31-.07-.62-.23-.89-.17-.26-.41-.46-.7-.57zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.899c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.391 11.65c-.399.56-.959.98-1.609 1.22-.68.25-1.43.34-2.25.34-.24 0-.4 0-.5-.01s-.24-.01-.43-.01v3.209c.01.07-.04.131-.11.141H5.52c-.08 0-.12-.041-.12-.131V6.42c0-.07.03-.11.1-.11.17 0 .33 0 .56-.01.24-.01.49-.01.76-.02s.56-.01.87-.02c.31-.01.61-.01.91-.01.82 0 1.5.1 2.06.31.5.17.96.45 1.34.82.32.32.57.71.73 1.14.149.42.229.85.229 1.3.001.86-.199 1.57-.6 2.13zm7.091 3.89c-.28.4-.671.709-1.12.891-.49.209-1.09.318-1.811.318-.459 0-.91-.039-1.359-.129-.35-.061-.7-.17-1.02-.32-.07-.039-.121-.109-.111-.189v-1.74c0-.029.011-.07.041-.09.029-.02.06-.01.09.01.39.23.8.391 1.24.49.379.1.779.15 1.18.15.38 0 .65-.051.83-.141.16-.07.27-.24.27-.42 0-.141-.08-.27-.24-.4-.16-.129-.489-.279-.979-.471-.51-.18-.979-.42-1.42-.719-.31-.221-.569-.51-.761-.85-.159-.32-.239-.67-.229-1.021 0-.43.12-.84.341-1.21.25-.4.619-.72 1.049-.92.469-.239 1.059-.349 1.769-.349.41 0 .83.03 1.24.09.3.04.59.12.86.23.039.01.08.05.1.09.01.04.02.08.02.12v1.63c0 .04-.02.08-.05.1-.09.02-.14.02-.18 0-.3-.16-.62-.27-.96-.34-.37-.08-.74-.13-1.12-.13-.2-.01-.41.02-.601.07-.129.03-.24.1-.31.2-.05.08-.08.18-.08.27s.04.18.101.26c.09.11.209.2.34.27.229.12.47.23.709.33.541.18 1.061.43 1.541.73.33.209.6.49.789.83.16.318.24.67.23 1.029.011.471-.129.94-.389 1.331z"/></svg></span>
+              <span class="tool-ic" title="Adobe Illustrator" tabindex="0" aria-label="Adobe Illustrator"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#FF9A00" d="M10.53 10.73c-.1-.31-.19-.61-.29-.92-.1-.31-.19-.6-.27-.89-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.14.51-.29.98-.44 1.4h2.54c-.06-.211-.14-.46-.23-.721-.09-.269-.18-.559-.27-.859zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zM14.7 16.83h-2.091c-.069.01-.139-.04-.159-.11l-.82-2.38H7.91l-.76 2.35c-.02.09-.1.15-.19.141H5.08c-.11 0-.14-.061-.11-.18L8.19 7.38c.03-.1.06-.21.1-.33.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.08 0 .12.03.13.08l3.65 10.3c.03.109 0 .16-.1.16zm3.4-.15c0 .11-.039.16-.129.16H16.01c-.1 0-.15-.061-.15-.16v-7.7c0-.1.041-.14.131-.14h1.98c.09 0 .129.05.129.14v7.7zm-.209-9.03c-.231.24-.571.37-.911.35-.33.01-.65-.12-.891-.35-.23-.25-.35-.58-.34-.92-.01-.34.12-.66.359-.89.242-.23.562-.35.892-.35.391 0 .689.12.91.35.22.24.34.56.33.89.01.34-.11.67-.349.92z"/></svg></span>
+              <span class="tool-ic" title="Canva" tabindex="0" aria-label="Canva"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#00C4CC" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.962 7.68c.754 0 1.337.549 1.405 1.2.069.583-.171 1.097-.822 1.406-.343.171-.48.172-.549.069-.034-.069 0-.137.069-.206.617-.514.617-.926.548-1.508-.034-.378-.308-.618-.583-.618-1.2 0-2.914 2.674-2.674 4.629.103.754.549 1.646 1.509 1.646.308 0 .65-.103.96-.24.5-.264.799-.47 1.097-.8-.073-.885.704-2.046 1.851-2.046.515 0 .926.205.96.583.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378-.035-.206-.24-.274-.446-.274-.72 0-1.131.994-1.029 1.611.035.275.172.549.447.549.205 0 .514-.31.617-.755.068-.308.343-.514.583-.514.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651 0 .069.034.171.17.171.092 0 .436-.18.777-.459.117-.59.253-1.298.253-1.357.034-.24.137-.48.617-.48.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994.172 0 .309.102.309.274 0 .103 0 .274-.069.446-.137.377-.309.96-.412 1.474 0 .137.035.274.207.274.171 0 .685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202 0-.411.035-.754.104-.994.068-.274.411-.514.617-.514.103 0 .205.069.205.171 0 .035 0 .103-.034.137-.137.446-.24.857-.24 1.269 0 .24.034.582.102.788 0 .034.035.069.07.069.068 0 .548-.445.89-1.028-.308-.206-.48-.549-.48-.96 0-.72.446-1.097.858-1.097.343 0 .617.24.617.72 0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24.293.293 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74.48 0 .924.205.959.582.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172 0-.137.309-.068.274-.376-.034-.206-.24-.275-.446-.275-.686 0-1.13.891-1.028 1.611.034.275.171.583.445.583.206 0 .515-.308.652-.754.068-.274.343-.514.583-.514.103 0 .17.034.205.171 0 .069 0 .206-.137.652-.17.308-.171.48-.137.617.034.274.171.48.309.583.034.034.068.102.068.102 0 .069-.034.138-.137.138-.034 0-.068 0-.103-.035-.514-.205-.72-.548-.789-.891-.205.24-.445.377-.72.377-.445 0-.89-.411-.96-.926a1.609 1.609 0 0 1 .075-.649c-.203.13-.422.203-.623.203h-.17c-.447.652-.927 1.098-1.27 1.303a.896.896 0 0 1-.377.104c-.068 0-.171-.035-.205-.104-.095-.152-.156-.392-.193-.667-.481.527-1.145.805-1.453.805-.343 0-.548-.206-.582-.55v-.376c.102-.754.377-1.2.377-1.337a.074.074 0 0 0-.069-.07c-.24 0-1.028.824-1.166 1.373l-.103.445c-.068.309-.377.515-.582.515-.103 0-.172-.035-.206-.172v-.137l.046-.233c-.435.31-.87.508-1.075.508-.308 0-.48-.172-.514-.412-.206.274-.445.412-.754.412-.352 0-.696-.24-.862-.593-.244.275-.523.553-.852.764-.48.309-1.028.549-1.68.549-.582 0-1.097-.309-1.371-.583-.412-.377-.651-.96-.686-1.509-.205-1.68.823-3.84 2.4-4.8.378-.205.755-.343 1.132-.343zm9.77 3.291c-.104 0-.172.172-.172.343 0 .274.137.583.309.755a1.74 1.74 0 0 0 .102-.583c0-.343-.137-.515-.24-.515z"/></svg></span>
+              <span class="tool-ic" title="Jira" tabindex="0" aria-label="Jira"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#0052CC" d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.001 1.001 0 0 0 23.013 0Z"/></svg></span>
+              <span class="tool-ic" title="HubSpot" tabindex="0" aria-label="HubSpot"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#FF7A59" d="M18.164 7.93V5.084a2.198 2.198 0 001.267-1.978v-.067A2.2 2.2 0 0017.238.845h-.067a2.2 2.2 0 00-2.193 2.193v.067a2.196 2.196 0 001.252 1.973l.013.006v2.852a6.22 6.22 0 00-2.969 1.31l.012-.01-7.828-6.095A2.497 2.497 0 104.3 4.656l-.012.006 7.697 5.991a6.176 6.176 0 00-1.038 3.446c0 1.343.425 2.588 1.147 3.607l-.013-.02-2.342 2.343a1.968 1.968 0 00-.58-.095h-.002a2.033 2.033 0 102.033 2.033 1.978 1.978 0 00-.1-.595l.005.014 2.317-2.317a6.247 6.247 0 104.782-11.134l-.036-.005zm-.964 9.378a3.206 3.206 0 113.215-3.207v.002a3.206 3.206 0 01-3.207 3.207z"/></svg></span>
+              <span class="tool-ic" title="Clockify" tabindex="0" aria-label="Clockify"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#03A9F4" d="M13.3512 20.4035c1.1108 0 2.169-.2217 3.139-.6157l2.6913 2.6944C17.4555 23.4458 15.4688 24 13.3512 24 6.729 24 1.3594 18.627 1.3594 12.0006 1.3594 5.3729 6.7289 0 13.3512 0c2.0964 0 4.0652.5406 5.7789 1.4865L16.4834 4.136c-.9687-.3918-2.0236-.6134-3.1322-.6134-4.6379 0-8.3976 3.779-8.3976 8.441 0 4.6609 3.7597 8.4399 8.3976 8.4399zm2.176-12.1544l5.5104-5.5139 1.5773 1.5772-5.5104 5.514zm-2.2328 5.6348c-1.0784 0-1.952-.8775-1.952-1.961 0-1.0825.8736-1.9611 1.952-1.9611 1.0784 0 1.952.8786 1.952 1.961 0 1.0836-.8736 1.9611-1.952 1.9611zm9.3462 5.6953l-1.5772 1.5783-5.5105-5.514 1.5774-1.5783z"/></svg></span></div>
+                <div class="marquee-list tools-row" aria-hidden="true"><span class="tool-ic" title="Figma" tabindex="-1" aria-label="Figma"><svg viewBox="0 0 38 57" width="20" height="30" aria-hidden="true"><path fill="#1ABCFE" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0ACF83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#FF7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#F24E1E" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#A259FF" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg></span>
+              <span class="tool-ic" title="FigJam" tabindex="-1" aria-label="FigJam"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="2" fill="#A259FF"/><rect x="13" y="3" width="8" height="8" rx="2" fill="#F24E1E"/><rect x="3" y="13" width="8" height="8" rx="2" fill="#0ACF83"/><rect x="13" y="13" width="8" height="8" rx="2" fill="#1ABCFE"/></svg></span>
+              <span class="tool-ic" title="Figma Make" tabindex="-1" aria-label="Figma Make"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 2l2.2 5.8L20 10l-5.8 2.2L12 18l-2.2-5.8L4 10l5.8-2.2z" fill="#A259FF"/><circle cx="18.5" cy="18.5" r="2.5" fill="#0ACF83"/></svg></span>
+              <span class="tool-ic" title="Miro" tabindex="-1" aria-label="Miro"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#050038" d="M17.392 0H13.9L17 4.808 10.444 0H6.949l3.102 6.3L3.494 0H0l3.05 8.131L0 24h3.494L10.05 6.985 6.949 24h3.494L17 5.494 13.899 24h3.493L24 3.672 17.392 0z"/></svg></span>
+              <span class="tool-ic" title="Claude Code" tabindex="-1" aria-label="Claude Code"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#D97757" d="m4.7144 15.9555 4.7174-2.6471.079-.2307-.079-.1275h-.2307l-.7893-.0486-2.6956-.0729-2.3375-.0971-2.2646-.1214-.5707-.1215-.5343-.7042.0546-.3522.4797-.3218.686.0608 1.5179.1032 2.2767.1578 1.6514.0972 2.4468.255h.3886l.0546-.1579-.1336-.0971-.1032-.0972L6.973 9.8356l-2.55-1.6879-1.3356-.9714-.7225-.4918-.3643-.4614-.1578-1.0078.6557-.7225.8803.0607.2246.0607.8925.686 1.9064 1.4754 2.4893 1.8336.3643.3035.1457-.1032.0182-.0728-.164-.2733-1.3539-2.4467-1.445-2.4893-.6435-1.032-.17-.6194c-.0607-.255-.1032-.4674-.1032-.7285L6.287.1335 6.6997 0l.9957.1336.419.3642.6192 1.4147 1.0018 2.2282 1.5543 3.0296.4553.8985.2429.8318.091.255h.1579v-.1457l.1275-1.706.2368-2.0947.2307-2.6957.0789-.7589.3764-.9107.7468-.4918.5828.2793.4797.686-.0668.4433-.2853 1.8517-.5586 2.9021-.3643 1.9429h.2125l.2429-.2429.9835-1.3053 1.6514-2.0643.7286-.8196.85-.9046.5464-.4311h1.0321l.759 1.1293-.34 1.1657-1.0625 1.3478-.8804 1.1414-1.2628 1.7-.7893 1.36.0729.1093.1882-.0183 2.8535-.607 1.5421-.2794 1.8396-.3157.8318.3886.091.3946-.3278.8075-1.967.4857-2.3072.4614-3.4364.8136-.0425.0304.0486.0607 1.5482.1457.6618.0364h1.621l3.0175.2247.7892.522.4736.6376-.079.4857-1.2142.6193-1.6393-.3886-3.825-.9107-1.3113-.3279h-.1822v.1093l1.0929 1.0686 2.0035 1.8092 2.5075 2.3314.1275.5768-.3218.4554-.34-.0486-2.2039-1.6575-.85-.7468-1.9246-1.621h-.1275v.17l.4432.6496 2.3436 3.5214.1214 1.0807-.17.3521-.6071.2125-.6679-.1214-1.3721-1.9246L14.38 17.959l-1.1414-1.9428-.1397.079-.674 7.2552-.3156.3703-.7286.2793-.6071-.4614-.3218-.7468.3218-1.4753.3886-1.9246.3157-1.53.2853-1.9004.17-.6314-.0121-.0425-.1397.0182-1.4328 1.9672-2.1796 2.9446-1.7243 1.8456-.4128.164-.7164-.3704.0667-.6618.4008-.5889 2.386-3.0357 1.4389-1.882.929-1.0868-.0062-.1579h-.0546l-6.3385 4.1164-1.1293.1457-.4857-.4554.0608-.7467.2307-.2429 1.9064-1.3114Z"/></svg></span>
+              <span class="tool-ic" title="Cursor" tabindex="-1" aria-label="Cursor"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#111111" d="M11.503.131 1.891 5.678a.84.84 0 0 0-.42.726v11.188c0 .3.162.575.42.724l9.609 5.55a1 1 0 0 0 .998 0l9.61-5.55a.84.84 0 0 0 .42-.724V6.404a.84.84 0 0 0-.42-.726L12.497.131a1.01 1.01 0 0 0-.996 0M2.657 6.338h18.55c.263 0 .43.287.297.515L12.23 22.918c-.062.107-.229.064-.229-.06V12.335a.59.59 0 0 0-.295-.51l-9.11-5.257c-.109-.063-.064-.23.061-.23"/></svg></span>
+              <span class="tool-ic" title="UX Pilot" tabindex="-1" aria-label="UX Pilot"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#5B4BC4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z" fill="#5B4BC4"/></svg></span>
+              <span class="tool-ic" title="Adobe Photoshop" tabindex="-1" aria-label="Adobe Photoshop"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#31A8FF" d="M9.85 8.42c-.37-.15-.77-.21-1.18-.2-.26 0-.49 0-.68.01-.2-.01-.34 0-.41.01v3.36c.14.01.27.02.39.02h.53c.39 0 .78-.06 1.15-.18.32-.09.6-.28.82-.53.21-.25.31-.59.31-1.03.01-.31-.07-.62-.23-.89-.17-.26-.41-.46-.7-.57zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.899c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zm-7.391 11.65c-.399.56-.959.98-1.609 1.22-.68.25-1.43.34-2.25.34-.24 0-.4 0-.5-.01s-.24-.01-.43-.01v3.209c.01.07-.04.131-.11.141H5.52c-.08 0-.12-.041-.12-.131V6.42c0-.07.03-.11.1-.11.17 0 .33 0 .56-.01.24-.01.49-.01.76-.02s.56-.01.87-.02c.31-.01.61-.01.91-.01.82 0 1.5.1 2.06.31.5.17.96.45 1.34.82.32.32.57.71.73 1.14.149.42.229.85.229 1.3.001.86-.199 1.57-.6 2.13zm7.091 3.89c-.28.4-.671.709-1.12.891-.49.209-1.09.318-1.811.318-.459 0-.91-.039-1.359-.129-.35-.061-.7-.17-1.02-.32-.07-.039-.121-.109-.111-.189v-1.74c0-.029.011-.07.041-.09.029-.02.06-.01.09.01.39.23.8.391 1.24.49.379.1.779.15 1.18.15.38 0 .65-.051.83-.141.16-.07.27-.24.27-.42 0-.141-.08-.27-.24-.4-.16-.129-.489-.279-.979-.471-.51-.18-.979-.42-1.42-.719-.31-.221-.569-.51-.761-.85-.159-.32-.239-.67-.229-1.021 0-.43.12-.84.341-1.21.25-.4.619-.72 1.049-.92.469-.239 1.059-.349 1.769-.349.41 0 .83.03 1.24.09.3.04.59.12.86.23.039.01.08.05.1.09.01.04.02.08.02.12v1.63c0 .04-.02.08-.05.1-.09.02-.14.02-.18 0-.3-.16-.62-.27-.96-.34-.37-.08-.74-.13-1.12-.13-.2-.01-.41.02-.601.07-.129.03-.24.1-.31.2-.05.08-.08.18-.08.27s.04.18.101.26c.09.11.209.2.34.27.229.12.47.23.709.33.541.18 1.061.43 1.541.73.33.209.6.49.789.83.16.318.24.67.23 1.029.011.471-.129.94-.389 1.331z"/></svg></span>
+              <span class="tool-ic" title="Adobe Illustrator" tabindex="-1" aria-label="Adobe Illustrator"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#FF9A00" d="M10.53 10.73c-.1-.31-.19-.61-.29-.92-.1-.31-.19-.6-.27-.89-.08-.28-.15-.54-.22-.78h-.02c-.09.43-.2.86-.34 1.29-.15.48-.3.98-.46 1.48-.14.51-.29.98-.44 1.4h2.54c-.06-.211-.14-.46-.23-.721-.09-.269-.18-.559-.27-.859zM19.75.3H4.25C1.9.3 0 2.2 0 4.55v14.9c0 2.35 1.9 4.25 4.25 4.25h15.5c2.35 0 4.25-1.9 4.25-4.25V4.55C24 2.2 22.1.3 19.75.3zM14.7 16.83h-2.091c-.069.01-.139-.04-.159-.11l-.82-2.38H7.91l-.76 2.35c-.02.09-.1.15-.19.141H5.08c-.11 0-.14-.061-.11-.18L8.19 7.38c.03-.1.06-.21.1-.33.04-.21.06-.43.06-.65-.01-.05.03-.1.08-.11h2.59c.08 0 .12.03.13.08l3.65 10.3c.03.109 0 .16-.1.16zm3.4-.15c0 .11-.039.16-.129.16H16.01c-.1 0-.15-.061-.15-.16v-7.7c0-.1.041-.14.131-.14h1.98c.09 0 .129.05.129.14v7.7zm-.209-9.03c-.231.24-.571.37-.911.35-.33.01-.65-.12-.891-.35-.23-.25-.35-.58-.34-.92-.01-.34.12-.66.359-.89.242-.23.562-.35.892-.35.391 0 .689.12.91.35.22.24.34.56.33.89.01.34-.11.67-.349.92z"/></svg></span>
+              <span class="tool-ic" title="Canva" tabindex="-1" aria-label="Canva"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#00C4CC" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zM6.962 7.68c.754 0 1.337.549 1.405 1.2.069.583-.171 1.097-.822 1.406-.343.171-.48.172-.549.069-.034-.069 0-.137.069-.206.617-.514.617-.926.548-1.508-.034-.378-.308-.618-.583-.618-1.2 0-2.914 2.674-2.674 4.629.103.754.549 1.646 1.509 1.646.308 0 .65-.103.96-.24.5-.264.799-.47 1.097-.8-.073-.885.704-2.046 1.851-2.046.515 0 .926.205.96.583.068.514-.377.582-.514.582s-.378-.034-.378-.17c-.034-.138.309-.07.275-.378-.035-.206-.24-.274-.446-.274-.72 0-1.131.994-1.029 1.611.035.275.172.549.447.549.205 0 .514-.31.617-.755.068-.308.343-.514.583-.514.102 0 .17.034.205.171v.138c-.034.137-.137.548-.102.651 0 .069.034.171.17.171.092 0 .436-.18.777-.459.117-.59.253-1.298.253-1.357.034-.24.137-.48.617-.48.103 0 .171.034.205.171v.138l-.136.617c.445-.583 1.097-.994 1.508-.994.172 0 .309.102.309.274 0 .103 0 .274-.069.446-.137.377-.309.96-.412 1.474 0 .137.035.274.207.274.171 0 .685-.206 1.096-.754l.007-.004c-.002-.068-.007-.134-.007-.202 0-.411.035-.754.104-.994.068-.274.411-.514.617-.514.103 0 .205.069.205.171 0 .035 0 .103-.034.137-.137.446-.24.857-.24 1.269 0 .24.034.582.102.788 0 .034.035.069.07.069.068 0 .548-.445.89-1.028-.308-.206-.48-.549-.48-.96 0-.72.446-1.097.858-1.097.343 0 .617.24.617.72 0 .308-.103.65-.274.96h.102a.77.77 0 0 0 .584-.24.293.293 0 0 1 .134-.117c.335-.425.83-.74 1.41-.74.48 0 .924.205.959.582.068.515-.378.618-.515.618l-.002-.002c-.138 0-.377-.035-.377-.172 0-.137.309-.068.274-.376-.034-.206-.24-.275-.446-.275-.686 0-1.13.891-1.028 1.611.034.275.171.583.445.583.206 0 .515-.308.652-.754.068-.274.343-.514.583-.514.103 0 .17.034.205.171 0 .069 0 .206-.137.652-.17.308-.171.48-.137.617.034.274.171.48.309.583.034.034.068.102.068.102 0 .069-.034.138-.137.138-.034 0-.068 0-.103-.035-.514-.205-.72-.548-.789-.891-.205.24-.445.377-.72.377-.445 0-.89-.411-.96-.926a1.609 1.609 0 0 1 .075-.649c-.203.13-.422.203-.623.203h-.17c-.447.652-.927 1.098-1.27 1.303a.896.896 0 0 1-.377.104c-.068 0-.171-.035-.205-.104-.095-.152-.156-.392-.193-.667-.481.527-1.145.805-1.453.805-.343 0-.548-.206-.582-.55v-.376c.102-.754.377-1.2.377-1.337a.074.074 0 0 0-.069-.07c-.24 0-1.028.824-1.166 1.373l-.103.445c-.068.309-.377.515-.582.515-.103 0-.172-.035-.206-.172v-.137l.046-.233c-.435.31-.87.508-1.075.508-.308 0-.48-.172-.514-.412-.206.274-.445.412-.754.412-.352 0-.696-.24-.862-.593-.244.275-.523.553-.852.764-.48.309-1.028.549-1.68.549-.582 0-1.097-.309-1.371-.583-.412-.377-.651-.96-.686-1.509-.205-1.68.823-3.84 2.4-4.8.378-.205.755-.343 1.132-.343zm9.77 3.291c-.104 0-.172.172-.172.343 0 .274.137.583.309.755a1.74 1.74 0 0 0 .102-.583c0-.343-.137-.515-.24-.515z"/></svg></span>
+              <span class="tool-ic" title="Jira" tabindex="-1" aria-label="Jira"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#0052CC" d="M11.571 11.513H0a5.218 5.218 0 0 0 5.232 5.215h2.13v2.057A5.215 5.215 0 0 0 12.575 24V12.518a1.005 1.005 0 0 0-1.005-1.005zm5.723-5.756H5.736a5.215 5.215 0 0 0 5.215 5.214h2.129v2.058a5.218 5.218 0 0 0 5.215 5.214V6.758a1.001 1.001 0 0 0-1.001-1.001zM23.013 0H11.455a5.215 5.215 0 0 0 5.215 5.215h2.129v2.057A5.215 5.215 0 0 0 24 12.483V1.005A1.001 1.001 0 0 0 23.013 0Z"/></svg></span>
+              <span class="tool-ic" title="HubSpot" tabindex="-1" aria-label="HubSpot"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#FF7A59" d="M18.164 7.93V5.084a2.198 2.198 0 001.267-1.978v-.067A2.2 2.2 0 0017.238.845h-.067a2.2 2.2 0 00-2.193 2.193v.067a2.196 2.196 0 001.252 1.973l.013.006v2.852a6.22 6.22 0 00-2.969 1.31l.012-.01-7.828-6.095A2.497 2.497 0 104.3 4.656l-.012.006 7.697 5.991a6.176 6.176 0 00-1.038 3.446c0 1.343.425 2.588 1.147 3.607l-.013-.02-2.342 2.343a1.968 1.968 0 00-.58-.095h-.002a2.033 2.033 0 102.033 2.033 1.978 1.978 0 00-.1-.595l.005.014 2.317-2.317a6.247 6.247 0 104.782-11.134l-.036-.005zm-.964 9.378a3.206 3.206 0 113.215-3.207v.002a3.206 3.206 0 01-3.207 3.207z"/></svg></span>
+              <span class="tool-ic" title="Clockify" tabindex="-1" aria-label="Clockify"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#03A9F4" d="M13.3512 20.4035c1.1108 0 2.169-.2217 3.139-.6157l2.6913 2.6944C17.4555 23.4458 15.4688 24 13.3512 24 6.729 24 1.3594 18.627 1.3594 12.0006 1.3594 5.3729 6.7289 0 13.3512 0c2.0964 0 4.0652.5406 5.7789 1.4865L16.4834 4.136c-.9687-.3918-2.0236-.6134-3.1322-.6134-4.6379 0-8.3976 3.779-8.3976 8.441 0 4.6609 3.7597 8.4399 8.3976 8.4399zm2.176-12.1544l5.5104-5.5139 1.5773 1.5772-5.5104 5.514zm-2.2328 5.6348c-1.0784 0-1.952-.8775-1.952-1.961 0-1.0825.8736-1.9611 1.952-1.9611 1.0784 0 1.952.8786 1.952 1.961 0 1.0836-.8736 1.9611-1.952 1.9611zm9.3462 5.6953l-1.5772 1.5783-5.5105-5.514 1.5774-1.5783z"/></svg></span></div>
+                </div>
+              </div>
+            </div>
+              </div>
+
+              <!-- Panel: Career Journey (Component: CareerTimeline, rendered from `careerEntries`) -->
+              <div class="tab-panel" id="panel-career" role="tabpanel" aria-labelledby="tab-career" tabindex="0" hidden>
+                <p class="annotation">Career journey</p>
+                <h2 class="about-lead mt-5">The path that shaped how I design today.</h2>
+                <div class="timeline mt-8 sm:mt-10" id="career-timeline"></div>
+              </div>
+
+              <!-- Panel: What I Do (Component: CapabilitiesList, rendered from `capabilities`) -->
+              <div class="tab-panel" id="panel-capabilities" role="tabpanel" aria-labelledby="tab-capabilities" tabindex="0" hidden>
+                <p class="annotation">What I do</p>
+                <h2 class="about-lead mt-5">From product thinking to visual expression.</h2>
+                <div class="caps mt-8 sm:mt-10" id="capabilities-list"></div>
+              </div>
+            </div>
+
+            <!-- Portrait column -->
+            <div class="col-span-12 lg:col-span-5 lg:col-start-8">
+              <figure class="about-portrait reveal-up mx-auto max-w-[440px] lg:max-w-none" style="--d:.1s" id="resume">
+                <img src="public/portrait.jpg" width="880" height="1100" alt="Portrait of Nisreen Abdelkader" loading="lazy" decoding="async" />
+                <span class="tint" aria-hidden="true"></span>
+                <span class="fade" aria-hidden="true"></span>
+                <!-- Social / professional links -->
+                <nav class="social-row" aria-label="Professional links">
+                  <a class="social-pill focus-ring" href="https://www.linkedin.com/in/nisreen-abdelkader/" target="_blank" rel="noopener">LinkedIn</a>
+                  <a class="social-pill focus-ring" href="https://www.behance.net/nisreenabdelkader" target="_blank" rel="noopener">Behance</a>
+                  <a class="social-pill focus-ring" href="mailto:nisreenabdelkader6@gmail.com">Email</a>
+                  <a class="social-pill focus-ring" href="public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener">Resume</a>
+                </nav>
+              </figure>
+              <!-- Identity -->
+              <div class="mt-6 flex items-end justify-between gap-6 reveal-up mx-auto max-w-[440px] lg:max-w-none" style="--d:.18s">
+                <div>
+                  <p class="identity-name">Nisreen Abdelkader</p>
+                  <p class="mt-1 text-[.9375rem] text-mute whitespace-nowrap">UI UX &amp; Brand Designer</p>
+                </div>
+                <p class="annotation text-right max-w-[11rem] leading-[1.8]">Based in Egypt · Working worldwide</p>
+              </div>
+            </div>
+          </div>
+
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="cursor-tip" id="cursor-tip" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span id="cursor-tip-text">Click to copy email</span></div>
+  <footer class="foot px-6 sm:px-16 pt-16 pb-8" id="contact">
+    <div class="eyes" id="eyes" aria-hidden="true"><span class="eye"><span class="pupil"></span></span><span class="eye"><span class="pupil"></span></span></div>
+    <div class="mt-16 flex flex-col sm:flex-row sm:items-center justify-between gap-8">
+      <p class="text-[1.0625rem] leading-relaxed" style="color:#BABABA">Let’s connect.<br />I’m always down for a chat.</p>
+      <div class="flex gap-3">
+        <a href="mailto:nisreenabdelkader6@gmail.com" class="ib" aria-label="Email"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+        <a href="public/Nisreen_Abdelkader_CV.pdf" target="_blank" rel="noopener" class="ib" aria-label="CV"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg></a>
+        <a href="https://www.linkedin.com/in/nisreen-abdelkader/" target="_blank" rel="noopener" class="ib" aria-label="LinkedIn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://www.behance.net/nisreenabdelkader" target="_blank" rel="noopener" class="ib" aria-label="Behance"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h5a3 3 0 0 1 0 6H3zM3 12h5.5a3 3 0 0 1 0 6H3zM14 9h6M13.5 14.5a3.5 3.5 0 0 1 7 0H13.5zM13.5 14.5a3.5 3.5 0 0 0 6.2 2.3"/></svg></a>
+      </div>
+    </div>
+    <button type="button" class="big copy-name mt-12" id="copy-name" data-email="nisreenabdelkader6@gmail.com" aria-label="Copy email address nisreenabdelkader6@gmail.com">Nisreen Abdelkader</button>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <div class="mt-10 pt-6 flex flex-col sm:flex-row justify-between gap-2 text-[.9375rem]" style="color: #A4A4A4; border-top: 1px solid rgba(255,255,255,.12)">
+      <span>© 2026 Nisreen Abdelkader</span><span>UI UX &amp; Brand Designer</span>
+    </div>
+  </footer>
+
+  <script>
+
+    // ---------- ClientMarquee data (edit here to add/remove companies) ----------
+    // scale: optional visual normalisation (wide wordmarks read larger than square marks)
+    // invert: set true for logos supplied on a dark background
+    const clients = [
+      { name: 'HLB Business Consultancy', logo: 'public/logos/hlb-business-consultancy.png', scale: 1.1 },
+      { name: 'Força Sport',              logo: 'public/logos/forca-sport.png',              scale: 1.15 },
+      { name: 'SwiftX',                   logo: 'public/logos/swiftx.png',                   scale: .8, invert: true },
+      { name: 'TAG — The Agile Group',    logo: 'public/logos/tag-the-agile-group.png',      scale: .9 },
+      { name: 'American Council Egypt — Language School', logo: 'public/logos/american-council-egypt.png', scale: 1.05 },
+    ];
+
+    // ---------- ClientMarquee render: two identical lists = seamless -50% loop ----------
+    (function renderClientMarquee() {
+      const track = document.querySelector('#client-marquee .marquee-track');
+      if (!track) return;
+      const list = (clone) => {
+        const ul = document.createElement('ul');
+        ul.className = 'marquee-list';
+        if (clone) ul.setAttribute('aria-hidden', 'true');
+        for (const c of clients) {
+          const li = document.createElement('li');
+          li.className = 'marquee-item';
+          const img = document.createElement('img');
+          img.src = c.logo; img.alt = clone ? '' : c.name; img.loading = 'lazy'; img.decoding = 'async';
+          img.title = c.name;
+          if (c.scale) img.style.setProperty('--logo-scale', c.scale);
+          if (c.invert) img.dataset.invert = 'true';
+          li.appendChild(img); ul.appendChild(li);
+        }
+        return ul;
+      };
+      track.append(list(false), list(true));
+    })();
+
+    document.documentElement.classList.add('js');
+
+    // ---------- Selected Work data (edit here; UI is generated below) ----------
+    // image: path to a real mockup/screenshot. null = generated placeholder.
+    // kind (placeholder style only): 'ui' | 'mobile' | 'poster' | 'logo' | 'editorial'   tone: 'paper' | 'warm' | 'ink'
+    const productProjects = [
+      { title: 'Dentlora',    category: 'UI UX Design · Healthcare', slug: 'dentlora',    href: 'work/product-design/dentlora/', image: 'public/projects/dentlora-cover.jpg', alt: 'Dentlora dental practice platform shown on desktop and mobile' },
+      { title: 'AgileRx',     category: 'UI UX Design · Healthcare · Mobile', slug: 'agilerx', href: 'work/product-design/agilerx/', image: 'public/projects/agilerx-cover.jpg', alt: 'AgileRx mobile-first pharmacy companion app screens' },
+      { title: 'AzharX',      category: 'Art Direction · UI · EdTech', slug: 'azharx', href: 'work/product-design/azharx/', image: 'public/projects/azharx-cover.jpg', alt: 'AzharX collage hero with the Grand Imam of Al-Azhar' },
+    ];
+    const brandingProjects = [
+      { title: 'Muwasat',  category: 'Brand Identity · Arabic Calligraphy', slug: 'muwasat', href: 'work/branding/muwasat/', image: 'public/projects/muwasat-cover.jpg', alt: 'Muwasat bilingual calligraphic logo on deep green' },
+      { title: 'Stratix',  category: 'Brand Identity · Corporate',          slug: 'stratix', href: 'work/branding/stratix/', image: 'public/projects/stratix-cover.jpg', alt: 'Stratix logo with a gold X on a dark wall' },
+      { title: 'ělva',     category: 'Brand Identity · Packaging',          slug: 'elva',    href: 'work/branding/elva/',    image: 'public/projects/elva-cover.jpg',    alt: 'ělva skincare wordmark over a portrait' },
+    ];
+    const workCategories = [
+      { num: '01', title: 'UI UX Design', desc: 'Digital experiences designed around clarity, usability and scalable systems.',
+        cta: 'Explore UI UX Work', href: 'work/product-design', count: '4 Selected Projects', total: 4, projects: productProjects, variant: 'product',
+        stack: ['public/projects/dentlora-cover.jpg', 'public/projects/agilerx-cover.jpg', 'public/projects/azharx-cover.jpg', 'public/projects/criterra-cover.jpg'] },
+      { num: '02', title: 'Brand Identity',  desc: 'Identity systems built from strategy to visual expression.',
+        cta: 'Explore Branding Work', href: 'work/branding', count: '6 Selected Projects', total: 5, projects: brandingProjects, variant: 'brand',
+        stack: ['public/projects/muwasat-cover.jpg', 'public/projects/stratix-cover.jpg', 'public/projects/elva-cover.jpg', 'public/projects/contaverde-cover.jpg', 'public/projects/logofolio-cover.jpg'] },
+    ];
+
+    // Generated placeholder art (SVG data URI): no external image hosts needed
+    function placeholderSVG(kind, tone) {
+      const bg = { paper: '#EAE5DB', warm: '#D8CDBB', ink: '#1E1C1A' }[tone] || '#EAE5DB';
+      const fg = tone === 'ink' ? 'rgba(244,241,235,.55)' : 'rgba(19,19,19,.16)';
+      const ac = 'rgba(122,107,168,.55)';
+      const size = { ui: [1200, 800], mobile: [540, 1100], poster: [1000, 1250], logo: [1000, 1000], editorial: [1000, 1000] }[kind] || [1000, 800];
+      const shapes = {
+        ui: `<rect x="40" y="40" width="200" height="720" rx="10" fill="${fg}" opacity=".5"/><rect x="280" y="40" width="880" height="120" rx="10" fill="${fg}"/><rect x="280" y="200" width="420" height="260" rx="10" fill="${fg}"/><rect x="740" y="200" width="420" height="260" rx="10" fill="${ac}"/><rect x="280" y="500" width="880" height="260" rx="10" fill="${fg}" opacity=".7"/>`,
+        mobile: `<rect x="60" y="80" width="420" height="60" rx="14" fill="${fg}"/><rect x="60" y="180" width="420" height="320" rx="20" fill="${ac}"/><rect x="60" y="540" width="200" height="200" rx="16" fill="${fg}"/><rect x="280" y="540" width="200" height="200" rx="16" fill="${fg}"/><rect x="60" y="780" width="420" height="120" rx="16" fill="${fg}" opacity=".6"/>`,
+        poster: `<circle cx="500" cy="520" r="250" fill="${ac}"/><rect x="100" y="100" width="220" height="24" rx="4" fill="${fg}"/><rect x="100" y="1040" width="560" height="40" rx="6" fill="${fg}"/><rect x="100" y="1110" width="380" height="24" rx="4" fill="${fg}" opacity=".7"/>`,
+        logo: `<rect x="300" y="300" width="400" height="400" rx="80" fill="${ac}"/><rect x="120" y="860" width="320" height="26" rx="4" fill="${fg}"/>`,
+        editorial: `<rect x="120" y="120" width="760" height="560" rx="8" fill="${fg}"/><rect x="120" y="740" width="480" height="28" rx="4" fill="${fg}" opacity=".8"/><rect x="120" y="800" width="300" height="20" rx="4" fill="${fg}" opacity=".6"/>`,
+      };
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size[0]} ${size[1]}"><rect width="100%" height="100%" fill="${bg}"/>${shapes[kind] || shapes.editorial}</svg>`;
+      return 'data:image/svg+xml,' + encodeURIComponent(svg);
+    }
+
+    // ---------- Component: ProjectPreview ----------
+    function ProjectPreview(p, categoryHref, isDominant) {
+      const a = document.createElement('a');
+      a.className = `project reveal-up ${isDominant ? 'is-dominant' : 'is-support'}`;
+      a.href = p.href || `${categoryHref}/${p.slug}`;
+      a.setAttribute('aria-label', `${p.title} — ${p.category}. View project`);
+
+      const frame = document.createElement('div');
+      frame.className = 'project-frame';
+      const img = document.createElement('img');
+      img.src = p.image || placeholderSVG(p.kind || 'ui', p.tone);
+      img.alt = p.alt || `${p.title} preview`;
+      img.loading = 'lazy'; img.decoding = 'async';
+      frame.appendChild(img);
+
+      a.append(frame, ProjectMeta(p));
+      return a;
+    }
+
+    // ---------- Component: ProjectMeta ----------
+    function ProjectMeta(p) {
+      const meta = document.createElement('div'); meta.className = 'project-meta';
+      meta.innerHTML = `
+        <div>
+          <p class="project-title">${p.title}</p>
+          <p class="project-cat">${p.category}</p>
+        </div>
+        <span class="project-arrow" aria-hidden="true">View
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>`;
+      return meta;
+    }
+
+    // ---------- Component: WorkCategorySection ----------
+    function WorkCategorySection(c) {
+      const article = document.createElement('article');
+      article.className = `work-block work-block--${c.variant}`;
+      article.setAttribute('aria-labelledby', `work-${c.variant}-title`);
+
+      const head = document.createElement('div');
+      head.className = 'work-head reveal-up';
+      head.innerHTML = `
+        <p class="work-num">${c.num}</p>
+        <h3 id="work-${c.variant}-title" class="work-title mt-6">${c.title}</h3>
+        <p class="mt-4 max-w-[30ch] text-[1rem] leading-[1.6] text-mute">${c.desc}</p>
+        <a href="${c.href}" class="btn btn-primary btn-pill focus-ring mt-8">${c.cta}
+          <svg class="arrow" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M6 4h6v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>`;
+
+      const previews = document.createElement('div');
+      previews.className = 'work-previews composition';
+      c.projects.forEach((p, i) => {
+        const el = ProjectPreview(p, c.href, i === 0);
+        el.style.setProperty('--d', `${.08 * i}s`);
+        previews.appendChild(el);
+      });
+
+      // avatar stack: tiny crops of the project placeholders (swap for real thumbnails later)
+      const count = document.createElement('p');
+      count.className = 'work-count reveal-up';
+      const stack = document.createElement('span'); stack.className = 'avatars'; stack.setAttribute('aria-hidden', 'true');
+      const tones = ['paper', 'warm', 'ink', 'warm', 'paper'];
+      for (let i = 0; i < Math.min(c.total, 5); i++) {
+        const im = document.createElement('img');
+        im.src = c.stack?.[i] || c.projects[i]?.image || placeholderSVG(i % 2 ? 'logo' : 'editorial', tones[i]);
+        im.alt = ''; im.width = 36; im.height = 36; im.loading = 'lazy';
+        stack.appendChild(im);
+      }
+      const label = document.createElement('span'); label.textContent = c.count;
+      const rule = document.createElement('span'); rule.className = 'rule'; rule.setAttribute('aria-hidden', 'true');
+      count.append(stack, label, rule);
+
+      article.append(head, previews, count);
+      return article;
+    }
+
+    (function renderWorkSection() {
+      const root = document.getElementById('work-blocks');
+      if (!root) return;
+      workCategories.forEach(c => root.appendChild(WorkCategorySection(c)));
+    })();
+
+    // ---------- Scroll reveal ----------
+    (function initReveal() {
+      const els = document.querySelectorAll('.reveal-up');
+      if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) { els.forEach(e => e.classList.add('in-view')); return; }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); } });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      els.forEach(e => io.observe(e));
+    })();
+
+    // ---------- Tools data (icon: optional path to an SVG/PNG in public/icons; falls back to a monogram) ----------
+    // ---------- About tabs data ----------
+    const aboutTabs = [
+      { id: 'about',        label: 'About Me' },
+      { id: 'career',       label: 'Career Journey' },
+      { id: 'capabilities', label: 'What I Do' },
+    ];
+    const careerEntries = [
+      { dates: 'Jun 2025 — Now', role: 'UI/UX Designer', company: 'TAG', type: 'Full-time · Remote', location: 'Ontario, Canada',
+        focus: ['AI-assisted product workflows', 'Design-to-development', 'Developer handoff'],
+        desc: 'Working across AI-assisted design workflows, rapid product implementation, GitHub-based collaboration and structured handoff to development teams.' },
+      { dates: 'Mar 2026 — Now', role: 'UI/UX Designer', company: 'SwiftX LLC', type: 'Part-time · Remote', location: 'Egypt & UAE',
+        focus: ['Requirements to design decisions', 'Bridge between PMs and developers', 'Implementation validation'],
+        desc: 'Designing and refining digital product experiences from business requirements to developer-ready solutions, with a focus on usability, consistency and smooth implementation.' },
+      { dates: '2022 — 2025', role: 'Graphic Designer', company: 'American Council Egypt', type: 'Part-time · Remote', location: 'Alexandria, Egypt' },
+    ];
+    const careerExtra = { label: 'Additional experience', text: 'Freelance work across UI/UX, branding and visual design since 2021.' };
+    const capabilities = [
+      { title: 'UI UX Design',                    desc: 'From requirements, user flows and structure to polished digital experiences.' },
+      { title: 'UX & Information Architecture',   desc: 'User journeys, flows, information structure and usability.' },
+      { title: 'UI & Design Systems',             desc: 'Interfaces, reusable components and scalable visual systems.' },
+      { title: 'Brand Identity',                  desc: 'Visual identities, typography, color and cohesive brand systems.' },
+      { title: 'Visual Direction',                desc: 'Creating strong and consistent visual languages across products and brands.' },
+      { title: 'Web Experiences',                 desc: 'Bringing UX, UI and brand together into intentional digital experiences.' },
+    ];
+
+    // ---------- Component: CareerTimeline ----------
+    (function CareerTimeline() {
+      const root = document.getElementById('career-timeline');
+      if (!root) return;
+      root.innerHTML = careerEntries.map(e => `
+        <div class="timeline-row">
+          <p class="timeline-dates">${e.dates}</p>
+          <div>
+            <p class="timeline-role">${e.role}</p>
+            <p class="timeline-company">${e.company}</p>
+            ${e.focus ? `<p class="timeline-focus">${e.focus.join(' · ')}</p>` : ''}
+            ${e.desc ? `<p class="timeline-desc">${e.desc}</p>` : ''}
+          </div>
+          <p class="timeline-meta">${e.type}<br>${e.location}</p>
+        </div>`).join('') + `
+        <div class="timeline-extra">
+          <p class="annotation">${careerExtra.label}</p>
+          <p class="mt-2">${careerExtra.text}</p>
+        </div>`;
+    })();
+
+    // ---------- Component: CapabilitiesList ----------
+    (function CapabilitiesList() {
+      const root = document.getElementById('capabilities-list');
+      if (!root) return;
+      root.innerHTML = capabilities.map((c, i) => `
+        <div class="cap">
+          <p class="cap-num">${String(i + 1).padStart(2, '0')}</p>
+          <p class="cap-title">${c.title}</p>
+          <p class="cap-desc">${c.desc}</p>
+        </div>`).join('');
+    })();
+
+    // ---------- Component: AboutTabs ----------
+    (function AboutTabs() {
+      const list = document.getElementById('about-tabs');
+      const panelsWrap = document.getElementById('about-panels');
+      if (!list || !panelsWrap) return;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      list.innerHTML = aboutTabs.map((t, i) => `
+        <button class="tab focus-ring" role="tab" id="tab-${t.id}" aria-controls="panel-${t.id}"
+                aria-selected="${i === 0}" tabindex="${i === 0 ? 0 : -1}" type="button">${t.label}</button>`).join('');
+      const tabs = [...list.querySelectorAll('[role="tab"]')];
+      const panels = aboutTabs.map(t => document.getElementById(`panel-${t.id}`));
+
+      // lock the panel area to the tallest panel so switching never shifts the page
+      function lockHeight() {
+        let max = 0;
+        panels.forEach(p => {
+          const wasHidden = p.hidden;
+          p.hidden = false; p.style.position = 'absolute'; p.style.visibility = 'hidden'; p.style.width = '100%';
+          max = Math.max(max, p.offsetHeight);
+          p.style.position = ''; p.style.visibility = ''; p.style.width = ''; p.hidden = wasHidden;
+        });
+        panelsWrap.style.minHeight = matchMedia('(min-width: 1024px)').matches ? max + 'px' : '';
+      }
+      lockHeight();
+      addEventListener('resize', lockHeight, { passive: true });
+      document.fonts?.ready.then(lockHeight);
+
+      let current = 0;
+      function activate(i, focus) {
+        if (i === current) return;
+        const from = panels[current], to = panels[i];
+        tabs.forEach((t, k) => { t.setAttribute('aria-selected', String(k === i)); t.tabIndex = k === i ? 0 : -1; });
+        const show = () => {
+          from.hidden = true; from.dataset.state = '';
+          to.hidden = false; to.dataset.state = 'enter';
+          requestAnimationFrame(() => requestAnimationFrame(() => { to.dataset.state = 'in'; }));
+        };
+        if (reduce) { from.hidden = true; to.hidden = false; to.dataset.state = 'in'; }
+        else { from.dataset.state = 'enter'; setTimeout(show, 160); }
+        current = i;
+        if (focus) tabs[i].focus();
+        // remove scroll-reveal state inside panels so switched content is visible immediately
+        to.querySelectorAll('.reveal-up').forEach(e => e.classList.add('in-view'));
+      }
+      tabs.forEach((t, i) => {
+        t.addEventListener('click', () => activate(i, false));
+        t.addEventListener('keydown', e => {
+          const n = tabs.length;
+          if (e.key === 'ArrowRight') { e.preventDefault(); activate((i + 1) % n, true); }
+          if (e.key === 'ArrowLeft')  { e.preventDefault(); activate((i - 1 + n) % n, true); }
+          if (e.key === 'Home')       { e.preventDefault(); activate(0, true); }
+          if (e.key === 'End')        { e.preventDefault(); activate(n - 1, true); }
+        });
+      });
+    })();
+
+
+    // Extremely subtle portrait parallax (pointer devices only, respects reduced motion)
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fine = matchMedia('(pointer: fine)').matches;
+    const card = document.getElementById('portrait');
+    if (!reduce && fine && card) {
+      window.addEventListener('pointermove', e => {
+        const x = (e.clientX / innerWidth - .5) * 8;
+        const y = (e.clientY / innerHeight - .5) * 8;
+        card.style.setProperty('--px', `${x}px`);
+        card.style.setProperty('--py', `${y}px`);
+      }, { passive: true });
+    }
+
+    // ---------- Footer: eyes + copy email ----------
+    (() => {
+      const $ = (q, r = document) => r.querySelector(q), $$ = (q, r = document) => [...r.querySelectorAll(q)];
+      const reduceM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const eyes = $$('#eyes .eye');
+      if (eyes.length) {
+        const movers = eyes.map(e => { const p = $('.pupil', e); return { e, x: gsap.quickTo(p, 'x', { duration: .35, ease: 'power3.out' }), y: gsap.quickTo(p, 'y', { duration: .35, ease: 'power3.out' }) }; });
+        addEventListener('pointermove', ev => movers.forEach(m => { const r = m.e.getBoundingClientRect(), dx = ev.clientX - (r.left + r.width / 2), dy = ev.clientY - (r.top + r.height / 2), d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 260); m.x(dx / d * 9 * k); m.y(dy / d * 14 * k); }), { passive: true });
+        if (!reduceM) { const blink = () => { gsap.to(eyes, { scaleY: .08, duration: .09, yoyo: true, repeat: 1, ease: 'power1.inOut', transformOrigin: '50% 50%' }); gsap.delayedCall(2.5 + Math.random() * 4, blink); }; gsap.delayedCall(2, blink); }
+      }
+      const btn = $('#copy-name'), tip = $('#cursor-tip'), tipText = $('#cursor-tip-text'), status = $('#copy-status'); if (!btn) return;
+      const tx = gsap.quickTo(tip, 'x', { duration: .25, ease: 'power3.out' }), ty = gsap.quickTo(tip, 'y', { duration: .25, ease: 'power3.out' });
+      const fine = matchMedia('(pointer: fine)').matches;
+      btn.addEventListener('pointerenter', e => { if (!fine) return; tipText.textContent = 'Click to copy email'; tx(e.clientX); ty(e.clientY); gsap.to(tip, { autoAlpha: 1, scale: 1, duration: .3, ease: 'back.out(2)' }); });
+      btn.addEventListener('pointermove', e => { if (fine) { tx(e.clientX); ty(e.clientY); } });
+      btn.addEventListener('pointerleave', () => gsap.to(tip, { autoAlpha: 0, scale: .9, duration: .2 }));
+      const colors = ['#2581C4', '#7A6BA8', '#fff', '#DCEBF8', '#F2B441', '#3FC28A'];
+      const confetti = (x, y) => { if (reduceM) return; const n = 42; for (let i = 0; i < n; i++) { const c = document.createElement('span'); c.className = 'confetti'; c.style.background = colors[i % colors.length]; if (i % 3 === 0) c.style.borderRadius = '50%'; document.body.appendChild(c); const a = Math.PI * 2 * i / n + (Math.random() - .5) * .6, v = 220 + Math.random() * 260; gsap.set(c, { x, y, scale: .6 + Math.random() * .8, rotation: Math.random() * 360 }); gsap.timeline({ onComplete: () => c.remove() }).to(c, { x: x + Math.cos(a) * v, y: y + Math.sin(a) * v - 80, rotation: '+=' + (Math.random() * 720 - 360), duration: .9 + Math.random() * .5, ease: 'power3.out' }).to(c, { y: '+=' + (160 + Math.random() * 120), autoAlpha: 0, duration: .8, ease: 'power2.in' }, '-=.55'); } };
+      btn.addEventListener('click', async e => {
+        const email = btn.dataset.email; let ok = false;
+        try { await navigator.clipboard.writeText(email); ok = true; } catch {}
+        if (!ok) { try { const t = document.createElement('textarea'); t.value = email; t.style.position = 'fixed'; document.body.appendChild(t); t.select(); ok = document.execCommand('copy'); t.remove(); } catch {} }
+        const x = e.clientX || innerWidth / 2, y = e.clientY || btn.getBoundingClientRect().top + 60;
+        confetti(x, y); tipText.textContent = ok ? 'Copied ✓' : email; status.textContent = ok ? `Email copied: ${email}` : email;
+        gsap.fromTo(btn, { scale: .985 }, { scale: 1, duration: .6, ease: 'elastic.out(1, .45)', transformOrigin: 'left center' });
+        if (!fine) { tx(x); ty(y); gsap.to(tip, { autoAlpha: 1, scale: 1, duration: .3 }); gsap.to(tip, { autoAlpha: 0, duration: .3, delay: 1.6 }); }
+        else gsap.delayedCall(1.8, () => { if (tip.style.opacity !== '0') tipText.textContent = 'Click to copy email'; });
+      });
+    })();
+
+    // ---- Glass nav: mobile menu + hide on fast scroll down ----
+    (() => {
+      const burger = document.getElementById('burger'), gm = document.getElementById('gmenu'); if (!burger || !gm) return;
+      burger.addEventListener('click', () => { const o = gm.dataset.open !== 'true'; gm.dataset.open = String(o); burger.setAttribute('aria-expanded', String(o)); });
+      gm.addEventListener('click', e => { if (e.target.closest('a')) { gm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); } });
+      document.addEventListener('click', e => { if (!e.target.closest('#gmenu') && !e.target.closest('#burger')) { gm.dataset.open = 'false'; burger.setAttribute('aria-expanded', 'false'); } });
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches || !window.gsap) return;
+      let lastY = scrollY, hidden = false;
+      addEventListener('scroll', () => { const y = scrollY, dy = y - lastY; lastY = y; const hide = y > 120 && dy > 12; const show = dy < -4 || y < 120; if (hide && !hidden) { hidden = true; gsap.to('#gnav', { y: -90, autoAlpha: 0, duration: .45, ease: 'power3.out', overwrite: true }); } else if (show && hidden) { hidden = false; gsap.to('#gnav', { y: 0, autoAlpha: 1, duration: .35, ease: 'power3.out', overwrite: true }); } }, { passive: true });
+    })();
+  </script>
+  <script src="public/i18n.js" defer></script>
+</body>
+</html>
